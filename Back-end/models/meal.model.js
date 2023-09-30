@@ -37,4 +37,14 @@ module.exports = class Meal {
   static fetchAll(callback) {
     getMealsFromFile(callback);
   }
+
+  static deleteById(id) {
+    getMealsFromFile((meals) => {
+      const updatedMeals = meals.filter((meal) => meal.id !== id);
+      fs.writeFile(mealDataPath, JSON.stringify(updatedMeals), (err) => {
+        if (!err) {
+        }
+      });
+    });
+  }
 };

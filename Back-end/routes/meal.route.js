@@ -8,4 +8,6 @@ router.get("/add-meal", mealController.getAddMeal);
 
 router.post("/add-meal", mealController.postAddMeal);
 
+router.post("/delete-meal", mealController.postDeleteMeal);
+
 module.exports = router;

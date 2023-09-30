@@ -1,10 +1,10 @@
 const Meal = require("../models/meal.model");
 
 exports.getMealPage = (req, res, next) => {
-  Meal.fetchAll((allProducts) => {
+  Meal.fetchAll((allMeals) => {
     res.render("meal", {
       path: "/meal",
-      products: allProducts,
+      meals: allMeals,
     });
   });
 };
@@ -22,5 +22,11 @@ exports.postAddMeal = (req, res, next) => {
   const price = req.body.price;
   const product = new Meal(id, name, imageURL, price);
   product.save();
-  res.redirect("/");
+  res.redirect("/meal");
+};
+
+exports.postDeleteMeal = (req, res, next) => {
+  const mealId = req.body.mealId;
+  Meal.deleteById(mealId);
+  res.redirect("/meal");
 };
