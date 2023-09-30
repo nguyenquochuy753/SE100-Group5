@@ -1,7 +1,7 @@
-const Product = require("../models/product");
+const Product = require("../models/meal.model");
 
 exports.getHomePage = (req, res, next) => {
   Product.fetchAll((allProducts) => {
-    res.render("home.ejs", { path: "/", products: allProducts });
+    res.render("home.ejs", { path: "/" });
   });
 };

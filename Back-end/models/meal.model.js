@@ -2,14 +2,14 @@ const { log } = require("console");
 const fs = require("fs");
 const path = require("path");
 
-const productDataPath = path.join(
+const mealDataPath = path.join(
   path.dirname(require.main.filename),
   "data",
-  "products.json"
+  "meals.json"
 ); // path.dirname(require.main.filename) is root directory
 
-const getProductFromFile = (callback) => {
-  fs.readFile(productDataPath, (err, fileContent) => {
+const getMealsFromFile = (callback) => {
+  fs.readFile(mealDataPath, (err, fileContent) => {
     if (err) {
       return callback([]);
     }
@@ -17,7 +17,7 @@ const getProductFromFile = (callback) => {
   });
 };
 
-module.exports = class Product {
+module.exports = class Meal {
   constructor(id, name, imageURL, price) {
     this.id = id;
     this.name = name;
@@ -26,15 +26,15 @@ module.exports = class Product {
   }
 
   save() {
-    getProductFromFile((products) => {
-      products.push(this);
-      fs.writeFile(productDataPath, JSON.stringify(products), (err) => {
+    getMealsFromFile((meals) => {
+      meals.push(this);
+      fs.writeFile(mealDataPath, JSON.stringify(meals), (err) => {
         console.log(err);
       });
     });
   }
 
   static fetchAll(callback) {
-    getProductFromFile(callback);
+    getMealsFromFile(callback);
   }
 };

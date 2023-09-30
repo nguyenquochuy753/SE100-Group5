@@ -6,8 +6,7 @@ const path = require("path");
 require("dotenv").config();
 
 const homeRoute = require("./routes/home.route");
-const storageRoute = require("./routes/storage.route");
-const addRoute = require("./routes/add.route");
+const mealRoute = require("./routes/meal.route");
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -18,8 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(homeRoute);
-app.use(storageRoute);
-app.use(addRoute);
+app.use(mealRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}/`);
