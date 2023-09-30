@@ -5,9 +5,9 @@ const bodyParser = require("body-parser");
 const path = require("path");
 require("dotenv").config();
 
-const homeRoute = require("./routes/home");
-const storageRoute = require("./routes/storage");
-const addRoute = require("./routes/add");
+const homeRoute = require("./routes/home.route");
+const storageRoute = require("./routes/storage.route");
+const addRoute = require("./routes/add.route");
 
 app.set("view engine", "ejs");
 app.set("views", "views");
