@@ -2,6 +2,30 @@
 </head>
 <body>
     <%- include('includes/navigation_bar.ejs') %>
-    <h1>This is the home page</h1>
+    <% if (products.length > 0) { %>
+        <div class="grid">
+            <% for (let product of products) { %>
+            <article class="card product-item">
+                <header class="card__header">
+                    <h1 class="product__title">Name: <%= product.name %></h1>
+                </header>
+                <div class="card__image">
+                    <img src="<%= product.imageURL %>" alt="A Book">
+                </div>
+                <div class="card__content">
+                    <h2 class="product__price">Price: <%= product.price %></h2>
+                    <p class="product__description"><%= product.description %></p>
+                </div>
+                <div class="card__actions">
+                    <a href="/" class="btn">Details</a>
+                </div>
+            </article>
+            <% } %>
+        </div>
+        <% } else { %>
+        <div>
+            <h1>No products found.</h1>
+        </div>
+        <% } %>
 </body>
 </html>

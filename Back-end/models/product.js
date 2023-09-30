@@ -18,10 +18,10 @@ const getProductFromFile = (callback) => {
 };
 
 module.exports = class Product {
-  constructor(id, name, image, price) {
+  constructor(id, name, imageURL, price) {
     this.id = id;
     this.name = name;
-    this.image = image;
+    this.imageURL = imageURL;
     this.price = price;
   }
 
@@ -32,5 +32,9 @@ module.exports = class Product {
         console.log(err);
       });
     });
+  }
+
+  static fetchAll(callback) {
+    getProductFromFile(callback);
   }
 };
