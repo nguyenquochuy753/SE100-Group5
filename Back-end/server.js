@@ -7,6 +7,7 @@ require("dotenv").config();
 
 const homeRoute = require("./routes/home");
 const storageRoute = require("./routes/storage");
+const addRoute = require("./routes/add");
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use(homeRoute);
 app.use(storageRoute);
+app.use(addRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}/`);
