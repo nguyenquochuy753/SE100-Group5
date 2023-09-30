@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/storage", (req, res, next) => {
-  res.send("<h1>Hello storage</h1>");
+  res.render("storage.ejs", { path: "/storage" });
 });
 
 module.exports = router;
