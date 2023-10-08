@@ -1,32 +1,45 @@
-const Meal = require("../models/meal.model");
+const mealModel = require("../models/meal.model")
 
-exports.getMealPage = (req, res, next) => {
-  Meal.fetchAll((allMeals) => {
-    res.render("meal", {
-      path: "/meal",
-      meals: allMeals,
-    });
-  });
-};
+const mealController = {
+  addMeal: async (req, res) => {
+    const newMeal = new mealModel(req.body)
+    if(req.file){
+      newMeal.hinh_anh_mon_an = req.file.path
+    }
+    try {
+      await newMeal.save();
+      res.status(200).json(newMeal);
+    } catch (error) {
+      res.status(500).json(error)
+    }
+  },
+  getAllMeals: async (req, res) => {
+    try {
+      const allMeals = await mealModel.find({});
+      res.status(200).json(allMeals);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  deleteMeal: async (req, res) => {
+    const id = req.params.id;
+    try {
+      await mealModel.findByIdAndDelete(id);
+      res.status(200).json("Deleted successfully");
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  updateMeal: async (req, res) => {
+    const id = req.params.id;
+    try {
+      await mealModel.findByIdAndUpdate(id, req.body);
+      res.status(200).json("updated successfully");
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+}
 
-exports.getAddMeal = (req, res, next) => {
-  res.render("add-meal", {
-    path: "/add-meal",
-  });
-};
+module.exports = mealController
 
-exports.postAddMeal = (req, res, next) => {
-  const id = Math.random().toString();
-  const name = req.body.name;
-  const imageURL = req.body.imageURL;
-  const price = req.body.price;
-  const product = new Meal(id, name, imageURL, price);
-  product.save();
-  res.redirect("/meal");
-};
-
-exports.postDeleteMeal = (req, res, next) => {
-  const mealId = req.body.mealId;
-  Meal.deleteById(mealId);
-  res.redirect("/meal");
-};
