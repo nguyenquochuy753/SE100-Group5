@@ -1,13 +1,10 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 const mealController = require("../controllers/meal.controller");
+const upload = require("../Middleware/Upload");
 
-router.get("/meal", mealController.getMealPage);
-
-router.get("/add-meal", mealController.getAddMeal);
-
-router.post("/add-meal", mealController.postAddMeal);
-
-router.post("/delete-meal", mealController.postDeleteMeal);
+router.post('/addMeal',upload.single('hinh_anh_mon_an'),mealController.addMeal);
+router.get('/getAllMeals',mealController.getAllMeals);
+router.put('/updateMeal/:id',mealController.updateMeal);
+router.delete('/deleteMeal/:id',mealController.deleteMeal);
 
 module.exports = router;
