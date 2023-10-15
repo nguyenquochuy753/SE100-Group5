@@ -9,19 +9,21 @@ import {
 } from "../../../../Constant";
 
 const ProjectRateClass = ({ register }) => {
+  const { ref, ...status } = register("status");
+
   return (
     <Fragment>
       <Row>
         <Col sm="4">
           <FormGroup>
-            <Label>Giá</Label>
+            <Label>Số Ghế</Label>
             <input
               className="form-control"
               type="number"
-              name="rate"
+              name="soGhe"
               //   defaultValue="0"
-              placeholder="Nhập giá của món ăn"
-              {...register("rate", { required: true })}
+              placeholder="Nhập số ghế của bàn ăn"
+              {...register("soGhe", { required: true })}
             />
           </FormGroup>
         </Col>
@@ -43,16 +45,21 @@ const ProjectRateClass = ({ register }) => {
         </Col> */}
         <Col sm="4">
           <FormGroup>
-            <Label>Trạng Thái</Label>
+            <Label for="exampleSelect">Trạng Thái</Label>
             <Input
               type="select"
-              name="badge"
+              name="status"
               placeholder="Trạng Thái"
               className="form-control digits"
+              id="exampleSelect"
               required
+              innerRef={ref}
+              {...status}
+              // {...register("status", { required: true })}
             >
-              <option value="stock">Còn</option>
-              <option value="empty">Hết</option>
+              <option value="Trống">Trống</option>
+              <option value="Đã Đặt">Đã Đặt</option>
+              <option value="Đang Ăn">Đang Ăn</option>
             </Input>
           </FormGroup>
         </Col>

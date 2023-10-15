@@ -4,6 +4,8 @@ import "./index.scss";
 import App from "./App";
 import "./i18n";
 import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const Root = () => {
   return (
@@ -14,7 +16,11 @@ const Root = () => {
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Root />);
+root.render(
+  <Provider store={store}>
+    <Root />
+  </Provider>
+);
 
 // ReactDOM.createRoot(<App />, document.getElementById("root"));
 

@@ -12,11 +12,14 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card, CardBody, Form } from "reactstrap";
 import CustomizerContext from "../../../../_helper/Customizer";
+import { useDispatch } from "react-redux";
+import { addTable } from "../../../../actions/table.actions";
 
-const Newproject = () => {
+const NewTable = () => {
   const history = useNavigate();
   const { layoutURL } = useContext(CustomizerContext);
   const project = useContext(ProjectContext);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -25,9 +28,16 @@ const Newproject = () => {
 
   const AddProject = (data) => {
     if (data !== "") {
-      project.addNewProject(data);
+      // project.addNewProject(data);
+      dispatch(
+        addTable({
+          ten_ban: data.title,
+          so_ghe: data.soGhe,
+          trang_thai: data.status,
+        })
+      );
       history(
-        `${process.env.PUBLIC_URL}/app/project/project-list/${layoutURL}`
+        `${process.env.PUBLIC_URL}/app/ecommerce/table/table-list/${layoutURL}`
       );
     } else {
       errors.showMessages();
@@ -37,9 +47,9 @@ const Newproject = () => {
   return (
     <Fragment>
       <Breadcrumbs
-        parent="Món Ăn"
-        title="Thêm Món Ăn"
-        mainTitle="Thêm Món Ăn"
+        parent="Bàn Ăn"
+        title="Thêm Bàn Ăn"
+        mainTitle="Thêm Bàn Ăn"
       />
       <Container fluid={true}>
         <Row>
@@ -55,7 +65,7 @@ const Newproject = () => {
                   <ProjectRateClass register={register} errors={errors} />
                   {/* <IssueClass register={register} /> */}
                   {/* <EnterSomeDetailsClass register={register} errors={errors} /> */}
-                  <UploadProjectFileClass register={register} errors={errors} />
+                  {/* <UploadProjectFileClass register={register} errors={errors} /> */}
                   <Row>
                     <Col>
                       <div className="text-end">
@@ -80,4 +90,4 @@ const Newproject = () => {
   );
 };
 
-export default Newproject;
+export default NewTable;

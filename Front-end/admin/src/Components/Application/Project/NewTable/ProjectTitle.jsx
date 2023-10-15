@@ -13,7 +13,7 @@ const ProjectTitleClass = ({ register, errors }) => {
               className="form-control"
               type="text"
               name="title"
-              placeholder="Tên món ăn *"
+              placeholder="Tên bàn ăn *"
               {...register("title", { required: true })}
             />
             <span style={{ color: "red" }}>

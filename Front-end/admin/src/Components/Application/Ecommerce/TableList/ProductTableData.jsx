@@ -1,13 +1,15 @@
 import {
-  productColumns,
   productData,
+  tableColumns,
 } from "../../../../Data/Ecommerce/ProductList";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
+import { useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
-import { getMeal } from "../../../../actions/meal.actions";
+import { getTable } from "../../../../actions/table.actions";
 import { Btn, H6, Image } from "../../../../AbstractElements";
 import { generatePublicUrl } from "../../../../urlConfig";
+import { useState } from "react";
 const style = {
   width: 40,
   height: 40,
@@ -22,32 +24,20 @@ function formatDate(value) {
 }
 const ProductTableData = () => {
   const dispatch = useDispatch();
-  const meal = useSelector((state) => state.meal);
-  const [meals, setMeals] = useState([]);
+  const table = useSelector((state) => state.table);
+  const [tables, setTables] = useState([]);
   useEffect(() => {
-    dispatch(getMeal());
-    const mealTranfer = meal.meals.map((m) => ({
-      image: (
-        <Image
-          attrImage={{
-            src: generatePublicUrl(m.hinh_anh_mon_an),
-            style: style,
-            alt: "",
-          }}
-        />
-      ),
+    dispatch(getTable());
+    const tableTranfer = table.tables.map((t) => ({
       Details: (
         <div>
-          <H6>{m.ten_mon_an}</H6>
+          <H6>{t.ten_ban}</H6>
           <span></span>
         </div>
       ),
-      amount: m.gia.toLocaleString("it-IT", {
-        style: "currency",
-        currency: "VND",
-      }),
-      stock: <div className="font-success">{m.trang_thai}</div>,
-      start_date: formatDate(m.createdAt),
+      amount: t.so_ghe,
+      stock: <div className="font-success">{t.trang_thai}</div>,
+      start_date: formatDate(t.createdAt),
       action: (
         <div>
           <span>
@@ -78,9 +68,8 @@ const ProductTableData = () => {
         </div>
       ),
     }));
-    setMeals(mealTranfer);
-  }, [dispatch, meal]);
-
+    setTables(tableTranfer);
+  }, [dispatch, table]);
   return (
     <Fragment>
       <div className="table-responsive product-table">
@@ -88,8 +77,8 @@ const ProductTableData = () => {
           noHeader
           pagination
           paginationServer
-          columns={productColumns}
-          data={meals}
+          columns={tableColumns}
+          data={tables}
           highlightOnHover={true}
           striped={true}
           responsive={true}
