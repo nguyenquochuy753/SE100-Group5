@@ -6,10 +6,11 @@ import React, { Fragment } from "react";
 import { useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
-import { getTable } from "../../../../actions/table.actions";
-import { Btn, H6, Image } from "../../../../AbstractElements";
+import { deleteTableById, getTable } from "../../../../actions/table.actions";
+import { Btn, H6, Image, P } from "../../../../AbstractElements";
 import { generatePublicUrl } from "../../../../urlConfig";
 import { useState } from "react";
+import CommonModal from "../../../UiKits/Modals/common/modal";
 const style = {
   width: 40,
   height: 40,
@@ -25,7 +26,17 @@ function formatDate(value) {
 const ProductTableData = () => {
   const dispatch = useDispatch();
   const table = useSelector((state) => state.table);
+  const [modal, setModal] = useState(false);
+  const [idRemove, setIdRemove] = useState();
+  const toggle = () => {
+    setModal(!modal);
+  };
+  const openModel = (id) => {
+    setModal(true);
+    setIdRemove(id);
+  };
   const [tables, setTables] = useState([]);
+
   useEffect(() => {
     dispatch(getTable());
     const tableTranfer = table.tables.map((t) => ({
@@ -48,6 +59,7 @@ const ProductTableData = () => {
                 className: "btn btn-xs",
                 type: "button",
               }}
+              onClick={() => openModel(t._id)}
             >
               Xoá
             </Btn>
@@ -72,6 +84,18 @@ const ProductTableData = () => {
   }, [dispatch, table]);
   return (
     <Fragment>
+      <CommonModal
+        isOpen={modal}
+        title={"Xoá Bàn"}
+        toggler={toggle}
+        idRemove={idRemove}
+      >
+        <P>
+          {
+            "Bàn của bạn chọn sẽ được xóa. Bạn có chắc muốn thực hiện hành động ?"
+          }
+        </P>
+      </CommonModal>
       <div className="table-responsive product-table">
         <DataTable
           noHeader
