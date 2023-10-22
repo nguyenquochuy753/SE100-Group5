@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Breadcrumbs, Btn } from "../../../../AbstractElements";
 import ProjectContext from "../../../../_helper/Project";
 import { Add, Cancel } from "../../../../Constant";
@@ -8,25 +8,34 @@ import ProjectRateClass from "./ProjectRate";
 import IssueClass from "./IssueClass";
 import EnterSomeDetailsClass from "./EnterSomeDetails";
 import UploadProjectFileClass from "./UploadProjectFile";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card, CardBody, Form } from "reactstrap";
 import CustomizerContext from "../../../../_helper/Customizer";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addMeal } from "../../../../actions/meal.actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addMeal, getMealById } from "../../../../actions/meal.actions";
 
-const Newproject = () => {
+const EditMeal = () => {
   const history = useNavigate();
   const { layoutURL } = useContext(CustomizerContext);
   const dispatch = useDispatch();
   const project = useContext(ProjectContext);
+  const meal = useSelector((state) => state.meal.meal[0]);
+  const { id } = useParams();
+
   const [file, setFile] = useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    dispatch(getMealById(id));
+  }, [meal, dispatch]);
+
+  console.log(meal);
 
   const AddProject = (data) => {
     if (data !== "") {
@@ -65,7 +74,11 @@ const Newproject = () => {
                   className="theme-form"
                   onSubmit={handleSubmit(AddProject)}
                 >
-                  <ProjectTitleClass register={register} errors={errors} />
+                  <ProjectTitleClass
+                    register={register}
+                    errors={errors}
+                    name={meal?.ten_mon_an}
+                  />
                   {/* <ClientNameClass register={register} errors={errors} /> */}
                   <ProjectRateClass register={register} errors={errors} />
                   {/* <IssueClass register={register} /> */}
@@ -99,4 +112,4 @@ const Newproject = () => {
   );
 };
 
-export default Newproject;
+export default EditMeal;

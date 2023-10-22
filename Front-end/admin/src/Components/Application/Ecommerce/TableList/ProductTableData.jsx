@@ -11,6 +11,9 @@ import { Btn, H6, Image, P } from "../../../../AbstractElements";
 import { generatePublicUrl } from "../../../../urlConfig";
 import { useState } from "react";
 import CommonModal from "../../../UiKits/Modals/common/modal";
+import { useNavigate } from "react-router";
+import { useContext } from "react";
+import CustomizerContext from "../../../../_helper/Customizer";
 const style = {
   width: 40,
   height: 40,
@@ -24,7 +27,10 @@ function formatDate(value) {
   return day + "-" + month + "-" + year;
 }
 const ProductTableData = () => {
+  const { layoutURL } = useContext(CustomizerContext);
+
   const dispatch = useDispatch();
+  const history = useNavigate();
   const table = useSelector((state) => state.table);
   const [modal, setModal] = useState(false);
   const [idRemove, setIdRemove] = useState();
@@ -72,6 +78,11 @@ const ProductTableData = () => {
                 color: "success",
                 className: "btn btn-xs",
                 type: "button",
+              }}
+              onClick={() => {
+                history(
+                  `${process.env.PUBLIC_URL}/app/project/table/edit-table/${t._id}/${layoutURL}`
+                );
               }}
             >
               Sửa{" "}

@@ -2,6 +2,7 @@ import { mealContants } from "../actions/constants";
 
 const initState = {
   meals: [],
+  meal: {},
   priceRange: {},
   mealsByPrice: {},
   pageRequest: false,
@@ -23,6 +24,12 @@ export default (state = initState, action) => {
         },
       };
       break;
+    case mealContants.GET_MEAL_BY_ID: {
+      state = {
+        ...state,
+        meal: action.payload,
+      };
+    }
     default:
       break;
   }

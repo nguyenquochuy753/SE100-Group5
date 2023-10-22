@@ -181,6 +181,8 @@ import FormTouchspinContain from "../Components/Forms/FormWidget/FormTouchspin";
 import FormClipboardContain from "../Components/Forms/FormWidget/FormClipboard";
 import FAQContent from "../Components/FAQ";
 import NewTable from "../Components/Application/Project/NewTable";
+import EditTable from "../Components/Application/Project/EditTable";
+import EditMeal from "../Components/Application/Project/EditMeal";
 
 export const routes = [
   {
@@ -516,8 +518,16 @@ export const routes = [
     Component: <Newproject />,
   },
   {
+    path: `${process.env.PUBLIC_URL}/app/project/meal/edit-meal/:id/:layout`,
+    Component: <EditMeal />,
+  },
+  {
     path: `${process.env.PUBLIC_URL}/app/project/table/new-table/:layout`,
     Component: <NewTable />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/project/table/edit-table/:id/:layout`,
+    Component: <EditTable />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/chat-app/chats/:layout`,
@@ -577,7 +587,7 @@ export const routes = [
     Component: <SearchResultContain />,
   },
   {
-    path: `${process.env.PUBLIC_URL}/app/ecommerce/product/:layout`,
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/select/:layout`,
     Component: <Products />,
   },
   {

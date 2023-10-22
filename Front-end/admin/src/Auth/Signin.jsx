@@ -1,7 +1,13 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
 import { Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import { Btn, H4, P } from "../AbstractElements";
-import { EmailAddress, ForgotPassword, Password, RememberPassword, SignIn } from "../Constant";
+import {
+  EmailAddress,
+  ForgotPassword,
+  Password,
+  RememberPassword,
+  SignIn,
+} from "../Constant";
 
 import { useNavigate } from "react-router-dom";
 import man from "../assets/images/dashboard/profile.png";
@@ -46,17 +52,34 @@ const Signin = ({ selected }) => {
             <div className="login-card">
               <div className="login-main login-tab">
                 <Form className="theme-form">
-                  <H4>{selected === "simpleLogin" ? "" : "Sign In With Simple Login"}</H4>
+                  <H4>
+                    {selected === "simpleLogin"
+                      ? ""
+                      : "Sign In With Simple Login"}
+                  </H4>
                   <P>{"Enter your email & password to login"}</P>
                   <FormGroup>
                     <Label className="col-form-label">{EmailAddress}</Label>
-                    <Input className="form-control" type="email" onChange={(e) => setEmail(e.target.value)} value={email} />
+                    <Input
+                      className="form-control"
+                      type="email"
+                      onChange={(e) => setEmail(e.target.value)}
+                      value={email}
+                    />
                   </FormGroup>
                   <FormGroup className="position-relative">
                     <Label className="col-form-label">{Password}</Label>
                     <div className="position-relative">
-                      <Input className="form-control" type={togglePassword ? "text" : "password"} onChange={(e) => setPassword(e.target.value)} value={password} />
-                      <div className="show-hide" onClick={() => setTogglePassword(!togglePassword)}>
+                      <Input
+                        className="form-control"
+                        type={togglePassword ? "text" : "password"}
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                      />
+                      <div
+                        className="show-hide"
+                        onClick={() => setTogglePassword(!togglePassword)}
+                      >
                         <span className={togglePassword ? "" : "show"}></span>
                       </div>
                     </div>
@@ -71,7 +94,16 @@ const Signin = ({ selected }) => {
                     <a className="link" href="#javascript">
                       {ForgotPassword}
                     </a>
-                    <Btn attrBtn={{ color: "primary", className: "d-block w-100 mt-2", onClick: (e) => loginAuth(e) }}>{SignIn}</Btn>
+                    <Btn
+                      attrBtn={{
+                        color: "primary",
+                        className: "d-block w-100 mt-2",
+                        onClick: (e) => loginAuth(e),
+                      }}
+                      onClick={(e) => loginAuth(e)}
+                    >
+                      {SignIn}
+                    </Btn>
                   </div>
                   <OtherWay />
                 </Form>

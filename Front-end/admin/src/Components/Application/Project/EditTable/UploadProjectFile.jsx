@@ -3,9 +3,8 @@ import { Col, FormGroup, Label, Row } from "reactstrap";
 import { UploadProjectFile } from "../../../../Constant";
 import Dropzone from "react-dropzone-uploader";
 
-const UploadProjectFileClass = ({ setFile }) => {
-  const getUploadParams = ({ meta, file }) => {
-    setFile(file);
+const UploadProjectFileClass = () => {
+  const getUploadParams = ({ meta }) => {
     return {
       url: "https://httpbin.org/post",
     };
