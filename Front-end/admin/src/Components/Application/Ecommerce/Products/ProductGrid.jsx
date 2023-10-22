@@ -9,9 +9,16 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { Row, Card, Button } from "reactstrap";
 import CustomizerContext from "../../../../_helper/Customizer";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getMeal } from "../../../../actions/meal.actions";
+import { generatePublicUrl } from "../../../../urlConfig";
 
 const ProductGrid = () => {
   const { addToCart } = useContext(CartContext);
+  const meal = useSelector((state) => state.meal);
+
+  const dispatch = useDispatch();
   const { productItem, symbol } = useContext(ProductContext);
   const layoutColumns = 3;
   const { layoutURL } = useContext(CustomizerContext);
@@ -39,21 +46,46 @@ const ProductGrid = () => {
     return images(`./${image}`);
   };
   const context = useContext(FilterContext);
-  const products = getVisibleproducts(productItem, context.filter);
-
+  // const products = getVisibleproducts(productItem, context.filter);
+  const [meals, setMeals] = useState([]);
+  useEffect(() => {
+    dispatch(getMeal());
+    const tempMeal = getVisibleproducts(meal.meals, context.filter);
+    setMeals(tempMeal);
+  }, [dispatch, meal]);
   return (
     <Fragment>
       <div className="product-wrapper-grid" id="product-wrapper-grid">
         <Row className="gridRow" id="gridRow">
-          {products &&
-            products.map((item) => {
+          {meals &&
+            meals.map((item) => {
               return (
-                <div id="gridId" className={`${layoutColumns === 3 ? "col-xl-3 col-lg-6 col-sm-6 xl-4 box-col-4" : "col-xl-" + layoutColumns}`} key={item.id}>
+                <div
+                  id="gridId"
+                  className={`${
+                    layoutColumns === 3
+                      ? "col-xl-3 col-lg-6 col-sm-6 xl-4 box-col-4"
+                      : "col-xl-" + layoutColumns
+                  }`}
+                  key={item._id}
+                >
                   <Card>
                     <div className="product-box">
                       <div className="product-img">
-                        {item.status === "sale" ? <span className="ribbon ribbon-danger">{item.status}</span> : ""}
-                        {item.status === "50%" ? <span className="ribbon ribbon-success ribbon-right">{item.status}</span> : ""}
+                        {item.status === "sale" ? (
+                          <span className="ribbon ribbon-danger">
+                            {item.status}
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                        {item.status === "50%" ? (
+                          <span className="ribbon ribbon-success ribbon-right">
+                            {item.status}
+                          </span>
+                        ) : (
+                          ""
+                        )}
                         {item.status === "gift" ? (
                           <span className="ribbon ribbon-secondary ribbon-vertical-left">
                             <i className="icon-gift">{item.status}</i>
@@ -68,24 +100,55 @@ const ProductGrid = () => {
                         ) : (
                           ""
                         )}
-                        {item.status === "Hot" ? <span className="ribbon ribbon ribbon-clip ribbon-warning">{item.status}</span> : ""} <Image attrImage={{ className: "img-fluid", src: `${dynamicImage(item.img)}`, alt: "" }} />
+                        {item.status === "Hot" ? (
+                          <span className="ribbon ribbon ribbon-clip ribbon-warning">
+                            {item.status}
+                          </span>
+                        ) : (
+                          ""
+                        )}{" "}
+                        <Image
+                          attrImage={{
+                            // className: "img-fluid",
+                            src: `${generatePublicUrl(item.hinh_anh_mon_an)}`,
+                            alt: "",
+                            style: { width: "100%", height: "350px" },
+                            // style: { height: "400px" },
+                          }}
+                        />
                         <div className="product-hover">
-                          <UL attrUL={{ className: "simple-list d-flex flex-row" }}>
+                          <UL
+                            attrUL={{
+                              className: "simple-list d-flex flex-row",
+                            }}
+                          >
                             <LI attrLI={{ className: "border-0" }}>
                               {/* <Link to={`${process.env.PUBLIC_URL}/app/ecommerce/cart/${layoutURL}`}> */}
-                              <Button color="default" onClick={() => AddToCarts(item, quantity)}>
+                              <Button
+                                color="default"
+                                onClick={() => AddToCarts(item, quantity)}
+                              >
                                 <i className="icon-shopping-cart"></i>
                               </Button>
                               {/* </Link> */}
                             </LI>
                             <LI attrLI={{ className: "border-0" }}>
-                              <Button color="default" data-toggle="modal" onClick={() => onOpenModal(item.id)}>
+                              <Button
+                                color="default"
+                                data-toggle="modal"
+                                onClick={() => onOpenModal(item._id)}
+                              >
                                 <i className="icon-eye"></i>
                               </Button>
                             </LI>
                             <LI attrLI={{ className: "border-0" }}>
-                              <Link to={`${process.env.PUBLIC_URL}/app/ecommerce/wishlist/${layoutURL}`}>
-                                <Button color="default" onClick={() => addWishList(item)}>
+                              <Link
+                                to={`${process.env.PUBLIC_URL}/app/ecommerce/wishlist/${layoutURL}`}
+                              >
+                                <Button
+                                  color="default"
+                                  onClick={() => addWishList(item)}
+                                >
                                   <i className="icon-heart"></i>
                                 </Button>
                               </Link>
@@ -101,16 +164,22 @@ const ProductGrid = () => {
                           <i className="fa fa-star font-warning"></i>
                           <i className="fa fa-star font-warning"></i>
                         </div>
-                        <Link to={`${process.env.PUBLIC_URL}/app/ecommerce/product-page/${layoutURL}/${item.id}`}>
-                          <H4>{item.name}</H4>
+                        <Link
+                          to={`${process.env.PUBLIC_URL}/app/ecommerce/product-page/${layoutURL}/${item.id}`}
+                        >
+                          <H4>{item.ten_mon_an}</H4>
                         </Link>
 
                         <P>{item.note}</P>
                         <div className="product-price">
-                          {symbol} {item.price}{" "}
-                          <del>
+                          {/* {symbol}{" "} */}
+                          {item.gia.toLocaleString("it-IT", {
+                            style: "currency",
+                            currency: "VND",
+                          })}{" "}
+                          {/* <del>
                             {symbol} {item.discountPrice}
-                          </del>
+                          </del> */}
                         </div>
                       </div>
                     </div>
@@ -118,7 +187,13 @@ const ProductGrid = () => {
                 </div>
               );
             })}
-          {openModal && <ProductModal value={openModal} setOpenModal={setOpenModal} dataid={dataid} />}
+          {openModal && (
+            <ProductModal
+              value={openModal}
+              setOpenModal={setOpenModal}
+              dataid={dataid}
+            />
+          )}
         </Row>
       </div>
     </Fragment>

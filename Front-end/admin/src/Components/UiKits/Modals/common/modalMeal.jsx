@@ -4,11 +4,12 @@ import { Btn } from "../../../../AbstractElements";
 import { Close, SaveChanges } from "../../../../Constant";
 import { useDispatch } from "react-redux";
 import { deleteTableById } from "../../../../actions/table.actions";
+import { deleteMealById } from "../../../../actions/meal.actions";
 
 const CommonModal = (props) => {
   const dispatch = useDispatch();
   const deleteHandler = () => {
-    dispatch(deleteTableById(props.idRemove));
+    dispatch(deleteMealById(props.idRemove));
     props.toggler();
   };
   return (

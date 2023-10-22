@@ -2,12 +2,15 @@ import {
   productColumns,
   productData,
 } from "../../../../Data/Ecommerce/ProductList";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
 import { getMeal } from "../../../../actions/meal.actions";
-import { Btn, H6, Image } from "../../../../AbstractElements";
+import { Btn, H6, Image, P } from "../../../../AbstractElements";
 import { generatePublicUrl } from "../../../../urlConfig";
+import CommonModal from "../../../UiKits/Modals/common/modalMeal";
+import CustomizerContext from "../../../../_helper/Customizer";
+import { useNavigate } from "react-router";
 const style = {
   width: 40,
   height: 40,
@@ -20,10 +23,24 @@ function formatDate(value) {
   const year = date.toLocaleString("default", { year: "numeric" });
   return day + "-" + month + "-" + year;
 }
+
 const ProductTableData = () => {
+  const { layoutURL } = useContext(CustomizerContext);
+
   const dispatch = useDispatch();
+  const history = useNavigate();
+
   const meal = useSelector((state) => state.meal);
   const [meals, setMeals] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [idRemove, setIdRemove] = useState();
+  const toggle = () => {
+    setModal(!modal);
+  };
+  const openModel = (id) => {
+    setModal(true);
+    setIdRemove(id);
+  };
   useEffect(() => {
     dispatch(getMeal());
     const mealTranfer = meal.meals.map((m) => ({
@@ -42,10 +59,7 @@ const ProductTableData = () => {
           <span></span>
         </div>
       ),
-      amount: m.gia.toLocaleString("it-IT", {
-        style: "currency",
-        currency: "VND",
-      }),
+      amount: m.gia,
       stock: <div className="font-success">{m.trang_thai}</div>,
       start_date: formatDate(m.createdAt),
       action: (
@@ -58,6 +72,7 @@ const ProductTableData = () => {
                 className: "btn btn-xs",
                 type: "button",
               }}
+              onClick={() => openModel(m._id)}
             >
               Xoá
             </Btn>
@@ -71,6 +86,11 @@ const ProductTableData = () => {
                 className: "btn btn-xs",
                 type: "button",
               }}
+              onClick={() => {
+                history(
+                  `${process.env.PUBLIC_URL}/app/project/meal/edit-meal/${m._id}/${layoutURL}`
+                );
+              }}
             >
               Sửa{" "}
             </Btn>
@@ -83,11 +103,23 @@ const ProductTableData = () => {
 
   return (
     <Fragment>
+      <CommonModal
+        isOpen={modal}
+        title={"Xoá Món Ăn"}
+        toggler={toggle}
+        idRemove={idRemove}
+      >
+        <P>
+          {
+            "Món ăn của bạn chọn sẽ được xóa. Bạn có chắc muốn thực hiện hành động ?"
+          }
+        </P>
+      </CommonModal>
       <div className="table-responsive product-table">
         <DataTable
           noHeader
           pagination
-          paginationServer
+          // paginationServer
           columns={productColumns}
           data={meals}
           highlightOnHover={true}

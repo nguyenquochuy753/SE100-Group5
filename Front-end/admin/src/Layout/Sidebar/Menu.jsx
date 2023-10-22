@@ -20,9 +20,10 @@ export const MENUITEMS = [
       {
         title: "Đặt Món",
         icon: "ecommerce",
-        value: "none",
+        value: "select",
         type: "link",
         active: false,
+        path: `${process.env.PUBLIC_URL}/app/ecommerce/select`,
       },
       {
         title: "Đặt Bàn",
