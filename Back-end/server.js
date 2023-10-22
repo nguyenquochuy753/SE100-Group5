@@ -10,6 +10,7 @@ const homeRoute = require("./routes/home.route");
 const mealRoute = require("./routes/meal.route");
 const tableRoute = require("./routes/table.route");
 const materialRoute = require("./routes/material.route");
+const placeOrderRoute = require("./routes/placeOrder.route")
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -28,6 +29,7 @@ app.use(homeRoute);
 app.use('/v1/meal',mealRoute);
 app.use('/v1/table',tableRoute);
 app.use('/v1/material', materialRoute);
+app.use('/v1/placeOrder',placeOrderRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}/`);
