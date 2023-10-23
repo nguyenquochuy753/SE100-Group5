@@ -1,9 +1,10 @@
-const tableController = require("../controllers/table.controller")
-const router = require('express').Router()
+const tableController = require("../controllers/table.controller");
+const router = require("express").Router();
 
-router.post('/addTable',tableController.addTable);
-router.get('/getAllTables',tableController.getAllTables);
-router.delete('/deleteTable/:id',tableController.deleteTable);
-router.put('/updateTable/:id',tableController.updateTable);
+router.post("/addTable", tableController.addTable);
+router.get("/getAllTables", tableController.getAllTables);
+router.get("/getTable/:id", tableController.getTableById);
+router.delete("/deleteTable/:id", tableController.deleteTable);
+router.put("/updateTable/:id", tableController.updateTable);
 
-module.exports = router
+module.exports = router;
