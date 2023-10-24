@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Breadcrumbs, Btn } from "../../../../AbstractElements";
 import ProjectContext from "../../../../_helper/Project";
 import { Add, Cancel } from "../../../../Constant";
@@ -12,13 +12,14 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card, CardBody, Form } from "reactstrap";
 import CustomizerContext from "../../../../_helper/Customizer";
-import { useDispatch } from "react-redux";
-import { addTable } from "../../../../actions/table.actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addTable, getTableById } from "../../../../actions/table.actions";
 
 const EditTable = () => {
   const history = useNavigate();
   const { layoutURL } = useContext(CustomizerContext);
   const project = useContext(ProjectContext);
+  const table = useSelector(state => state.table.table)
   const { id } = useParams();
   console.log(id);
 
@@ -28,6 +29,11 @@ const EditTable = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  useEffect(()=>{
+    dispatch(getTableById(id));
+  },[dispatch, table]);
+
+  console.log(table);
 
   const AddProject = (data) => {
     if (data !== "") {

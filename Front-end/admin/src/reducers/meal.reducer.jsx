@@ -24,12 +24,12 @@ export default (state = initState, action) => {
         },
       };
       break;
-    case mealContants.GET_MEAL_BY_ID: {
+    case mealContants.GET_MEAL_BY_ID:
       state = {
         ...state,
         meal: action.payload,
       };
-    }
+      break;
     default:
       break;
   }

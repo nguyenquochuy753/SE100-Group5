@@ -14,6 +14,19 @@ export const getTable = () => {
   };
 };
 
+export const getTableById = (payload) =>{
+  return async (dispatch) => {
+    const res = await axios.get(`/table/getTable/${payload}`);
+    if (res.status === 200) {
+      dispatch({
+        type: tableContants.GET_TABLE_BY_ID,
+        payload: res.data,
+      });
+    } else {
+    }
+  };
+}
+
 export const addTable = (form) => {
   return async (dispatch) => {
     dispatch({ type: tableContants.ADD_TABLE_REQUEST });
