@@ -26,7 +26,7 @@ const OtherWay = () => {
       </div>
       <P attrPara={{ className: "text-center mb-0 " }}>
         Don't have account?
-        <Link className="ms-2" to={`${process.env.PUBLIC_URL}/pages/authentication/register-simple`}>
+        <Link className="ms-2" to={`${process.env.PUBLIC_URL}/pages/authentication/register-simple/:layout`}>
           Create Account
         </Link>
       </P>

@@ -13,7 +13,7 @@ const UserHeader = () => {
   const [name, setName] = useState("Emay Walter");
   const { layoutURL } = useContext(CustomizerContext);
   const authenticated = JSON.parse(localStorage.getItem("authenticated"));
-  const auth0_profile = JSON.parse(localStorage.getItem("auth0_profile"));
+  // const auth0_profile = JSON.parse(localStorage.getItem("auth0_profile"));
 
   useEffect(() => {
     setProfile(localStorage.getItem("profileURL") || man);
@@ -39,12 +39,12 @@ const UserHeader = () => {
         <Image
           attrImage={{
             className: "b-r-10 m-0",
-            src: `${authenticated ? auth0_profile.picture : profile}`,
+            src: `${authenticated ? profile : profile}`,
             alt: "",
           }}
         />
         <div className="media-body">
-          <span>{authenticated ? auth0_profile.name : name}</span>
+          <span>{authenticated ? name : name}</span>
           <P attrPara={{ className: "mb-0 font-roboto" }}>
             {Admin} <i className="middle fa fa-angle-down"></i>
           </P>
