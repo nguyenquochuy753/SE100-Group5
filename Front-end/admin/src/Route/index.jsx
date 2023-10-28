@@ -12,7 +12,7 @@ import { classes } from "../Data/Layouts";
 
 const Routers = () => {
   // const login = useState(JSON.parse(localStorage.getItem("login")))[0];
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(JSON.parse(localStorage.getItem("authenticated")));
   const defaultLayoutObj = classes.find((item) => Object.values(item).pop(1) === "compact-wrapper");
   const layout = localStorage.getItem("layout") || Object.keys(defaultLayoutObj).pop();
 

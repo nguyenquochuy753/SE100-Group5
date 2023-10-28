@@ -39,7 +39,7 @@ const Signin = ({ selected }) => {
     setName("Emay Walter");
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-          localStorage.setItem("login", JSON.stringify(true));
+          // localStorage.setItem("login", JSON.stringify(true));
           localStorage.setItem("authenticated", JSON.stringify(true));
           history(`${process.env.PUBLIC_URL}`);
           toast.success("Successfully logged in!");
