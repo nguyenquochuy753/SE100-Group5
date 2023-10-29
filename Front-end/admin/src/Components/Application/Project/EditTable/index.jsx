@@ -13,15 +13,20 @@ import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card, CardBody, Form } from "reactstrap";
 import CustomizerContext from "../../../../_helper/Customizer";
 import { useDispatch, useSelector } from "react-redux";
-import { addTable, getTableById } from "../../../../actions/table.actions";
+import {
+  addTable,
+  getTableById,
+  updateTable,
+} from "../../../../actions/table.actions";
+import { useState } from "react";
 
 const EditTable = () => {
   const history = useNavigate();
   const { layoutURL } = useContext(CustomizerContext);
   const project = useContext(ProjectContext);
-  const table = useSelector(state => state.table.table)
+  const table = useSelector((state) => state.table.table);
+  const [tableEdit, setTableEdit] = useState();
   const { id } = useParams();
-  console.log(id);
 
   const dispatch = useDispatch();
   const {
@@ -29,20 +34,21 @@ const EditTable = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getTableById(id));
-  },[dispatch, table]);
-
-  console.log(table);
+    setTableEdit(table[0]);
+  }, [dispatch, table]);
 
   const AddProject = (data) => {
     if (data !== "") {
       // project.addNewProject(data);
+      console.log(data);
       dispatch(
-        addTable({
-          ten_ban: data.title,
-          so_ghe: data.soGhe,
-          trang_thai: data.status,
+        updateTable({
+          id: id,
+          ten_ban: data.title != "" ? data.title : tableEdit.ten_ban,
+          so_ghe: data.soGhe != "" ? data.soGhe : tableEdit.so_ghe,
+          trang_thai: tableEdit.trang_thai,
         })
       );
       history(
@@ -69,9 +75,18 @@ const EditTable = () => {
                   className="theme-form"
                   onSubmit={handleSubmit(AddProject)}
                 >
-                  <ProjectTitleClass register={register} errors={errors} />
+                  <ProjectTitleClass
+                    register={register}
+                    errors={errors}
+                    name={tableEdit?.ten_ban}
+                  />
                   {/* <ClientNameClass register={register} errors={errors} /> */}
-                  <ProjectRateClass register={register} errors={errors} />
+                  <ProjectRateClass
+                    register={register}
+                    errors={errors}
+                    numChair={tableEdit?.so_ghe}
+                    statusTable={tableEdit?.trang_thai}
+                  />
                   {/* <IssueClass register={register} /> */}
                   {/* <EnterSomeDetailsClass register={register} errors={errors} /> */}
                   {/* <UploadProjectFileClass register={register} errors={errors} /> */}

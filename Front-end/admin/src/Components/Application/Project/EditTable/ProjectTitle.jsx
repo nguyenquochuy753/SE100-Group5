@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Col, FormGroup, Label, Row } from "reactstrap";
 import { ProjectTitle } from "../../../../Constant";
 
-const ProjectTitleClass = ({ register, errors }) => {
+const ProjectTitleClass = ({ register, errors, name }) => {
   return (
     <Fragment>
       <Row>
@@ -14,7 +14,8 @@ const ProjectTitleClass = ({ register, errors }) => {
               type="text"
               name="title"
               placeholder="Tên bàn ăn *"
-              {...register("title", { required: true })}
+              defaultValue={name}
+              {...register("title", { required: name != "" ? false : true })}
             />
             <span style={{ color: "red" }}>
               {errors.title && "Title is required"}

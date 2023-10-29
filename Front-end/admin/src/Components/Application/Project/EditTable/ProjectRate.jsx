@@ -8,9 +8,8 @@ import {
   ProjectStatus,
 } from "../../../../Constant";
 
-const ProjectRateClass = ({ register }) => {
+const ProjectRateClass = ({ register, numChair, statusTable }) => {
   const { ref, ...status } = register("status");
-
   return (
     <Fragment>
       <Row>
@@ -21,9 +20,11 @@ const ProjectRateClass = ({ register }) => {
               className="form-control"
               type="number"
               name="soGhe"
-              //   defaultValue="0"
+              defaultValue={numChair}
               placeholder="Nhập số ghế của bàn ăn"
-              {...register("soGhe", { required: true })}
+              {...register("soGhe", {
+                required: numChair != "" ? false : true,
+              })}
             />
           </FormGroup>
         </Col>
@@ -43,7 +44,7 @@ const ProjectRateClass = ({ register }) => {
             </Input>
           </FormGroup>
         </Col> */}
-        <Col sm="4">
+        {/* <Col sm="4">
           <FormGroup>
             <Label for="exampleSelect">Trạng Thái</Label>
             <Input
@@ -54,6 +55,15 @@ const ProjectRateClass = ({ register }) => {
               id="exampleSelect"
               required
               innerRef={ref}
+              defaultValue={
+                statusTable == "Trống"
+                  ? "Trống"
+                  : statusTable == "Đã Đặt"
+                  ? "Đã Đặt"
+                  : statusTable == "Đang Ăn"
+                  ? "Đang Ăn"
+                  : statusTable
+              }
               {...status}
               // {...register("status", { required: true })}
             >
@@ -62,7 +72,7 @@ const ProjectRateClass = ({ register }) => {
               <option value="Đang Ăn">Đang Ăn</option>
             </Input>
           </FormGroup>
-        </Col>
+        </Col> */}
       </Row>
     </Fragment>
   );

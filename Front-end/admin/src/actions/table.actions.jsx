@@ -14,7 +14,7 @@ export const getTable = () => {
   };
 };
 
-export const getTableById = (payload) =>{
+export const getTableById = (payload) => {
   return async (dispatch) => {
     const res = await axios.get(`/table/getTable/${payload}`);
     if (res.status === 200) {
@@ -25,7 +25,7 @@ export const getTableById = (payload) =>{
     } else {
     }
   };
-}
+};
 
 export const addTable = (form) => {
   return async (dispatch) => {
@@ -62,6 +62,33 @@ export const deleteTableById = (payload) => {
         const { error } = res.data;
         dispatch({
           type: tableContants.DELETE_TABLE_BY_ID_FAILURE,
+          payload: {
+            error,
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const updateTable = (payload) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(`/table/updateTable/${payload.id}`, {
+        ten_ban: payload.ten_ban,
+        so_ghe: payload.so_ghe,
+        trang_thai: payload.trang_thai,
+      });
+      dispatch({ type: tableContants.UPDATE_TABLE_BY_ID_REQUEST });
+      if (res.status === 200) {
+        dispatch({ type: tableContants.UPDATE_TABLE_BY_ID_SUCCESS });
+        dispatch(getTable());
+      } else {
+        const { error } = res.data;
+        dispatch({
+          type: tableContants.UPDATE_TABLE_BY_ID_FAILURE,
           payload: {
             error,
           },

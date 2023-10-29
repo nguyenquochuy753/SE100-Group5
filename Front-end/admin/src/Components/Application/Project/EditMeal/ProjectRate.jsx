@@ -8,7 +8,7 @@ import {
   ProjectStatus,
 } from "../../../../Constant";
 
-const ProjectRateClass = ({ register }) => {
+const ProjectRateClass = ({ register, gia, trang_thai }) => {
   const { ref, ...status } = register("status");
 
   return (
@@ -21,7 +21,7 @@ const ProjectRateClass = ({ register }) => {
               className="form-control"
               type="number"
               name="rate"
-              //   defaultValue="0"
+              defaultValue={gia}
               placeholder="Nhập giá của món ăn"
               {...register("rate", { required: true })}
             />
@@ -53,10 +53,14 @@ const ProjectRateClass = ({ register }) => {
               className="form-control digits"
               required
               innerRef={ref}
+              defaultValue={
+                trang_thai == "Còn" ? 0 : trang_thai == "Hết" ? 1 : 2
+              }
               {...status}
             >
-              <option value="Còn">Còn</option>
-              <option value="Hết">Hết</option>
+              <option value={0}>Còn</option>
+              <option value={1}>Hết</option>
+              <option value={2}>Test</option>
             </Input>
           </FormGroup>
         </Col>
