@@ -14,8 +14,8 @@ const ProjectTitleClass = ({ register, errors, name }) => {
               type="text"
               name="title"
               placeholder="Tên món ăn *"
-              {...register("title", { required: true })}
-              value={name}
+              {...register("title", { required: name != "" ? false : true })}
+              defaultValue={name}
             />
             <span style={{ color: "red" }}>
               {errors.title && "Title is required"}

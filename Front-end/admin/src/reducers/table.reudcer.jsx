@@ -2,6 +2,7 @@ import { tableContants } from "../actions/constants";
 
 const initState = {
   tables: [],
+  table: {},
   pageRequest: false,
   page: {},
   error: null,
@@ -16,6 +17,11 @@ export default (state = initState, action) => {
         tables: action.payload,
       };
       break;
+    case tableContants.GET_TABLE_BY_ID:
+      state = {
+        ...state,
+        table: action.payload
+      }
     default:
       break;
   }

@@ -66,3 +66,31 @@ export const deleteMealById = (payload) => {
     }
   };
 };
+
+export const updateMeal = (payload) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(`/meal/updateMeal/${payload.id}`, {
+        ten_mon_an: payload.ten_mon_an,
+        gia: payload.gia,
+        trang_thai: payload.trang_thai,
+        hinh_anh_mon_an: payload.hinh_anh_mon_an,
+      });
+      dispatch({ type: mealContants.UPDATE_MEAL_BY_ID_REQUEST });
+      if (res.status === 200) {
+        dispatch({ type: mealContants.UPDATE_MEAL_BY_ID_SUCCESS });
+        dispatch(getMeal());
+      } else {
+        const { error } = res.data;
+        dispatch({
+          type: mealContants.UPDATE_MEAL_BY_ID_FAILURE,
+          payload: {
+            error,
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
