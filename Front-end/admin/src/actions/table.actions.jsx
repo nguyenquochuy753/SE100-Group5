@@ -99,3 +99,13 @@ export const updateTable = (payload) => {
     }
   };
 };
+
+export const bookTable = (payload) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: tableContants.BOOK_TABLE, payload: payload });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

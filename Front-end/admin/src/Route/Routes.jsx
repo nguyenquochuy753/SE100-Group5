@@ -510,6 +510,10 @@ export const routes = [
     Component: <Project />,
   },
   {
+    path: `${process.env.PUBLIC_URL}/app/project/book/:layout`,
+    Component: <Project />,
+  },
+  {
     path: `${process.env.PUBLIC_URL}/app/project/new-project/:layout`,
     Component: <Newproject />,
   },

@@ -10,11 +10,19 @@ import CartContext from "../../../../_helper/Ecommerce/Cart";
 import EmptyCart from "./EmptyCart";
 import HeaderCard from "../../../Common/Component/HeaderCard";
 import CustomizerContext from "../../../../_helper/Customizer";
+import { useDispatch, useSelector } from "react-redux";
+import { generatePublicUrl } from "../../../../urlConfig";
+import { addMealToCart } from "../../../../actions/cart.actions";
 
 const CartData = () => {
   const { layoutURL } = useContext(CustomizerContext);
+  const dispatch = useDispatch();
   const { symbol } = useContext(ProductContext);
-  const { addToCart, cart, decrementQty, removeFromCart } = useContext(CartContext);
+  // const { addToCart, cart, decrementQty, removeFromCart } = useContext(CartContext);
+  const { addToCart, decrementQty, removeFromCart } = useContext(CartContext);
+  const cart = useSelector((state) => state.cart.carts);
+  const table = useSelector((state) => state.table.tableBook);
+
   const incrementQty = (product, quantity) => {
     addToCart(product, quantity);
   };
@@ -28,12 +36,42 @@ const CartData = () => {
   const dynamicImage = (image) => {
     return images(`./${image}`);
   };
-
+  const totalAmount = cart.reduce((total, c) => total + c.p.gia * c.qty, 0);
+  const plusMealHandler = (id) => {
+    const newCart = [];
+    for (const c of cart) {
+      if (c.p._id == id) {
+        c.qty += 1;
+        newCart.push(c);
+      } else {
+        newCart.push(c);
+      }
+    }
+    dispatch(addMealToCart(newCart));
+  };
+  const minusMealHandler = (id) => {
+    const newCart = [];
+    for (const c of cart) {
+      if (c.p._id == id) {
+        c.qty -= 1;
+        if (c.qty > 0) {
+          newCart.push(c);
+        }
+      } else {
+        newCart.push(c);
+      }
+    }
+    dispatch(addMealToCart(newCart));
+  };
+  const removeMealHandler = (id) => {
+    const newCart = cart.filter((c) => c.p._id != id);
+    dispatch(addMealToCart(newCart));
+  };
   return (
     <Fragment>
       {cart && cart.length > 0 ? (
         <div>
-          <HeaderCard title={CartTitle} />
+          <HeaderCard title={`Giỏ Hàng ${table && table.name}`} />
           <CardBody className="cart">
             <Row>
               <div className="order-history table-responsive wishlist">
@@ -50,29 +88,61 @@ const CartData = () => {
                       return (
                         <tr key={i}>
                           <td>
-                            <Image attrImage={{ className: "img-fluid img-60", src: `${dynamicImage(item.imgPng)}`, alt: "#" }} />
+                            <Image
+                              attrImage={{
+                                className: "img-fluid img-60",
+                                src: `${generatePublicUrl(
+                                  item.p.hinh_anh_mon_an
+                                )}`,
+                                alt: "#",
+                              }}
+                            />
                           </td>
                           <td>
                             <div className="product-name">
-                              <a href="#javascript">{item.name}</a>
+                              <a href="#javascript">{item.p.ten_mon_an}</a>
                             </div>
                           </td>
-                          <td>${item.price}</td>
+                          <td>
+                            {item.p.gia.toLocaleString("it-IT", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
+                          </td>
                           <td className="qty-box">
                             <div className="input-group bootstrap-touchspin">
                               <span className="input-group-prepend">
                                 <Btn
                                   attrBtn={{
                                     color: "primary",
-                                    className: "bootstrap-touchspin-down btn-square",
-                                    onClick: () => decrementQuantity(item.id),
-                                  }}>
+                                    className:
+                                      "bootstrap-touchspin-down btn-square",
+                                    // onClick: () =>
+                                    //   decrementQuantity(item.p._id),
+                                  }}
+                                  onClick={() => minusMealHandler(item.p._id)}
+                                >
                                   <i className="fa fa-minus"></i>
                                 </Btn>
                               </span>
-                              <Input type="text" name="quantity" value={item.qty} readOnly={true} style={{ textAlign: "center" }} className="form-control input-number" />
+                              <Input
+                                type="text"
+                                name="quantity"
+                                value={item.qty}
+                                readOnly={true}
+                                style={{ textAlign: "center" }}
+                                className="form-control input-number"
+                              />
                               <span className="input-group-append">
-                                <Btn attrBtn={{ color: "primary", className: "bootstrap-touchspin-up btn-square", onClick: () => incrementQty(item, 1) }}>
+                                <Btn
+                                  attrBtn={{
+                                    color: "primary",
+                                    className:
+                                      "bootstrap-touchspin-up btn-square",
+                                    // onClick: () => plusMealHandler(item.p._id),
+                                  }}
+                                  onClick={() => plusMealHandler(item.p._id)}
+                                >
                                   {" "}
                                   <i className="fa fa-plus"></i>
                                 </Btn>{" "}
@@ -80,13 +150,19 @@ const CartData = () => {
                             </div>
                           </td>
                           <td>
-                            <a href="#javascript" onClick={() => removefromcart(item)}>
+                            <a
+                              href="#javascript"
+                              onClick={() => removeMealHandler(item.p._id)}
+                            >
                               <XCircle />
                             </a>
                           </td>
                           <td>
-                            {symbol}
-                            {item.price * item.qty}
+                            {/* {symbol} */}
+                            {(item.p.gia * item.qty).toLocaleString("it-IT", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
                           </td>
                         </tr>
                       );
@@ -94,30 +170,45 @@ const CartData = () => {
                     <tr>
                       <td colSpan="4">
                         <div className="input-group">
-                          <Input className="form-control me-2" type="text" placeholder="Enter coupan code" />
+                          <Input
+                            className="form-control me-2"
+                            type="text"
+                            placeholder="Nhập mã giảm giá"
+                          />
                           <a className="btn btn-primary" href="#javascript">
-                            Apply
+                            Xác Nhận
                           </a>
                         </div>
                       </td>
                       <td className="total-amount">
                         <H6 attrH6={{ className: "m-0 text-end" }}>
-                          <span className="f-w-600">Total Price :</span>
+                          <span className="f-w-600">Tổng Cộng :</span>
                         </H6>
                       </td>
                       <td>
-                        <span>${getCartTotal(cart)}</span>
+                        <span>
+                          {totalAmount.toLocaleString("it-IT", {
+                            style: "currency",
+                            currency: "VND",
+                          })}
+                        </span>
                       </td>
                     </tr>
                     <tr>
                       <td className="text-end" colSpan="5">
-                        <Link to={`${process.env.PUBLIC_URL}/app/ecommerce/product/${layoutURL}`} className="btn btn-secondary cart-btn-transform">
-                          continue shopping
+                        <Link
+                          to={`${process.env.PUBLIC_URL}/app/ecommerce/product/${layoutURL}`}
+                          className="btn btn-secondary cart-btn-transform"
+                        >
+                          tiếp tục mua sắm
                         </Link>
                       </td>
                       <td>
-                        <Link className="btn btn-success cart-btn-transform" to={`${process.env.PUBLIC_URL}/app/ecommerce/checkout/${layoutURL}`}>
-                          check out
+                        <Link
+                          className="btn btn-success cart-btn-transform"
+                          to={`${process.env.PUBLIC_URL}/app/ecommerce/checkout/${layoutURL}`}
+                        >
+                          thanh toán
                         </Link>
                       </td>
                     </tr>

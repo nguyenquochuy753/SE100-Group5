@@ -27,7 +27,8 @@ export const MENUITEMS = [
       },
       {
         title: "Đặt Bàn",
-        value: "none",
+        value: "book",
+        path: `${process.env.PUBLIC_URL}/app/project/book`,
 
         icon: "project",
         type: "link",

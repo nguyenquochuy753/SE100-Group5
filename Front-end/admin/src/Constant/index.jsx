@@ -342,12 +342,12 @@ export const LorumIpsum = "Lorum Ipsum";
 export const Purchase = "Purchase";
 export const CartTitle = "Cart";
 export const CartTableHeader = [
-  "Prdouct",
-  "Prdouct Name",
-  "Price",
-  "Quantity",
-  "Action",
-  "Total",
+  "Hình Ảnh",
+  "Tên Sản Phẩm",
+  "Giá",
+  "Số Lượng",
+  "Hành Động",
+  "Tổng cộng",
 ];
 export const NewOrders = "New Orders";
 export const TotalPrice = "Total Price";
