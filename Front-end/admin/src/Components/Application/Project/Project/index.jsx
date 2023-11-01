@@ -34,11 +34,17 @@ const Project = () => {
   useEffect(() => {
     dispatch(getTable());
   }, [dispatch]);
-  const bookTableHandler = (id, name) => {
-    dispatch(bookTable({ id, name }));
-    history(`${process.env.PUBLIC_URL}/app/ecommerce/select/${layoutURL}`);
+  const bookTableHandler = (id, name, trang_thai) => {
+    if (trang_thai == "Đang Ăn") {
+      history(
+        `${process.env.PUBLIC_URL}/app/ecommerce/detailtable/${id}/${layoutURL}`
+      );
+    } else {
+      dispatch(bookTable({ id, name }));
+      history(`${process.env.PUBLIC_URL}/app/ecommerce/select/${layoutURL}`);
+    }
   };
-  console.log(tableBook);
+  console.log(table);
 
   return (
     <Fragment>
@@ -92,7 +98,7 @@ const Project = () => {
                     </NavItem>
                   </Nav>
                 </Col>
-                <Col md="6">
+                {/* <Col md="6">
                   <div className="text-end">
                     <Link
                       className="btn btn-primary"
@@ -104,7 +110,7 @@ const Project = () => {
                       {CreateNewProject}
                     </Link>
                   </div>
-                </Col>
+                </Col> */}
               </Row>
             </Card>
           </Col>
@@ -125,8 +131,8 @@ const Project = () => {
                   </TabPane>
                   <TabPane tabId="2">
                     <Row>
-                      {allData.map((item, i) =>
-                        item.badge === "Doing" ? (
+                      {table?.map((item, i) =>
+                        item.trang_thai == "Trống" ? (
                           <CusClass item={item} key={i} />
                         ) : (
                           ""
@@ -136,8 +142,8 @@ const Project = () => {
                   </TabPane>
                   <TabPane tabId="3">
                     <Row>
-                      {allData.map((item, i) =>
-                        item.badge === "Done" ? (
+                      {table?.map((item, i) =>
+                        item.trang_thai == "Đang Ăn" ? (
                           <CusClass item={item} key={i} />
                         ) : (
                           ""

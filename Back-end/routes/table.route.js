@@ -6,5 +6,6 @@ router.get("/getAllTables", tableController.getAllTables);
 router.get("/getTable/:id", tableController.getTableById);
 router.delete("/deleteTable/:id", tableController.deleteTable);
 router.put("/updateTable/:id", tableController.updateTable);
+router.put("/orderTable/:id", tableController.orderMeal);
 
 module.exports = router;

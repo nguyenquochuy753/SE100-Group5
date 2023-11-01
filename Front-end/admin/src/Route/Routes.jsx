@@ -183,6 +183,7 @@ import FAQContent from "../Components/FAQ";
 import NewTable from "../Components/Application/Project/NewTable";
 import EditTable from "../Components/Application/Project/EditTable";
 import EditMeal from "../Components/Application/Project/EditMeal";
+import TableDetail from "../Components/Application/Ecommerce/TableDetail";
 
 export const routes = [
   {
@@ -623,7 +624,7 @@ export const routes = [
     Component: <WishList />,
   },
   {
-    path: `${process.env.PUBLIC_URL}/app/ecommerce/checkout/:layout`,
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/checkout/:id/:layout`,
     Component: <CheckOut />,
   },
   {
@@ -637,6 +638,10 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/table/table-list/:layout`,
     Component: <TableListContain />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/detailtable/:id/:layout`,
+    Component: <TableDetail />,
   },
 
   // //Gallery

@@ -408,7 +408,7 @@ export const FancyShirtPrice = "$100.00";
 export const Cuba = "Cuba";
 export const HelloCuba = "hello@Cuba.in";
 
-export const InvoiceHash = "Invoice #";
+export const InvoiceHash = "Hóa Đơn #";
 export const IssuedJan = "Issued: Jan";
 export const PaymentDue = "Payment Due: Feb";
 export const JohanDeo = "Johan Deo";

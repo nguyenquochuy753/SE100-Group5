@@ -9,3 +9,13 @@ export const addMealToCart = (payload) => {
     }
   };
 };
+
+export const clearCart = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: cartContants.CLEAR_CART });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

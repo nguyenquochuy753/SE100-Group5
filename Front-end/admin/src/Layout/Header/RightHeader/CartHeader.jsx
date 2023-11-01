@@ -8,7 +8,9 @@ import { Cart, CheckOut, GOTOYOURCART, OrderTotal } from "../../../Constant";
 import SvgIcon from "../../../Components/Common/Component/SvgIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { generatePublicUrl } from "../../../urlConfig";
-import { addMealToCart } from "../../../actions/cart.actions";
+import { addMealToCart, clearCart } from "../../../actions/cart.actions";
+import { toast } from "react-toastify";
+import { addMealToTable } from "../../../actions/table.actions";
 
 const CartHeader = () => {
   const history = useNavigate();
@@ -51,6 +53,27 @@ const CartHeader = () => {
   const removeMealHandler = (id) => {
     const newCart = cart.filter((c) => c.p._id != id);
     dispatch(addMealToCart(newCart));
+  };
+  const orderHandler = () => {
+    if (!table.id) {
+      toast.error("Vui lòng chọn bàn trước khi đặt món");
+      return;
+    }
+
+    dispatch(
+      addMealToTable({
+        id: table.id,
+        trang_thai: "Đang Ăn",
+        mon_an: cart.map((c) => ({
+          ma_mon_an: c.p._id,
+          sl: c.qty,
+        })),
+      })
+    );
+    dispatch(clearCart());
+
+    toast.success(`${table.name} đặt món thành công`);
+    history(`${process.env.PUBLIC_URL}/app/project/book/${layout}`);
   };
   return (
     <li className="cart-nav onhover-dropdown">
@@ -197,12 +220,18 @@ const CartHeader = () => {
             >
               ĐẾN GIỎ HÀNG CỦA BẠN
             </Link>
-            <Link
+            {/* <Link
               to={`${process.env.PUBLIC_URL}/app/ecommerce/checkout/${layout}`}
               className="btn btn-primary view-checkout"
             >
               THANH TOÁN
-            </Link>
+            </Link> */}
+            <button
+              className="btn btn-primary view-checkout"
+              onClick={orderHandler}
+            >
+              ĐẶT MÓN
+            </button>
           </li>
         </ul>
       </div>

@@ -450,3 +450,53 @@ export const tableColumns = [
     maxWidth: "160px",
   },
 ];
+export const tableProductColumns = [
+  {
+    name: "Hình Ảnh",
+    selector: (row) => row.image,
+    sortable: true,
+    center: true,
+    minWidth: "100px",
+    maxWidth: "120px",
+  },
+  {
+    name: "Tên Món Ăn",
+    selector: (row) => row.Details,
+    sortable: true,
+    center: true,
+    wrap: true,
+    minWidth: "400px",
+  },
+  {
+    name: "Giá",
+    selector: (row) => row.amount,
+    sortable: true,
+    center: true,
+    minWidth: "100px",
+    maxWidth: "150px",
+  },
+  {
+    name: "Trạng Thái",
+    selector: (row) => row.stock,
+    sortable: true,
+    center: true,
+    minWidth: "120px",
+    maxWidth: "150px",
+  },
+  {
+    name: "Số Lượng",
+    selector: (row) => row.start_date,
+    sortable: true,
+    center: true,
+    minWidth: "120px",
+    maxWidth: "150px",
+  },
+  {
+    name: "Hành Vi",
+    selector: (row) => row.action,
+    sortable: true,
+    center: true,
+    minWidth: "160px",
+    maxWidth: "160px",
+  },
+];

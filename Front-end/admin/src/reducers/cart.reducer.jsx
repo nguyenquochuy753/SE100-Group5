@@ -14,6 +14,9 @@ export default (state = initState, action) => {
         carts: action.payload,
       };
       break;
+    case cartContants.CLEAR_CART:
+      state = initState;
+      break;
     default:
       break;
   }

@@ -2,13 +2,24 @@ import React from "react";
 import { Col, Row, Progress } from "reactstrap";
 import { H6, Image, LI, P, UL } from "../../../../AbstractElements";
 import { Issues, Resolved, Comment, Done } from "../../../../Constant";
+import { generatePublicUrl } from "../../../../urlConfig";
 
 const CusClass = ({ item, bookTable }) => {
+  console.log(item.mon_an);
+  const calcProgressHandler = () => {
+    let count = 0;
+    for (const meal of item.mon_an) {
+      if (meal.da_hoan_thanh) {
+        count++;
+      }
+    }
+    return (count / item.mon_an.length) * 100;
+  };
   return (
     <Col
       className="col-xxl-4"
       md="6"
-      onClick={() => bookTable(item._id, item.ten_ban)}
+      onClick={() => bookTable(item._id, item.ten_ban, item.trang_thai)}
     >
       <div className="project-box">
         <span
@@ -32,17 +43,24 @@ const CusClass = ({ item, bookTable }) => {
           </div>
         </div>
         <P>Danh sách các món ăn đã đặt</P>
-        {/*<Row className="details">
-          <Col xs="6">
-            <span>{Issues} </span>
-          </Col>
-          <Col
-            xs="6"
-            className={item?.badge === "Done" ? "font-success" : "font-primary"}
-          >
-            {item?.issue}
-          </Col>
-          <Col xs="6">
+        <Row className="details">
+          {item.mon_an &&
+            item.mon_an.map((m) => (
+              <>
+                <Col xs="6">
+                  <span>{m.ma_mon_an.ten_mon_an}</span>
+                </Col>
+                <Col
+                  xs="6"
+                  className={
+                    item?.badge === "Done" ? "font-success" : "font-primary"
+                  }
+                >
+                  {m.sl}
+                </Col>
+              </>
+            ))}
+          {/* <Col xs="6">
             {" "}
             <span>{Resolved}</span>
           </Col>
@@ -61,20 +79,28 @@ const CusClass = ({ item, bookTable }) => {
             className={item?.badge === "Done" ? "font-success" : "font-primary"}
           >
             {item?.comment}
-          </Col>
+          </Col> */}
         </Row>
         <div className="customers">
           <UL attrUL={{ className: "d-inline-block" }}>
-            <LI attrLI={{ className: "d-inline-block border-0" }}>
-              <Image
-                attrImage={{
-                  className: "img-30 rounded-circle",
-                  src: `${require(`../../../../assets/images/${item?.customers_img1}`)}`,
-                  alt: "",
-                }}
-              />
-            </LI>
-            <LI attrLI={{ className: "d-inline-block border-0" }}>
+            {item.mon_an &&
+              item.mon_an.map((m) => (
+                <>
+                  <LI attrLI={{ className: "d-inline-block border-0" }}>
+                    <Image
+                      attrImage={{
+                        className: "img-30 rounded-circle",
+                        src: `${generatePublicUrl(
+                          m.ma_mon_an.hinh_anh_mon_an
+                        )}`,
+                        alt: "",
+                      }}
+                    />
+                  </LI>
+                </>
+              ))}
+
+            {/* <LI attrLI={{ className: "d-inline-block border-0" }}>
               <Image
                 attrImage={{
                   className: "img-30 rounded-circle",
@@ -91,24 +117,35 @@ const CusClass = ({ item, bookTable }) => {
                   alt: "",
                 }}
               />
-            </LI>
-            <LI attrLI={{ className: "d-inline-block ms-2 border-0" }}>
+            </LI> */}
+            {/* <LI attrLI={{ className: "d-inline-block ms-2 border-0" }}>
               <P attrPara={{ className: "f-12" }}>{`+${item?.like} More`}</P>
-            </LI>
+            </LI> */}
           </UL>
         </div>
         <div className="project-status mt-4">
           <div className="media mb-0">
-            <P>{item?.progress}% </P>
+            <P>
+              {item.mon_an && item.mon_an.length > 0
+                ? calcProgressHandler().toFixed(0)
+                : 0}
+              %{" "}
+            </P>
             <div className="media-body text-end">
               <span>{Done}</span>
             </div>
           </div>
-          {item?.progress === "100" ? (
+          {item.mon_an &&
+          item.mon_an.length > 0 &&
+          calcProgressHandler() == 100 ? (
             <Progress
               className="sm-progress-bar"
               color="success"
-              value={item?.progress}
+              value={
+                item.mon_an && item.mon_an.length > 0
+                  ? calcProgressHandler()
+                  : 0
+              }
               style={{ height: "5px" }}
             />
           ) : (
@@ -116,11 +153,15 @@ const CusClass = ({ item, bookTable }) => {
               className="sm-progress-bar"
               striped
               color="primary"
-              value={item?.progress}
+              value={
+                item.mon_an && item.mon_an.length > 0
+                  ? calcProgressHandler()
+                  : 0
+              }
               style={{ height: "5px" }}
             />
           )}
-        </div> */}
+        </div>
       </div>
     </Col>
   );
