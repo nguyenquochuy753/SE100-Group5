@@ -9,9 +9,9 @@ const mongoose = require("mongoose");
 const homeRoute = require("./routes/home.route");
 const mealRoute = require("./routes/meal.route");
 const tableRoute = require("./routes/table.route");
+const ingredient_typeRoute = require("./routes/ingredient_type.route");
 
-
-const materialRoute = require("./routes/material.route");
+const ingredientRoute = require("./routes/ingredient.route");
 const placeOrderRoute = require("./routes/placeOrder.route");
 const categoryRoute = require("./routes/category.route");
 
@@ -31,7 +31,8 @@ mongoose.connect(process.env.MONGO_CONNECT_URL).then(() => {
 app.use(homeRoute);
 app.use("/v1/meal", mealRoute);
 app.use("/v1/table", tableRoute);
-app.use("/v1/material", materialRoute);
+app.use("/v1/ingredient", ingredientRoute);
+app.use("/v1/ingredient_type", ingredient_typeRoute);
 app.use("/v1/placeOrder", placeOrderRoute);
 app.use("/v1/category", categoryRoute);
 
