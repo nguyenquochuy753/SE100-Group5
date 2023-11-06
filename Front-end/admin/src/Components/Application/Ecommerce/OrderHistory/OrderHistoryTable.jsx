@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import DataTable from "react-data-table-component";
-import { MoreVertical } from "react-feather";
-import { Link } from "react-router-dom";
+import { MoreVertical, Info } from "react-feather";
+import { Link, useNavigate } from "react-router-dom";
 import { Image } from "../../../../AbstractElements";
 import { OrderHistoryDataTable } from "../../../../Data/Ecommerce/Orderhistory";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../../../actions/order.actions";
+import { useContext } from "react";
+import CustomizerContext from "../../../../_helper/Customizer";
 
 const OrderHistoryTable = () => {
   function formatDate(value) {
@@ -16,6 +18,8 @@ const OrderHistoryTable = () => {
     return day + "-" + month + "-" + year;
   }
   const order = useSelector((state) => state.order.orders);
+  const { layoutURL } = useContext(CustomizerContext);
+  const history = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrders());
@@ -47,7 +51,15 @@ const OrderHistoryTable = () => {
             style: "currency",
             currency: "VND",
           }),
-        action: <MoreVertical />,
+        action: (
+          <Info
+            onClick={() => {
+              history(
+                `${process.env.PUBLIC_URL}/app/ecommerce/orderdetail/${item._id}/${layoutURL}`
+              );
+            }}
+          />
+        ),
       };
     }),
     productColumns: [
