@@ -3,7 +3,7 @@ import { CartTitle, CartTableHeader } from "../../../../Constant";
 import { getCartTotal } from "../../../../Services/Ecommerce.service";
 import { Btn, H6, Image } from "../../../../AbstractElements";
 import { CardBody, Table, Row, Input } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { XCircle } from "react-feather";
 import ProductContext from "../../../../_helper/Ecommerce/Product";
 import CartContext from "../../../../_helper/Ecommerce/Cart";
@@ -12,11 +12,17 @@ import HeaderCard from "../../../Common/Component/HeaderCard";
 import CustomizerContext from "../../../../_helper/Customizer";
 import { useDispatch, useSelector } from "react-redux";
 import { generatePublicUrl } from "../../../../urlConfig";
-import { addMealToCart } from "../../../../actions/cart.actions";
+import { addMealToCart, clearCart } from "../../../../actions/cart.actions";
+import { toast } from "react-toastify";
+import { addMealToTable } from "../../../../actions/table.actions";
 
 const CartData = () => {
   const { layoutURL } = useContext(CustomizerContext);
+  const history = useNavigate();
+
   const dispatch = useDispatch();
+  const id = window.location.pathname.split("/").pop();
+  const layout = id;
   const { symbol } = useContext(ProductContext);
   // const { addToCart, cart, decrementQty, removeFromCart } = useContext(CartContext);
   const { addToCart, decrementQty, removeFromCart } = useContext(CartContext);
@@ -66,6 +72,27 @@ const CartData = () => {
   const removeMealHandler = (id) => {
     const newCart = cart.filter((c) => c.p._id != id);
     dispatch(addMealToCart(newCart));
+  };
+  const orderHandler = () => {
+    if (!table.id) {
+      toast.error("Vui lòng chọn bàn trước khi đặt món");
+      return;
+    }
+
+    dispatch(
+      addMealToTable({
+        id: table.id,
+        trang_thai: "Đang Ăn",
+        mon_an: cart.map((c) => ({
+          ma_mon_an: c.p._id,
+          sl: c.qty,
+        })),
+      })
+    );
+    dispatch(clearCart());
+
+    toast.success(`${table.name} đặt món thành công`);
+    history(`${process.env.PUBLIC_URL}/app/project/book/${layout}`);
   };
   return (
     <Fragment>
@@ -204,12 +231,12 @@ const CartData = () => {
                         </Link>
                       </td>
                       <td>
-                        <Link
+                        <button
                           className="btn btn-success cart-btn-transform"
-                          to={`${process.env.PUBLIC_URL}/app/ecommerce/checkout/${layoutURL}`}
+                          onClick={orderHandler}
                         >
                           thanh toán
-                        </Link>
+                        </button>
                       </td>
                     </tr>
                   </tbody>

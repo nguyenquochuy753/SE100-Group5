@@ -49,26 +49,34 @@
 //   }
 // };
 
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const mealSchema = new mongoose.Schema({
-  ten_mon_an: {
-    type: String,
-    required: true
+const mealSchema = new mongoose.Schema(
+  {
+    ten_mon_an: {
+      type: String,
+      required: true,
+    },
+    gia: {
+      type: Number,
+      required: true,
+    },
+    trang_thai: {
+      type: String,
+      default: "Còn",
+    },
+    hinh_anh_mon_an: {
+      type: String,
+      required: true,
+    },
+    ma_danh_muc: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Category",
+      required: true,
+    },
   },
-  gia: {
-    type: Number,
-    required: true
-  },
-  trang_thai: {
-    type: String,
-    default: "Còn"
-  },
-  hinh_anh_mon_an: {
-    type: String,
-    required : true
-  }
-}, { timestamps: true })
+  { timestamps: true }
+);
 
-const meal = mongoose.model('Meal', mealSchema)
-module.exports = meal
+const meal = mongoose.model("Meal", mealSchema);
+module.exports = meal;

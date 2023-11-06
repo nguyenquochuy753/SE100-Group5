@@ -500,3 +500,38 @@ export const tableProductColumns = [
     maxWidth: "160px",
   },
 ];
+export const categoryColumns = [
+  {
+    name: "Mã Danh Mục",
+    selector: (row) => row.Details,
+    sortable: true,
+    // center: true,
+    wrap: true,
+    minWidth: "100px",
+  },
+  {
+    name: "Tên Danh Mục",
+    selector: (row) => row.amount,
+    sortable: true,
+    center: true,
+    minWidth: "200px",
+    maxWidth: "900px",
+  },
+
+  {
+    name: "Ngày Thêm",
+    selector: (row) => row.start_date,
+    sortable: true,
+    center: true,
+    minWidth: "120px",
+    maxWidth: "400px",
+  },
+  {
+    name: "Hành Vi",
+    selector: (row) => row.action,
+    sortable: true,
+    center: true,
+    minWidth: "160px",
+    maxWidth: "200px",
+  },
+];

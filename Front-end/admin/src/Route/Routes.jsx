@@ -184,6 +184,8 @@ import NewTable from "../Components/Application/Project/NewTable";
 import EditTable from "../Components/Application/Project/EditTable";
 import EditMeal from "../Components/Application/Project/EditMeal";
 import TableDetail from "../Components/Application/Ecommerce/TableDetail";
+import CategoryListContain from "../Components/Application/Ecommerce/CategoryList";
+import NewCategory from "../Components/Application/Project/NewCategory";
 
 export const routes = [
   {
@@ -531,6 +533,10 @@ export const routes = [
     Component: <NewTable />,
   },
   {
+    path: `${process.env.PUBLIC_URL}/app/project/category/new-category/:layout`,
+    Component: <NewCategory />,
+  },
+  {
     path: `${process.env.PUBLIC_URL}/app/project/table/edit-table/:id/:layout`,
     Component: <EditTable />,
   },
@@ -638,6 +644,10 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/table/table-list/:layout`,
     Component: <TableListContain />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/category/category-list/:layout`,
+    Component: <CategoryListContain />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/detailtable/:id/:layout`,

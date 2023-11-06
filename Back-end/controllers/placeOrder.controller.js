@@ -33,10 +33,16 @@ const placeOrderController = {
   },
   getAllPlaceOrder: async (req, res) => {
     try {
-      const allPlaceOrders = await placeOrderModel.find({}).populate({
-        path: "mon_an.ma_mon_an",
-        select: "_id ten_mon_an gia hinh_anh_mon_an",
-      });
+      const allPlaceOrders = await placeOrderModel
+        .find({})
+        .populate({
+          path: "mon_an.ma_mon_an",
+          // select: "_id ten_mon_an gia hinh_anh_mon_an",
+        })
+        .populate({
+          path: "ma_ban",
+        })
+        .sort({ createdAt: -1 });
       res.status(200).json(allPlaceOrders);
     } catch (error) {
       res.status(400).json(error);

@@ -15,7 +15,9 @@ const mealController = {
   },
   getAllMeals: async (req, res) => {
     try {
-      const allMeals = await mealModel.find({});
+      const allMeals = await mealModel
+        .find({})
+        .populate({ path: "ma_danh_muc" });
       res.status(200).json(allMeals);
     } catch (error) {
       res.status(500).json(error);
@@ -24,7 +26,9 @@ const mealController = {
   getMeal: async (req, res) => {
     const id = req.params.id;
     try {
-      const allMeals = await mealModel.find({ _id: id });
+      const allMeals = await mealModel
+        .find({ _id: id })
+        .populate({ path: "ma_danh_muc" });
       res.status(200).json(allMeals);
     } catch (error) {
       res.status(500).json(error);

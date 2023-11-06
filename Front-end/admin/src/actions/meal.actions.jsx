@@ -75,6 +75,7 @@ export const updateMeal = (payload) => {
         gia: payload.gia,
         trang_thai: payload.trang_thai,
         hinh_anh_mon_an: payload.hinh_anh_mon_an,
+        ma_danh_muc: payload.ma_danh_muc,
       });
       dispatch({ type: mealContants.UPDATE_MEAL_BY_ID_REQUEST });
       if (res.status === 200) {

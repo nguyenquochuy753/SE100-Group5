@@ -29,6 +29,7 @@ import {
   getMealById,
   updateMeal,
 } from "../../../../actions/meal.actions";
+import { getCategories } from "../../../../actions/category.actions";
 
 const EditMeal = () => {
   const history = useNavigate();
@@ -36,7 +37,11 @@ const EditMeal = () => {
   const dispatch = useDispatch();
   const project = useContext(ProjectContext);
   const meal = useSelector((state) => state.meal.meal[0]);
+  const categories = useSelector((state) => state.category.categories);
+  const [loading, setLoading] = useState(false);
   const [mealStatus, setMealStatus] = useState(meal?.trang_thai);
+  const [mealEdit, setMealEdit] = useState();
+  const [categoryList, setCategoryList] = useState([]);
   const { id } = useParams();
 
   const [file, setFile] = useState(null);
@@ -46,13 +51,19 @@ const EditMeal = () => {
     formState: { errors },
   } = useForm();
   const { ref, ...status } = register("status");
+  const { ref: refCategory, ...category } = register("category");
 
   useEffect(() => {
+    // setLoading(true);
     dispatch(getMealById(id));
-    setMealStatus(meal?.trang_thai);
-  }, [meal, dispatch]);
+    dispatch(getCategories());
+    // setMealStatus(meal?.trang_thai);
+    // setLoading(false);
+    setMealEdit(meal);
+    setCategoryList(categories);
+  }, [dispatch, meal]);
 
-  // console.log(meal);
+  // console.log(mealEdit);
 
   const AddProject = (data) => {
     if (data !== "") {
@@ -67,6 +78,10 @@ const EditMeal = () => {
           trang_thai:
             data.status != meal.trang_thai ? data.status : meal.trang_thai,
           hinh_anh_mon_an: meal.hinh_anh_mon_an,
+          ma_danh_muc:
+            data.category != meal.ma_danh_muc
+              ? data.category
+              : meal.ma_danh_muc,
         })
       );
       // console.log("file", file);
@@ -77,6 +92,7 @@ const EditMeal = () => {
       // form.append("hinh_anh_mon_an", file);
 
       // dispatch(addMeal(form));
+
       history(
         `${process.env.PUBLIC_URL}/app/ecommerce/meal/meal-list/${layoutURL}`
       );
@@ -103,8 +119,9 @@ const EditMeal = () => {
                   <ProjectTitleClass
                     register={register}
                     errors={errors}
-                    name={meal?.ten_mon_an}
+                    name={mealEdit?.ten_mon_an}
                   />
+
                   {/* <ClientNameClass register={register} errors={errors} /> */}
                   {/* <ProjectRateClass
                     register={register}
@@ -120,19 +137,52 @@ const EditMeal = () => {
                           className="form-control"
                           type="number"
                           name="rate"
-                          defaultValue={meal?.gia}
+                          defaultValue={mealEdit?.gia}
                           placeholder="Nhập giá của món ăn"
                           {...register("rate", {
-                            required: meal?.gia != "" ? false : true,
+                            required: mealEdit?.gia != "" ? false : true,
                           })}
                         />
                       </FormGroup>
                     </Col>
+                    <Col sm="4">
+                      <FormGroup>
+                        <Label>Danh Mục</Label>
+                        {mealEdit && (
+                          <Input
+                            type="select"
+                            name="badge"
+                            placeholder="Trạng Thái"
+                            className="form-control digits"
+                            required
+                            innerRef={refCategory}
+                            // defaultValue={mealEdit?.trang_thai}
+                            {...category}
+                          >
+                            {mealEdit?.ma_danh_muc && (
+                              <option value={mealEdit.ma_danh_muc._id}>
+                                {mealEdit.ma_danh_muc.name}
+                              </option>
+                            )}
+                            {categoryList?.map((c) => {
+                              if (c._id != mealEdit?.ma_danh_muc?._id) {
+                                return (
+                                  <option value={c._id} key={c._id}>
+                                    {c.name}
+                                  </option>
+                                );
+                              }
+                            })}
 
+                            {/* <option value="Hết">Hết</option> */}
+                          </Input>
+                        )}
+                      </FormGroup>
+                    </Col>
                     <Col sm="4">
                       <FormGroup>
                         <Label>Trạng Thái</Label>
-                        {mealStatus && (
+                        {mealEdit && mealEdit.trang_thai && (
                           <Input
                             type="select"
                             name="badge"
@@ -140,11 +190,20 @@ const EditMeal = () => {
                             className="form-control digits"
                             required
                             innerRef={ref}
-                            defaultValue={mealStatus}
+                            defaultValue={mealEdit?.trang_thai}
                             {...status}
                           >
-                            <option value="Còn">Còn</option>
-                            <option value="Hết">Hết</option>
+                            <option value={mealEdit?.trang_thai}>
+                              {mealEdit?.trang_thai}
+                            </option>
+                            <option
+                              value={`${
+                                mealEdit?.trang_thai == "Hết" ? "Còn" : "Hết"
+                              }`}
+                            >{`${
+                              mealEdit?.trang_thai == "Hết" ? "Còn" : "Hết"
+                            }`}</option>
+                            {/* <option value="Hết">Hết</option> */}
                           </Input>
                         )}
                       </FormGroup>
@@ -164,7 +223,7 @@ const EditMeal = () => {
                           Sửa
                         </Btn>
                         <Link
-                          to={`${process.env.PUBLIC_URL}/app/project/project-list`}
+                          to={`${process.env.PUBLIC_URL}/app/ecommerce/meal/meal-list/${layoutURL}`}
                         >
                           <Btn attrBtn={{ color: "danger" }}>Hủy</Btn>
                         </Link>

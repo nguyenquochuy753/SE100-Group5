@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { H3, H4, P, Image } from "../../../../AbstractElements";
 import { InvoiceHash, IssuedJan, PaymentDue } from "../../../../Constant";
 import { Col, Media, Row } from "reactstrap";
-import logo1 from "../../../../assets/images/other-images/logo-login.png";
-
+// import logo1 from "../../../../assets/images/other-images/logo-login.png";
+import logo from "../../../../assets/images/logo/logo.png";
 const InvoiceHeader = ({ order }) => {
   function formatDate(value) {
     let date = new Date(value);
@@ -21,15 +21,21 @@ const InvoiceHeader = ({ order }) => {
               <Image
                 attrImage={{
                   className: "media-object img-60",
-                  src: logo1,
+                  src: logo,
                   alt: "",
+                  style: {
+                    with: "100px",
+                    height: "90px",
+                  },
                 }}
               />
             </div>
             <Media body className="m-l-20 text-right">
-              <H4 attrH4={{ className: "media-heading f-w-600" }}>Cuba</H4>
+              <H4 attrH4={{ className: "media-heading f-w-600" }}>
+                Restaurant
+              </H4>
               <P>
-                hello@Cuba.in
+                hello@123.in
                 <br />
                 <span className="digits">{"289-335-6503"}</span>
               </P>

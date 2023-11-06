@@ -98,6 +98,12 @@ const ProductModal = (props) => {
                     </del> */}
                   </div>
                   <div className="product-view">
+                    <H6 attrH6={{ className: "f-w-600" }}>Danh Mục</H6>
+                    <P attrPara={{ className: "mb-0" }}>
+                      {singleProduct?.ma_danh_muc.name}
+                    </P>
+                  </div>
+                  <div className="product-view">
                     <H6 attrH6={{ className: "f-w-600" }}>Chi Tiết Món Ăn</H6>
                     <P attrPara={{ className: "mb-0" }}>
                       {singleProduct?.discription}
