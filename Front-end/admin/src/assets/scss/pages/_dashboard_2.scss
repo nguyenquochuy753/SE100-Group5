@@ -9,7 +9,7 @@
   transform: translateY(-50%);
 }
 .balance-widget {
-  background-image: url(../../images/dashboard-2/balance-bg.png);
+  // background-image: url(../../images/dashboard-2/balance-bg.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right;
@@ -471,7 +471,8 @@
   .frame-image {
     min-width: 62px;
     height: 62px;
-    border-color: var(--recent-border) var(--white) var(--white) var(--recent-border);
+    border-color: var(--recent-border) var(--white) var(--white)
+      var(--recent-border);
     border-width: 1px;
     border-style: solid;
     margin: 6px;
@@ -508,7 +509,11 @@
   }
 }
 
-@each $activity-dot-name, $activity-dot-color in (primary, $primary-color), (secondary, $secondary-color), (success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color), (dark, $dark-color), (warning, $warning-color) {
+@each $activity-dot-name, $activity-dot-color in (primary, $primary-color),
+  (secondary, $secondary-color), (success, $success-color),
+  (danger, $danger-color), (info, $info-color), (light, $light-color),
+  (dark, $dark-color), (warning, $warning-color)
+{
   .activity-dot-#{$activity-dot-name} {
     min-width: 6px;
     width: 6px;

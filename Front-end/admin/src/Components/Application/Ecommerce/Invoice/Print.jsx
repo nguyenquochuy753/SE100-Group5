@@ -36,9 +36,7 @@ const PrintComponent = ({ order }) => {
         >
           {Print}
         </Btn>
-        <Link
-          to={`${process.env.PUBLIC_URL}/app/ecommerce/product/${layoutURL}`}
-        >
+        <Link to={`${process.env.PUBLIC_URL}/app/project/book/${layoutURL}`}>
           <Btn attrBtn={{ color: "secondary" }}>{Cancel}</Btn>
         </Link>
       </Col>

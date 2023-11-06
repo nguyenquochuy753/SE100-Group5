@@ -36,8 +36,8 @@ export const MENUITEMS = [
       },
       {
         title: "Đơn Hàng",
-        value: "none",
-
+        value: "orderhistory",
+        path: `${process.env.PUBLIC_URL}/app/ecommerce/orderhistory`,
         icon: "calendar",
         type: "link",
         active: false,
@@ -72,10 +72,23 @@ export const MENUITEMS = [
       {
         title: "Danh Mục",
         icon: "learning",
-        type: "link",
-        value: "none",
-
+        type: "sub",
+        value: "category",
         active: false,
+        children: [
+          {
+            path: `${process.env.PUBLIC_URL}/app/ecommerce/category/category-list`,
+            type: "link",
+            title: "Danh Sách Danh Mục",
+            value: "category-list",
+          },
+          {
+            path: `${process.env.PUBLIC_URL}/app/project/category/new-category`,
+            type: "link",
+            title: "Thêm Danh Mục",
+            value: "new-category",
+          },
+        ],
       },
       {
         title: "Nguyên Liệu",

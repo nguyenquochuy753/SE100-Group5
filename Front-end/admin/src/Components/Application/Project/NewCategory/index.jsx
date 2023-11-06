@@ -12,16 +12,15 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card, CardBody, Form } from "reactstrap";
 import CustomizerContext from "../../../../_helper/Customizer";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addMeal } from "../../../../actions/meal.actions";
+import { addTable } from "../../../../actions/table.actions";
+import { addCategory } from "../../../../actions/category.actions";
 
-const Newproject = () => {
+const NewCategory = () => {
   const history = useNavigate();
   const { layoutURL } = useContext(CustomizerContext);
-  const dispatch = useDispatch();
   const project = useContext(ProjectContext);
-  const [file, setFile] = useState(null);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -29,22 +28,19 @@ const Newproject = () => {
   } = useForm();
 
   const AddProject = (data) => {
-    console.log("Test");
     if (data !== "") {
-      // project.addNewProject(data);
-
       console.log(data);
-      // console.log("file", file);
-      const form = new FormData();
-      form.append("ten_mon_an", data.title);
-      form.append("gia", data.rate);
-      form.append("trang_thai", data.status);
-      form.append("ma_danh_muc", data.category);
-      form.append("hinh_anh_mon_an", file);
-
-      dispatch(addMeal(form));
+      // project.addNewProject(data);
+      // dispatch(
+      //   addTable({
+      //     ten_ban: data.title,
+      //     so_ghe: data.soGhe,
+      //     trang_thai: data.status,
+      //   })
+      // );
+      dispatch(addCategory({ name: data.title }));
       history(
-        `${process.env.PUBLIC_URL}/app/ecommerce/meal/meal-list/${layoutURL}`
+        `${process.env.PUBLIC_URL}/app/ecommerce/category/category-list/${layoutURL}`
       );
     } else {
       errors.showMessages();
@@ -54,9 +50,9 @@ const Newproject = () => {
   return (
     <Fragment>
       <Breadcrumbs
-        parent="Món Ăn"
-        title="Thêm Món Ăn"
-        mainTitle="Thêm Món Ăn"
+        parent="Quản Lý Món Ăn"
+        title="Thêm Danh Mục"
+        mainTitle="Thêm Danh Mục"
       />
       <Container fluid={true}>
         <Row>
@@ -69,14 +65,10 @@ const Newproject = () => {
                 >
                   <ProjectTitleClass register={register} errors={errors} />
                   {/* <ClientNameClass register={register} errors={errors} /> */}
-                  <ProjectRateClass register={register} errors={errors} />
+                  {/* <ProjectRateClass register={register} errors={errors} /> */}
                   {/* <IssueClass register={register} /> */}
                   {/* <EnterSomeDetailsClass register={register} errors={errors} /> */}
-                  <UploadProjectFileClass
-                    register={register}
-                    errors={errors}
-                    setFile={setFile}
-                  />
+                  {/* <UploadProjectFileClass register={register} errors={errors} /> */}
                   <Row>
                     <Col>
                       <div className="text-end">
@@ -101,4 +93,4 @@ const Newproject = () => {
   );
 };
 
-export default Newproject;
+export default NewCategory;

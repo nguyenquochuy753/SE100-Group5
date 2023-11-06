@@ -7,9 +7,20 @@ import {
   ProjectRate,
   ProjectStatus,
 } from "../../../../Constant";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCategories } from "../../../../actions/category.actions";
 
 const ProjectRateClass = ({ register }) => {
   const { ref, ...status } = register("status");
+  const { ref: refCategory, ...category } = register("category");
+
+  const categories = useSelector((state) => state.category.categories);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   return (
     <Fragment>
@@ -27,22 +38,29 @@ const ProjectRateClass = ({ register }) => {
             />
           </FormGroup>
         </Col>
-        {/* <Col sm="4">
+        <Col sm="4">
           <FormGroup>
-            <Label>{ProgressLevel}</Label>
-            <Input
-              type="select"
-              name="progress_level"
-              className="form-control digits"
-              required
-            >
-              <option value="25">{"25"}</option>
-              <option value="50">{"50"}</option>
-              <option value="70">{"70"}</option>
-              <option value="100">{"100"}</option>
-            </Input>
+            <Label>Danh Mục</Label>
+            {categories && categories.length > 0 && (
+              <Input
+                type="select"
+                name="progress_level"
+                className="form-control digits"
+                required
+                innerRef={refCategory}
+                {...category}
+              >
+                {categories?.map((c) => (
+                  <option value={c._id} key={c._id}>
+                    {c.name}
+                  </option>
+                ))}
+                {/* <option value="Còn">Còn</option>
+                <option value="Hết">Hết</option> */}
+              </Input>
+            )}
           </FormGroup>
-        </Col> */}
+        </Col>
         <Col sm="4">
           <FormGroup>
             <Label>Trạng Thái</Label>

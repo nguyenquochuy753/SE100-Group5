@@ -81,8 +81,10 @@ export const getVisibleproducts = (
       }
 
       let CategoryMatch;
-      if (category && product.name) {
-        CategoryMatch = product.name.includes(category);
+      console.log("Category", category);
+      // console.log("Product", product);
+      if (category && product?.ma_danh_muc._id) {
+        CategoryMatch = product?.ma_danh_muc?._id.includes(category);
       } else {
         CategoryMatch = true;
       }
@@ -94,6 +96,7 @@ export const getVisibleproducts = (
 
       const searchByName =
         product.ten_mon_an.toLowerCase().indexOf(searchBy) > -1;
+      console.log(searchBy);
 
       return (
         brandMatch &&
