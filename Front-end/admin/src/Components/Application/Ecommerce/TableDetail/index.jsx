@@ -27,7 +27,10 @@ const TableDetail = () => {
         <Row>
           <Col sm="12">
             <Card>
-              <HeaderCard title={table?.ten_ban} span1={ProductListDesc} />
+              <HeaderCard
+                title={table?.ten_ban}
+                span1="Danh Sách các món ăn mà bàn đã đặt"
+              />
               <CardBody>
                 <ProductTableData table={table?.mon_an} idTable={id} />
               </CardBody>

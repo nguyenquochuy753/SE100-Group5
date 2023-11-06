@@ -108,6 +108,7 @@ const ProductTableData = ({ table, idTable }) => {
               color: "success",
               className: "btn btn-xs",
               type: "button",
+              disabled: m.isDone,
             }}
             onClick={() => doneMealHandler(m._id)}
           >
