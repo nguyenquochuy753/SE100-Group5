@@ -6,7 +6,7 @@ import { DailyDropdown, OrderThisMonthTitle } from "../../../Constant";
 import DropdownCommon from "../../Common/Dropdown";
 import CountUp from "react-countup";
 import ReactApexChart from "react-apexcharts";
-const getCountOfDate  = (order, date)=>{
+const getCountOfDate = (order, date) => {
   const count = order?.reduce((preOrder, currOrder) => {
     const dateOrder = new Date(currOrder.createdAt);
     if (dateOrder.getDate() == date) {
@@ -16,23 +16,27 @@ const getCountOfDate  = (order, date)=>{
     }
   }, 0);
   return count;
-}
+};
 const OrderThisMonth = ({ order }) => {
   const today = new Date();
   const listDate = [];
   for (let i = 1; i <= today.getDate(); i++) {
-    if(i<10){
-    listDate.push("0"+i);
-    }else{
-      listDate.push(i+"");
+    if (i < 10) {
+      listDate.push("0" + i);
+    } else {
+      listDate.push(i + "");
     }
   }
   const listOrderOfDate = [];
-for(let i = 1;i<=today.getDate();i++){
-  const count = getCountOfDate(order, i);
-  listOrderOfDate.push(count);
-}
-console.log(listOrderOfDate);
+  let countOrder = 0;
+  for (let i = 1; i <= today.getDate(); i++) {
+    const count = getCountOfDate(order, i);
+    if (countOrder < count) {
+      countOrder = count;
+    }
+    listOrderOfDate.push(count);
+  }
+  console.log(listOrderOfDate);
   const totalSaleOrderMounth = order?.reduce((preOrder, currOrder) => {
     const date = new Date(currOrder.createdAt);
     if (date.getMonth() == today.getMonth()) {
@@ -56,111 +60,111 @@ console.log(listOrderOfDate);
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=0){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 0) {
             return o;
-          }else{
-            return o-1;
+          } else {
+            return o - 1;
           }
         }),
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=1){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 1) {
             return o;
-          }else{
-            return o-2;
+          } else {
+            return o - 2;
           }
         }),
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=2){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 2) {
             return o;
-          }else{
-            return o-3;
+          } else {
+            return o - 3;
           }
         }),
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=3){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 3) {
             return o;
-          }else{
-            return o-4;
+          } else {
+            return o - 4;
           }
         }),
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=4){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 4) {
             return o;
-          }else{
-            return o-5;
+          } else {
+            return o - 5;
           }
         }),
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=5){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 5) {
             return o;
-          }else{
-            return o-6;
+          } else {
+            return o - 6;
           }
         }),
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=6){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 6) {
             return o;
-          }else{
-            return o-7;
+          } else {
+            return o - 7;
           }
         }),
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=7){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 7) {
             return o;
-          }else{
-            return o-8;
+          } else {
+            return o - 8;
           }
         }),
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=8){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 8) {
             return o;
-          }else{
-            return o-9;
+          } else {
+            return o - 9;
           }
         }),
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=9){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 9) {
             return o;
-          }else{
-            return o-10;
+          } else {
+            return o - 10;
           }
         }),
       },
       {
         name: "sales",
-        data: listOrderOfDate.map(o=>{
-          if(o<=10){
+        data: listOrderOfDate.map((o) => {
+          if (o <= 10) {
             return o;
-          }else{
-            return o-11;
+          } else {
+            return o - 11;
           }
         }),
       },
@@ -285,7 +289,7 @@ console.log(listOrderOfDate);
       },
       yaxis: {
         min: 0,
-        max: 40,
+        max: countOrder,
         axisBorder: {
           show: true,
           color: "var(--chart-border)",
