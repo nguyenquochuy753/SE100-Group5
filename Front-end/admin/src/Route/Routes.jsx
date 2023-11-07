@@ -186,6 +186,7 @@ import EditMeal from "../Components/Application/Project/EditMeal";
 import TableDetail from "../Components/Application/Ecommerce/TableDetail";
 import CategoryListContain from "../Components/Application/Ecommerce/CategoryList";
 import NewCategory from "../Components/Application/Project/NewCategory";
+import OrderDetail from "../Components/Application/Ecommerce/OrderDetail";
 
 export const routes = [
   {
@@ -620,6 +621,10 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/invoice/:layout`,
     Component: <Invoice />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/orderdetail/:id/:layout`,
+    Component: <OrderDetail />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/cart/:layout`,

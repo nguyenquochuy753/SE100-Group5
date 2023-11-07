@@ -16,10 +16,38 @@ const WidgetsGrid = ({ order }) => {
       return preOrder;
     }
   }, 0);
+  const totalSaleOrderMounth = order?.reduce((preOrder, currOrder) => {
+    const date = new Date(currOrder.createdAt);
+    if (date.getMonth() == today.getMonth()) {
+      return (
+        preOrder +
+        currOrder?.mon_an?.reduce(
+          (pre, curr) => pre + curr.ma_mon_an.gia * curr.sl,
+          0
+        )
+      );
+    } else {
+      return preOrder;
+    }
+  }, 0);
   const totalOrderPreMounth = order?.reduce((preOrder, currOrder) => {
     const date = new Date(currOrder.createdAt);
     if (date.getMonth() == today.getMonth() - 1) {
       return preOrder + 1;
+    } else {
+      return preOrder;
+    }
+  }, 0);
+  const totalSaleOrderPreMounth = order?.reduce((preOrder, currOrder) => {
+    const date = new Date(currOrder.createdAt);
+    if (date.getMonth() == today.getMonth() - 1) {
+      return (
+        preOrder +
+        currOrder?.mon_an?.reduce(
+          (pre, curr) => pre + curr.ma_mon_an.gia * curr.sl,
+          0
+        )
+      );
     } else {
       return preOrder;
     }
@@ -29,7 +57,9 @@ const WidgetsGrid = ({ order }) => {
       title: "Đơn Hàng Mới",
       color: "primary",
       total: totalOrderMounth,
-      gros: Math.abs(100 - (totalOrderMounth / totalOrderPreMounth) * 100),
+      gros: Math.abs(
+        100 - (totalOrderMounth / totalOrderPreMounth) * 100
+      ).toFixed(0),
       icon: "new-order",
     },
     {
@@ -40,13 +70,15 @@ const WidgetsGrid = ({ order }) => {
       icon: "customers",
     },
     {
-      title: "Average Sale",
+      title: "Doanh Thu Trung Bình",
       color: "secondary",
-      total: 389,
-      gros: 10,
-      prefix: "$",
+      total: totalSaleOrderMounth,
+      gros: Math.abs(
+        100 - (totalSaleOrderMounth / totalSaleOrderPreMounth) * 100
+      ).toFixed(0),
+      // prefix: "$",
       icon: "sale",
-      suffix: "k",
+      suffix: "đ",
     },
     {
       title: "Gross Profit",

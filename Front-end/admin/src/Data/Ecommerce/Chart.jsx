@@ -57,14 +57,40 @@ export const OrderThisMonthChart = {
         show: false,
       },
     },
-    colors: ["#7064F5", "#7064F5", "#7064F5", "#7064F5", "#7064F5", "#7064F5", "#7064F5", "#7064F5", "#7064F5", "#7064F5", "#7064F5", "#7064F5"],
+    colors: [
+      "#7064F5",
+      "#7064F5",
+      "#7064F5",
+      "#7064F5",
+      "#7064F5",
+      "#7064F5",
+      "#7064F5",
+      "#7064F5",
+      "#7064F5",
+      "#7064F5",
+      "#7064F5",
+      "#7064F5",
+    ],
     fill: {
       type: "gradient",
       gradient: {
         shade: "dark",
         type: "horizontal",
         shadeIntensity: 1,
-        gradientToColors: ["#FF8BA7", "#FF8BA7", "#FF8BA7", "#FF8BA7", "#FF8BA7", "#FF8BA7", "#FF8BA7", "#FF8BA7", "#FF8BA7", "#FF8BA7", "#FF8BA7", "#FF8BA7"],
+        gradientToColors: [
+          "#FF8BA7",
+          "#FF8BA7",
+          "#FF8BA7",
+          "#FF8BA7",
+          "#FF8BA7",
+          "#FF8BA7",
+          "#FF8BA7",
+          "#FF8BA7",
+          "#FF8BA7",
+          "#FF8BA7",
+          "#FF8BA7",
+          "#FF8BA7",
+        ],
         inverseColors: true,
         opacityFrom: 1,
         opacityTo: 1,
@@ -128,7 +154,19 @@ export const OrderThisMonthChart = {
       },
     },
     xaxis: {
-      categories: ["01", "03", "05", "07", "09", "10", "11", "12", "15", "16", "18"],
+      categories: [
+        "01",
+        "03",
+        "05",
+        "07",
+        "09",
+        "10",
+        "11",
+        "12",
+        "15",
+        "16",
+        "18",
+      ],
       tickAmount: 6,
       tickPlacement: "between",
       axisTicks: {
@@ -370,7 +408,19 @@ export const OptionsOverView = {
         stops: [0, 100],
       },
     },
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"],
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+    ],
     markers: {
       discrete: [
         {
@@ -489,7 +539,10 @@ export const OptionsOverViewBarChart = {
   series: [
     {
       name: "Revenue",
-      data: [30, 40, 18, 25, 18, 10, 20, 35, 22, 40, 30, 38, 20, 35, 11, 28, 40, 11, 28, 40, 11, 28, 40, 11, 28, 40, 11],
+      data: [
+        30, 40, 18, 25, 18, 10, 20, 35, 22, 40, 30, 38, 20, 35, 11, 28, 40, 11,
+        28, 40, 11, 28, 40, 11, 28, 40, 11,
+      ],
     },
   ],
   options: {
@@ -519,7 +572,17 @@ export const OptionsOverViewBarChart = {
       colors: ["transparent"],
     },
     xaxis: {
-      categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
+      categories: [
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+      ],
       labels: {
         show: false,
       },
