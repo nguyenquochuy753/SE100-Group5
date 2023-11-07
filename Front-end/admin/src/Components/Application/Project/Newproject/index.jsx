@@ -29,15 +29,17 @@ const Newproject = () => {
   } = useForm();
 
   const AddProject = (data) => {
+    console.log("Test");
     if (data !== "") {
       // project.addNewProject(data);
 
       console.log(data);
-      console.log("file", file);
+      // console.log("file", file);
       const form = new FormData();
       form.append("ten_mon_an", data.title);
       form.append("gia", data.rate);
       form.append("trang_thai", data.status);
+      form.append("ma_danh_muc", data.category);
       form.append("hinh_anh_mon_an", file);
 
       dispatch(addMeal(form));

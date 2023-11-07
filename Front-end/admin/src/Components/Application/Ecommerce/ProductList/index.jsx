@@ -17,7 +17,10 @@ const ProductListContain = () => {
         <Row>
           <Col sm="12">
             <Card>
-              <HeaderCard title={ProductListTitle} span1={ProductListDesc} />
+              <HeaderCard
+                title={"Danh Sách Món Ăn"}
+                span1={"Các món ăn mà nhà hàng đã thêm"}
+              />
               <CardBody>
                 <ProductTableData />
               </CardBody>

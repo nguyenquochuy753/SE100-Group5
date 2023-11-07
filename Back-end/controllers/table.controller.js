@@ -12,7 +12,7 @@ const tableController = {
   },
   getAllTables: async (req, res) => {
     try {
-      const allTables = await tableModel.find({});
+      const allTables = await tableModel.find({}).populate("mon_an.ma_mon_an");
       res.status(200).json(allTables);
     } catch (error) {
       res.status(500).json(error);
@@ -21,7 +21,9 @@ const tableController = {
   getTableById: async (req, res) => {
     const id = req.params.id;
     try {
-      const table = await tableModel.find({ _id: id });
+      const table = await tableModel
+        .find({ _id: id })
+        .populate("mon_an.ma_mon_an");
       res.status(200).json(table);
     } catch (error) {
       res.status(500).json(error);
@@ -41,6 +43,18 @@ const tableController = {
     try {
       await tableModel.findByIdAndUpdate(id, req.body);
       res.status(200).json("updated successfully");
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  orderMeal: async (req, res) => {
+    const id = req.params.id;
+    try {
+      await tableModel.findByIdAndUpdate(id, {
+        trang_thai: req.body.trang_thai,
+        mon_an: req.body.mon_an,
+      });
+      res.status(200).json("order successfully");
     } catch (error) {
       res.status(500).json(error);
     }

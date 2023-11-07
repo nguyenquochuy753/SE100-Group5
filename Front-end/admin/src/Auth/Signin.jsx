@@ -27,11 +27,11 @@ const Signin = ({ selected }) => {
 
   const [value, setValue] = useState(localStorage.getItem("profileURL" || man));
   const [name, setName] = useState(localStorage.getItem("Name"));
-  
+
   useEffect(() => {
     localStorage.setItem("profileURL", man);
     localStorage.setItem("Name", "Emay Walter");
-  }, [value, name]);;
+  }, [value, name]);
 
   const loginAuth = async (e) => {
     e.preventDefault();
@@ -39,23 +39,22 @@ const Signin = ({ selected }) => {
     setName("Emay Walter");
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-          // localStorage.setItem("login", JSON.stringify(true));
-          localStorage.setItem("authenticated", JSON.stringify(true));
-          history(`${process.env.PUBLIC_URL}`);
-          toast.success("Successfully logged in!");
-          console.log(userCredential);
-        }
-      )
+        // localStorage.setItem("login", JSON.stringify(true));
+        localStorage.setItem("authenticated", JSON.stringify(true));
+        history(`${process.env.PUBLIC_URL}`);
+        toast.success("Successfully logged in!");
+        console.log(userCredential);
+      })
       .catch((err) => {
         console.log(err);
-        toast.error('You entered wrong username or password!');
-      })
+        toast.error("You entered wrong username or password!");
+      });
     // if (email === "test@gmail.com" && password === "test123") {
-      // localStorage.setItem("login", JSON.stringify(true));
-      // localStorage.setItem("authenticated", JSON.stringify(true));
-      // // history(`${process.env.PUBLIC_URL}/dashboard/default/${layoutURL}`);
-      // history(`${process.env.PUBLIC_URL}`);
-      // toast.success("Successfully logged in!..");
+    // localStorage.setItem("login", JSON.stringify(true));
+    // localStorage.setItem("authenticated", JSON.stringify(true));
+    // // history(`${process.env.PUBLIC_URL}/dashboard/default/${layoutURL}`);
+    // history(`${process.env.PUBLIC_URL}`);
+    // toast.success("Successfully logged in!..");
     // } else {
     //   toast.error("You enter wrong password or username!..");
     // }
@@ -69,11 +68,7 @@ const Signin = ({ selected }) => {
             <div className="login-card">
               <div className="login-main login-tab">
                 <Form className="theme-form">
-                  <H4>
-                    {selected === "simpleLogin"
-                      ? ""
-                      : "Sign in"}
-                  </H4>
+                  <H4>{selected === "simpleLogin" ? "" : "Sign in"}</H4>
                   {/* <P>{"Enter your email & password to login"}</P> */}
                   <br />
                   <FormGroup>

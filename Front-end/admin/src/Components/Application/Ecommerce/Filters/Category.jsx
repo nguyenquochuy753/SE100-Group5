@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { H6, UL } from "../../../../AbstractElements";
 import { MAX, MIN, Price, STEP } from "../../../../Constant";
 import {
@@ -10,11 +10,19 @@ import FilterContext from "../../../../_helper/Ecommerce/Filter";
 import ProductContext from "../../../../_helper/Ecommerce/Product";
 import { Input, Label } from "reactstrap";
 import { Range, getTrackBackground } from "react-range";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../../../actions/category.actions";
 
 const Category = () => {
   const { productItem } = useContext(ProductContext);
   const { filter, filterColor, filterCategory, filterBrand, filterPrice } =
     useContext(FilterContext);
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.category.categories);
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+  console.log(categories);
   const colors = getColors(productItem);
   const step = STEP;
   const min = MIN;
@@ -54,22 +62,33 @@ const Category = () => {
   return (
     <Fragment>
       <div className="product-filter">
-        <H6 className="f-w-600">Category</H6>
+        <H6 className="f-w-600">Danh Mục</H6>
         <div className="checkbox-animated mt-0">
-          {gender.map((item, i) => {
-            return (
-              <Label className="d-block" key={i}>
-                <Input
-                  className="radio_animated"
-                  type="radio"
-                  name="name"
-                  value={item}
-                  onClick={(e) => ClickCategory(item, e)}
-                />
-                {item}
-              </Label>
-            );
-          })}
+          <Label className="d-block">
+            <Input
+              className="radio_animated"
+              type="radio"
+              name="name"
+              value={""}
+              onClick={(e) => ClickCategory("", e)}
+            />
+            Tất Cả
+          </Label>
+          {categories &&
+            categories.map((item, i) => {
+              return (
+                <Label className="d-block" key={i}>
+                  <Input
+                    className="radio_animated"
+                    type="radio"
+                    name="name"
+                    value={item._id}
+                    onClick={(e) => ClickCategory(item._id, e)}
+                  />
+                  {item.name}
+                </Label>
+              );
+            })}
         </div>
       </div>
       <div className="product-filter">

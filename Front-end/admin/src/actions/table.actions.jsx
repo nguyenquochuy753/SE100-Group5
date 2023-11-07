@@ -99,3 +99,39 @@ export const updateTable = (payload) => {
     }
   };
 };
+
+export const bookTable = (payload) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: tableContants.BOOK_TABLE, payload: payload });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const addMealToTable = (payload) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(`/table/orderTable/${payload.id}`, {
+        trang_thai: payload.trang_thai,
+        mon_an: payload.mon_an,
+      });
+      dispatch({ type: tableContants.ADD_MEAL_TO_TABLE_REQUEST });
+      if (res.status === 200) {
+        dispatch({ type: tableContants.ADD_MEAL_TO_TABLE_SUCCESS });
+        dispatch(getTable());
+      } else {
+        const { error } = res.data;
+        dispatch({
+          type: tableContants.ADD_MEAL_TO_TABLE_FAILURE,
+          payload: {
+            error,
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

@@ -4,13 +4,14 @@ const app = express();
 const bodyParser = require("body-parser");
 const path = require("path");
 require("dotenv").config();
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const homeRoute = require("./routes/home.route");
 const mealRoute = require("./routes/meal.route");
 const tableRoute = require("./routes/table.route");
 const materialRoute = require("./routes/material.route");
-const placeOrderRoute = require("./routes/placeOrder.route")
+const placeOrderRoute = require("./routes/placeOrder.route");
+const categoryRoute = require("./routes/category.route");
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -19,17 +20,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use(express.json());
-app.use('/uploads', express.static('uploads'))
+app.use("/uploads", express.static("uploads"));
 
-mongoose.connect(process.env.MONGO_CONNECT_URL).then(()=>{
-  console.log('Connected MongoDB successfully');
-})
+mongoose.connect(process.env.MONGO_CONNECT_URL).then(() => {
+  console.log("Connected MongoDB successfully");
+});
 
 app.use(homeRoute);
-app.use('/v1/meal',mealRoute);
-app.use('/v1/table',tableRoute);
-app.use('/v1/material', materialRoute);
-app.use('/v1/placeOrder',placeOrderRoute);
+app.use("/v1/meal", mealRoute);
+app.use("/v1/table", tableRoute);
+app.use("/v1/material", materialRoute);
+app.use("/v1/placeOrder", placeOrderRoute);
+app.use("/v1/category", categoryRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}/`);

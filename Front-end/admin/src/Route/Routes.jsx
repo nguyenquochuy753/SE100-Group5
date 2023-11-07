@@ -183,6 +183,10 @@ import FAQContent from "../Components/FAQ";
 import NewTable from "../Components/Application/Project/NewTable";
 import EditTable from "../Components/Application/Project/EditTable";
 import EditMeal from "../Components/Application/Project/EditMeal";
+import TableDetail from "../Components/Application/Ecommerce/TableDetail";
+import CategoryListContain from "../Components/Application/Ecommerce/CategoryList";
+import NewCategory from "../Components/Application/Project/NewCategory";
+import OrderDetail from "../Components/Application/Ecommerce/OrderDetail";
 
 export const routes = [
   {
@@ -510,6 +514,10 @@ export const routes = [
     Component: <Project />,
   },
   {
+    path: `${process.env.PUBLIC_URL}/app/project/book/:layout`,
+    Component: <Project />,
+  },
+  {
     path: `${process.env.PUBLIC_URL}/app/project/new-project/:layout`,
     Component: <Newproject />,
   },
@@ -524,6 +532,10 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/project/table/new-table/:layout`,
     Component: <NewTable />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/project/category/new-category/:layout`,
+    Component: <NewCategory />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/project/table/edit-table/:id/:layout`,
@@ -611,6 +623,10 @@ export const routes = [
     Component: <Invoice />,
   },
   {
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/orderdetail/:id/:layout`,
+    Component: <OrderDetail />,
+  },
+  {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/cart/:layout`,
     Component: <ProductCart />,
   },
@@ -619,7 +635,7 @@ export const routes = [
     Component: <WishList />,
   },
   {
-    path: `${process.env.PUBLIC_URL}/app/ecommerce/checkout/:layout`,
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/checkout/:id/:layout`,
     Component: <CheckOut />,
   },
   {
@@ -633,6 +649,14 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/table/table-list/:layout`,
     Component: <TableListContain />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/category/category-list/:layout`,
+    Component: <CategoryListContain />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/detailtable/:id/:layout`,
+    Component: <TableDetail />,
   },
 
   // //Gallery

@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import cubaimg from "../../assets/images/logo/logo-icon.png"
-import CustomizerContext from '../../_helper/Customizer';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import cubaimg from "../../assets/images/logo/logo-icon.png";
+import CustomizerContext from "../../_helper/Customizer";
 
 const SidebarIcon = () => {
   const { layoutURL } = useContext(CustomizerContext);
@@ -12,6 +12,10 @@ const SidebarIcon = () => {
           className="img-fluid"
           src={cubaimg}
           alt=""
+          style={{
+            width: "35px",
+            height: "35px",
+          }}
         />
       </Link>
     </div>

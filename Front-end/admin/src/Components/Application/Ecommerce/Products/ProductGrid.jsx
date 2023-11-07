@@ -13,11 +13,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMeal } from "../../../../actions/meal.actions";
 import { generatePublicUrl } from "../../../../urlConfig";
+import { addMealToCart } from "../../../../actions/cart.actions";
 
 const ProductGrid = () => {
   const { addToCart } = useContext(CartContext);
   const meal = useSelector((state) => state.meal);
-
+  const cart = useSelector((state) => state.cart.carts);
   const dispatch = useDispatch();
   const { productItem, symbol } = useContext(ProductContext);
   const layoutColumns = 3;
@@ -53,6 +54,27 @@ const ProductGrid = () => {
     const tempMeal = getVisibleproducts(meal.meals, context.filter);
     setMeals(tempMeal);
   }, [dispatch, meal]);
+
+  const addMealToCartHandler = (p, qty) => {
+    const newCart = [];
+    let edit = false;
+    for (const c of cart) {
+      if (c.p._id == p._id) {
+        c.qty += qty;
+        newCart.push(c);
+        edit = true;
+        // console.log(newCart);
+      } else {
+        newCart.push(c);
+      }
+    }
+    if (!edit) {
+      newCart.push({ p, qty });
+    }
+    // console.log(newCart);
+
+    dispatch(addMealToCart(newCart));
+  };
   return (
     <Fragment>
       <div className="product-wrapper-grid" id="product-wrapper-grid">
@@ -126,7 +148,7 @@ const ProductGrid = () => {
                               {/* <Link to={`${process.env.PUBLIC_URL}/app/ecommerce/cart/${layoutURL}`}> */}
                               <Button
                                 color="default"
-                                onClick={() => AddToCarts(item, quantity)}
+                                onClick={() => addMealToCartHandler(item, 1)}
                               >
                                 <i className="icon-shopping-cart"></i>
                               </Button>

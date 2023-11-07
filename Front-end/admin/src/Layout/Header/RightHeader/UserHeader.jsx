@@ -44,31 +44,45 @@ const UserHeader = () => {
           }}
         />
         <div className="media-body">
-          <span>{authenticated ? name : name}</span>
+          <span>{authenticated ? "Hung" : name}</span>
           <P attrPara={{ className: "mb-0 font-roboto" }}>
             {Admin} <i className="middle fa fa-angle-down"></i>
           </P>
         </div>
       </div>
-      <UL attrUL={{ className: "simple-list profile-dropdown onhover-show-div" }}>
+      <UL
+        attrUL={{ className: "simple-list profile-dropdown onhover-show-div" }}
+      >
         <LI
           attrLI={{
-            onClick: () => UserMenuRedirect(`${process.env.PUBLIC_URL}/app/users/profile/${layoutURL}`),
-          }}>
+            onClick: () =>
+              UserMenuRedirect(
+                `${process.env.PUBLIC_URL}/app/users/profile/${layoutURL}`
+              ),
+          }}
+        >
           <User />
           <span>{Account} </span>
         </LI>
         <LI
           attrLI={{
-            onClick: () => UserMenuRedirect(`${process.env.PUBLIC_URL}/app/email-app/${layoutURL}`),
-          }}>
+            onClick: () =>
+              UserMenuRedirect(
+                `${process.env.PUBLIC_URL}/app/email-app/${layoutURL}`
+              ),
+          }}
+        >
           <Mail />
           <span>{Inbox}</span>
         </LI>
         <LI
           attrLI={{
-            onClick: () => UserMenuRedirect(`${process.env.PUBLIC_URL}/app/todo-app/todo/${layoutURL}`),
-          }}>
+            onClick: () =>
+              UserMenuRedirect(
+                `${process.env.PUBLIC_URL}/app/todo-app/todo/${layoutURL}`
+              ),
+          }}
+        >
           <FileText />
           <span>{Taskboard}</span>
         </LI>
