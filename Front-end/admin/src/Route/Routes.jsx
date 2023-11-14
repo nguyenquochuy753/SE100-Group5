@@ -187,6 +187,9 @@ import TableDetail from "../Components/Application/Ecommerce/TableDetail";
 import CategoryListContain from "../Components/Application/Ecommerce/CategoryList";
 import NewCategory from "../Components/Application/Project/NewCategory";
 import OrderDetail from "../Components/Application/Ecommerce/OrderDetail";
+import NewIngredientType from "../Components/Application/Project/NewIngredientType";
+import IngredientTypeListContain from "../Components/Application/Ecommerce/IngredientTypeList";
+import IngredientListContain from "../Components/Application/Ecommerce/IngredientList";
 
 export const routes = [
   {
@@ -538,6 +541,10 @@ export const routes = [
     Component: <NewCategory />,
   },
   {
+    path: `${process.env.PUBLIC_URL}/app/project/ingredient/new-ingredient-type/:layout`,
+    Component: <NewIngredientType />,
+  },
+  {
     path: `${process.env.PUBLIC_URL}/app/project/table/edit-table/:id/:layout`,
     Component: <EditTable />,
   },
@@ -653,6 +660,14 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/category/category-list/:layout`,
     Component: <CategoryListContain />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-type-list/:layout`,
+    Component: <IngredientTypeListContain />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-list/:layout`,
+    Component: <IngredientListContain />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/detailtable/:id/:layout`,

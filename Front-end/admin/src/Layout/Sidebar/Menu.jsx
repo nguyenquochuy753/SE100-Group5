@@ -93,10 +93,29 @@ export const MENUITEMS = [
       {
         title: "Nguyên Liệu",
         icon: "job-search",
-        value: "none",
-
-        type: "link",
+        value: "ingredient",
+        type: "sub",
         active: false,
+        children: [
+          {
+            path: `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-list`,
+            type: "link",
+            title: "Danh Sách Nguyên Liệu",
+            value: "ingredient-list",
+          },
+          {
+            path: `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-type-list`,
+            type: "link",
+            title: "Danh Sách Loại Nguyên Liệu",
+            value: "ingredient-type-list",
+          },
+          {
+            path: `${process.env.PUBLIC_URL}/app/project/ingredient/new-ingredient-type`,
+            type: "link",
+            title: "Thêm Loại Nguyên Liệu",
+            value: "new-ingredient-type",
+          },
+        ],
       },
     ],
   },
