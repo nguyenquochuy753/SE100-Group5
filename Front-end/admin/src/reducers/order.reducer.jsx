@@ -26,6 +26,7 @@ export default (state = initState, action) => {
       state = {
         ...state,
         order: action.payload,
+        orderId: "",
       };
       break;
     default:

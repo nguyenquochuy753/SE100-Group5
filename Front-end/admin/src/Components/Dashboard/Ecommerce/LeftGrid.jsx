@@ -21,7 +21,7 @@ const LeftGrid = ({ order }) => {
         <Col xxl="3" md="5" sm="6" className="box-col-5">
           <ValuableCustomer />
         </Col>
-        <Col xxl="4" sm="6" className="box-col-6">
+        <Col xxl="9" sm="6" className="box-col-6">
           <OrderThisMonth order={order} />
         </Col>
         <Col xxl="3" md="6" className="box-col-6">
