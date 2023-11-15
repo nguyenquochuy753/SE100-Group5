@@ -11,8 +11,8 @@ const OrderHistoryContain = () => {
     <Fragment>
       <Breadcrumbs
         parent="Quản Lý Nhà Hàng"
-        title="Lịch Sử Đơn Hàng"
-        mainTitle="Lịch Sử Đơn Hàng"
+        title="Hóa Đơn"
+        mainTitle="Hóa Đơn"
       />
       <Container fluid={true} className="orderhistory">
         <Row>

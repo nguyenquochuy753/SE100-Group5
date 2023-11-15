@@ -35,7 +35,7 @@ export const MENUITEMS = [
         active: false,
       },
       {
-        title: "Đơn Hàng",
+        title: "Hóa Đơn",
         value: "orderhistory",
         path: `${process.env.PUBLIC_URL}/app/ecommerce/orderhistory`,
         icon: "calendar",

@@ -49,9 +49,9 @@ const Project = () => {
   return (
     <Fragment>
       <Breadcrumbs
-        parent="Project"
-        title="Project List"
-        mainTitle="Project List"
+        parent="Quản Lý Nhà Hàng"
+        title="Đặt Bàn"
+        mainTitle="Đặt Bàn"
       />
       <Container fluid={true}>
         <Row className="project-card">

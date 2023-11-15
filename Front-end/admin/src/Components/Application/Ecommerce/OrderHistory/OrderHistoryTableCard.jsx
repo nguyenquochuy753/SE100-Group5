@@ -9,7 +9,7 @@ const OrderHistoryTableCard = () => {
     <Col>
       <Card>
         <CardHeader>
-          <H5>Danh Sách Đơn Hàng</H5>
+          <H5>Hóa Đơn</H5>
         </CardHeader>
         <CardBody>
           <OrderHistoryTable />

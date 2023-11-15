@@ -100,7 +100,7 @@ export const OrderHistoryDataTable = {
 
   productColumns: [
     {
-      name: "Mã Đơn Hàng",
+      name: "Mã Hóa Đơn",
       selector: (row) => row.product,
       sortable: true,
       center: true,
