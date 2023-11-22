@@ -1,7 +1,7 @@
 import {
   productData,
   tableColumns,
-  categoryColumns,
+  ingredintColumns,
 } from "../../../../Data/Ecommerce/ProductList";
 import React, { Fragment } from "react";
 import { useEffect } from "react";
@@ -46,7 +46,6 @@ const ProductTableData = () => {
     setModal(true);
     setIdRemove(id);
   };
-  const [tables, setTables] = useState([]);
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -61,6 +60,7 @@ const ProductTableData = () => {
     ),
     amount: m.khoi_luong_ton,
     stock: <div className="font-success">{}</div>,
+    type: m.ma_loai_nguyen_lieu.ten_loai_nguyen_lieu,
     start_date: formatDate(m.createdAt),
     action: (
       <div>
@@ -98,6 +98,8 @@ const ProductTableData = () => {
       </div>
     ),
   }));
+
+  console.log(ingredients);
 
   // useEffect(() => {
   //   dispatch(getTable());
@@ -167,8 +169,8 @@ const ProductTableData = () => {
         <DataTable
           noHeader
           pagination
-          paginationServer
-          columns={categoryColumns}
+          // paginationServer
+          columns={ingredintColumns}
           data={ingredientTranfer}
           highlightOnHover={true}
           striped={true}

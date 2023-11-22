@@ -535,3 +535,83 @@ export const categoryColumns = [
     maxWidth: "200px",
   },
 ];
+
+export const ingredintColumns = [
+  {
+    name: "Tên Nguyên Liệu",
+    selector: (row) => row.Details,
+    sortable: true,
+    // center: true,
+    wrap: true,
+    minWidth: "100px",
+  },
+  {
+    name: "Khối Lượng Tồn",
+    selector: (row) => row.amount,
+    sortable: true,
+    center: true,
+    minWidth: "200px",
+    maxWidth: "900px",
+  },
+
+  {
+    name: "Loại Nguyên Liệu",
+    selector: (row) => row.type,
+    sortable: true,
+    center: true,
+    minWidth: "120px",
+    maxWidth: "400px",
+  },
+  {
+    name: "Ngày Thêm",
+    selector: (row) => row.start_date,
+    sortable: true,
+    center: true,
+    minWidth: "120px",
+    maxWidth: "400px",
+  },
+  {
+    name: "Hành Vi",
+    selector: (row) => row.action,
+    sortable: true,
+    center: true,
+    minWidth: "160px",
+    maxWidth: "200px",
+  },
+];
+
+export const ingredientTypeColumns = [
+  {
+    name: "Mã Loại Nguyên Liệu",
+    selector: (row) => row.Details,
+    sortable: true,
+    // center: true,
+    wrap: true,
+    minWidth: "100px",
+  },
+  {
+    name: "Tên Loại Nguyên Liệu",
+    selector: (row) => row.amount,
+    sortable: true,
+    center: true,
+    minWidth: "200px",
+    maxWidth: "900px",
+  },
+
+  {
+    name: "Ngày Thêm",
+    selector: (row) => row.start_date,
+    sortable: true,
+    center: true,
+    minWidth: "120px",
+    maxWidth: "400px",
+  },
+  {
+    name: "Hành Vi",
+    selector: (row) => row.action,
+    sortable: true,
+    center: true,
+    minWidth: "160px",
+    maxWidth: "200px",
+  },
+];

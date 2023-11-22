@@ -13,3 +13,26 @@ export const getIngredients = () => {
     }
   };
 };
+
+export const addIngredient = (form) => {
+  return async (dispatch) => {
+    dispatch({ type: ingredientContants.ADD_INGREDIENT_REQUEST });
+    try {
+      const res = await axios.post(`/ingredient/addIngredient`, form);
+      if (res.status === 200) {
+        dispatch({
+          type: ingredientContants.ADD_INGREDIENT_SUCCESS,
+          payload: { category: res.data },
+        });
+      } else {
+        dispatch({
+          type: ingredientContants.ADD_INGREDIENT_FAILURE,
+          payload: res.data,
+        });
+      }
+      console.log(res);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};

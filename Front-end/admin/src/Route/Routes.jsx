@@ -190,6 +190,7 @@ import OrderDetail from "../Components/Application/Ecommerce/OrderDetail";
 import NewIngredientType from "../Components/Application/Project/NewIngredientType";
 import IngredientTypeListContain from "../Components/Application/Ecommerce/IngredientTypeList";
 import IngredientListContain from "../Components/Application/Ecommerce/IngredientList";
+import NewIngredient from "../Components/Application/Project/NewIngredient";
 
 export const routes = [
   {
@@ -543,6 +544,10 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/project/ingredient/new-ingredient-type/:layout`,
     Component: <NewIngredientType />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/project/ingredient/new-ingredient/:layout`,
+    Component: <NewIngredient />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/project/table/edit-table/:id/:layout`,

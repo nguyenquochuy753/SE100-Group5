@@ -104,6 +104,12 @@ export const MENUITEMS = [
             value: "ingredient-list",
           },
           {
+            path: `${process.env.PUBLIC_URL}/app/project/ingredient/new-ingredient`,
+            type: "link",
+            title: "Thêm Nguyên Liệu",
+            value: "new-ingredient",
+          },
+          {
             path: `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-type-list`,
             type: "link",
             title: "Danh Sách Loại Nguyên Liệu",

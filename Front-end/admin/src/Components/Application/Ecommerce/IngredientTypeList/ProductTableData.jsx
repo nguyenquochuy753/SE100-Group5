@@ -1,8 +1,4 @@
-import {
-  productData,
-  tableColumns,
-  categoryColumns,
-} from "../../../../Data/Ecommerce/ProductList";
+import { ingredientTypeColumns } from "../../../../Data/Ecommerce/ProductList";
 import React, { Fragment } from "react";
 import { useEffect } from "react";
 import DataTable from "react-data-table-component";
@@ -169,7 +165,7 @@ const ProductTableData = () => {
           noHeader
           pagination
           paginationServer
-          columns={categoryColumns}
+          columns={ingredientTypeColumns}
           data={ingredientTypeTranfer}
           highlightOnHover={true}
           striped={true}
