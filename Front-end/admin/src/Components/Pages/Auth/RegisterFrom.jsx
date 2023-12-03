@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 // import logoWhite from '../../../assets/images/logo/logo.png';
 // import logoDark from '../../../assets/images/logo/logo_dark.png';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../firebase';
+import { auth, db } from '../../../firebase';
+import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -14,15 +15,31 @@ import { ToastContainer, toast } from 'react-toastify';
 const RegisterFrom = ({ logoClassMain }) => {
   const [togglePassword, setTogglePassword] = useState(false);
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const history = useNavigate();
 
 
   const signInAuth = async (e) => {
     e.preventDefault();
+
+    // const userCollectionRef = collection(db, "users");
+
+    // await docRef.set({
+    //   username: email,
+    //   firstName: 'Ada',
+    //   lastName: 'Lovelace',
+    //   userType: 'admin',
+    // });
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        addDoc(collection(db, "users"), {
+          email: email,
+          firstName: firstName,
+          lastName: lastName,
+          userType: 'admin',
+        })
         localStorage.setItem("login", JSON.stringify(true));
         localStorage.setItem("authenticated", JSON.stringify(true));
         history(`${process.env.PUBLIC_URL}`);
@@ -51,10 +68,10 @@ const RegisterFrom = ({ logoClassMain }) => {
                 <Label className='col-form-label m-0 pt-0'>Your Name</Label>
                 <Row className='g-2'>
                   <Col xs='6'>
-                    <Input className='form-control' type='text' required='' placeholder='Fist Name' />
+                    <Input className='form-control' type='text' required='' onChange={(e) => setFirstName(e.target.value)} placeholder='Fist Name' />
                   </Col>
                   <Col xs='6'>
-                    <Input className='form-control' type='email' required='' placeholder='Last Name' />
+                    <Input className='form-control' type='email' required='' onChange={(e) => setLastName(e.target.value)} placeholder='Last Name' />
                   </Col>
                 </Row>
               </FormGroup>
