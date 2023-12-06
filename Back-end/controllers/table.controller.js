@@ -66,6 +66,33 @@ const tableController = {
     } catch (error) {
       res.status(200).json(error);
     }
+  },
+  finishTheDish: async(req,res)=>{
+    const { tableId, itemId } = req.params;
+
+    try {
+      const table = await tableModel.findById(tableId);
+
+      if (!table) {
+        return res.status(404).json({ message: 'Table not found' });
+      }
+
+      const mealIndex = table.mon_an.findIndex(
+        meal => meal.ma_mon_an.toString() === itemId
+      );
+
+      if (mealIndex === -1) {
+        return res.status(404).json({ message: 'Meal not found in the table' });
+      }
+
+      table.mon_an[mealIndex].trang_thai = 'Chế biến xong';
+
+      await table.save();
+
+      return res.status(200).json({ message: 'Meal processed successfully' });
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   }
 };
 
