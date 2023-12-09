@@ -5,7 +5,7 @@ import ProductTableData from "./ProductTableData";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
 import HeaderCard from "../../../Common/Component/HeaderCard";
 
-const TableListContain = () => {
+const UserList = () => {
   return (
     <Fragment>
       <Breadcrumbs
@@ -31,4 +31,4 @@ const TableListContain = () => {
     </Fragment>
   );
 };
-export default TableListContain;
+export default UserList;

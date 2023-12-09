@@ -193,6 +193,8 @@ import IngredientListContain from "../Components/Application/Ecommerce/Ingredien
 import NewIngredient from "../Components/Application/Project/NewIngredient";
 import EditIngredientType from "../Components/Application/Project/EditIngredientType";
 import EditIngredient from "../Components/Application/Project/EditIngredient";
+import UserList from "../Components/Application/Ecommerce/UserList";
+import UserCreate from "../Components/Application/Users/UsersCreate";
 
 export const routes = [
   {
@@ -595,6 +597,10 @@ export const routes = [
     Component: <UsersEditContain />,
   },
   {
+    path: `${process.env.PUBLIC_URL}/app/user/new-user/:layout`,
+    Component: <UserCreate />,
+  },
+  {
     path: `${process.env.PUBLIC_URL}/app/users/cards/:layout`,
     Component: <UsersCardssContain />,
   },
@@ -683,6 +689,10 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-list/:layout`,
     Component: <IngredientListContain />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/user/user-list/:layout`,
+    Component: <UserList />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/detailtable/:id/:layout`,
