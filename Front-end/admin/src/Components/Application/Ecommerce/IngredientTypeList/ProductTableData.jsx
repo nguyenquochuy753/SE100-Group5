@@ -85,7 +85,7 @@ const ProductTableData = () => {
             }}
             onClick={() => {
               history(
-                `${process.env.PUBLIC_URL}/app/project/table/edit-table/${m._id}/${layoutURL}`
+                `${process.env.PUBLIC_URL}/app/project/ingredient/edit-ingredient-type/${m._id}/${layoutURL}`
               );
             }}
           >

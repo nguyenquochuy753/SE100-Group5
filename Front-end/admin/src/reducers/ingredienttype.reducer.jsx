@@ -2,6 +2,7 @@ import { ingredientTypeContants } from "../actions/constants";
 
 const initState = {
   ingredientTypes: [],
+  ingredientType: {},
   error: null,
   loading: false,
 };
@@ -12,6 +13,12 @@ export default (state = initState, action) => {
       state = {
         ...state,
         ingredientTypes: action.payload,
+      };
+      break;
+    case ingredientTypeContants.GET_INGREDIENT_TYPE_BY_ID:
+      state = {
+        ...state,
+        ingredientType: action.payload,
       };
       break;
     default:
