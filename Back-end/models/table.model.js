@@ -26,9 +26,9 @@ const tableSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
-        da_hoan_thanh: {
-          type: Boolean,
-          default: false,
+        trang_thai: {
+          type: String,
+          default: "Chờ chế biến", // chờ chế biến, đã chế biến , hoàn thành
         },
       },
     ],
