@@ -17,7 +17,11 @@ import { useContext } from "react";
 import CustomizerContext from "../../../../_helper/Customizer";
 import { getCategories } from "../../../../actions/category.actions";
 import { getIngredientTypes } from "../../../../actions/ingredientType.actions";
-import { getIngredients } from "../../../../actions/ingredient.actions";
+import {
+  deleteIngredientById,
+  getIngredients,
+} from "../../../../actions/ingredient.actions";
+import ModalCustom from "../../../UiKits/Modals/common/modalCustom";
 const style = {
   width: 40,
   height: 40,
@@ -47,9 +51,14 @@ const ProductTableData = () => {
     setIdRemove(id);
   };
 
+  const deleteHandler = (id) => {
+    console.log(id);
+    dispatch(deleteIngredientById(id));
+  };
+
   useEffect(() => {
     dispatch(getIngredients());
-  }, [dispatch]);
+  }, [dispatch, ingredients]);
 
   const ingredientTranfer = ingredients?.map((m) => ({
     Details: (
@@ -88,7 +97,7 @@ const ProductTableData = () => {
             }}
             onClick={() => {
               history(
-                `${process.env.PUBLIC_URL}/app/project/table/edit-table/${m._id}/${layoutURL}`
+                `${process.env.PUBLIC_URL}/app/project/ingredient/edit-ingredient/${m._id}/${layoutURL}`
               );
             }}
           >
@@ -153,18 +162,19 @@ const ProductTableData = () => {
   // }, [dispatch, table]);
   return (
     <Fragment>
-      <CommonModal
+      <ModalCustom
         isOpen={modal}
-        title={"Xoá Bàn"}
+        title={"Xoá Nguyên Liệu"}
         toggler={toggle}
         idRemove={idRemove}
+        onConfirm={deleteHandler}
       >
         <P>
           {
-            "Bàn của bạn chọn sẽ được xóa. Bạn có chắc muốn thực hiện hành động ?"
+            "Nguyên liệu của bạn chọn sẽ được xóa. Bạn có chắc muốn thực hiện hành động ?"
           }
         </P>
-      </CommonModal>
+      </ModalCustom>
       <div className="table-responsive product-table">
         <DataTable
           noHeader

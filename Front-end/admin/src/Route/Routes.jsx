@@ -191,6 +191,8 @@ import NewIngredientType from "../Components/Application/Project/NewIngredientTy
 import IngredientTypeListContain from "../Components/Application/Ecommerce/IngredientTypeList";
 import IngredientListContain from "../Components/Application/Ecommerce/IngredientList";
 import NewIngredient from "../Components/Application/Project/NewIngredient";
+import EditIngredientType from "../Components/Application/Project/EditIngredientType";
+import EditIngredient from "../Components/Application/Project/EditIngredient";
 
 export const routes = [
   {
@@ -536,6 +538,14 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/project/table/new-table/:layout`,
     Component: <NewTable />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/project/ingredient/edit-ingredient-type/:id/:layout`,
+    Component: <EditIngredientType />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/project/ingredient/edit-ingredient/:id/:layout`,
+    Component: <EditIngredient />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/project/category/new-category/:layout`,

@@ -2,6 +2,7 @@ import { ingredientContants } from "../actions/constants";
 
 const initState = {
   ingredients: [],
+  ingredient: {},
   error: null,
   loading: false,
 };
@@ -12,6 +13,12 @@ export default (state = initState, action) => {
       state = {
         ...state,
         ingredients: action.payload,
+      };
+      break;
+    case ingredientContants.GET_INGREDIENT_BY_ID:
+      state = {
+        ...state,
+        ingredient: action.payload,
       };
       break;
     default:
