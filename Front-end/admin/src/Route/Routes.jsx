@@ -190,6 +190,11 @@ import OrderDetail from "../Components/Application/Ecommerce/OrderDetail";
 import NewIngredientType from "../Components/Application/Project/NewIngredientType";
 import IngredientTypeListContain from "../Components/Application/Ecommerce/IngredientTypeList";
 import IngredientListContain from "../Components/Application/Ecommerce/IngredientList";
+import NewIngredient from "../Components/Application/Project/NewIngredient";
+import EditIngredientType from "../Components/Application/Project/EditIngredientType";
+import EditIngredient from "../Components/Application/Project/EditIngredient";
+import UserList from "../Components/Application/Ecommerce/UserList";
+import UserCreate from "../Components/Application/Users/UsersCreate";
 
 export const routes = [
   {
@@ -537,12 +542,24 @@ export const routes = [
     Component: <NewTable />,
   },
   {
+    path: `${process.env.PUBLIC_URL}/app/project/ingredient/edit-ingredient-type/:id/:layout`,
+    Component: <EditIngredientType />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/project/ingredient/edit-ingredient/:id/:layout`,
+    Component: <EditIngredient />,
+  },
+  {
     path: `${process.env.PUBLIC_URL}/app/project/category/new-category/:layout`,
     Component: <NewCategory />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/project/ingredient/new-ingredient-type/:layout`,
     Component: <NewIngredientType />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/project/ingredient/new-ingredient/:layout`,
+    Component: <NewIngredient />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/project/table/edit-table/:id/:layout`,
@@ -578,6 +595,10 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/users/edit/:layout`,
     Component: <UsersEditContain />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/user/new-user/:layout`,
+    Component: <UserCreate />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/users/cards/:layout`,
@@ -668,6 +689,10 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-list/:layout`,
     Component: <IngredientListContain />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/ecommerce/user/user-list/:layout`,
+    Component: <UserList />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/ecommerce/detailtable/:id/:layout`,

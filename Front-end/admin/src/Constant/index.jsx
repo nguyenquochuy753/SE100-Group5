@@ -458,6 +458,13 @@ export const UsersCountryMenu = [
   "Usa",
   "Aus",
 ];
+export const UsersCountry = [
+  "--Lựa Chọn--",
+  "Việt Nam",
+  "Lào",
+  "Thái Lan",
+  "Campuchia",
+];
 export const AboutMe = "About Me";
 export const UpdateProfile = "Update Profile";
 export const UsersTableTitle = "Add projects And Upload";

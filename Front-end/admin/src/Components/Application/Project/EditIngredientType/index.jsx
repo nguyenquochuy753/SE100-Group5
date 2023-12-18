@@ -30,18 +30,26 @@ import {
   updateMeal,
 } from "../../../../actions/meal.actions";
 import { getCategories } from "../../../../actions/category.actions";
+import {
+  getIngredientTypeById,
+  updateIngredientType,
+} from "../../../../actions/ingredientType.actions";
 
-const EditMeal = () => {
+const EditIngredientType = () => {
   const history = useNavigate();
   const { layoutURL } = useContext(CustomizerContext);
   const dispatch = useDispatch();
   const project = useContext(ProjectContext);
   const meal = useSelector((state) => state.meal.meal[0]);
+  const ingredientType = useSelector(
+    (state) => state.ingredientType.ingredientType
+  );
   const categories = useSelector((state) => state.category.categories);
   const [loading, setLoading] = useState(false);
   const [mealStatus, setMealStatus] = useState(meal?.trang_thai);
   const [mealEdit, setMealEdit] = useState();
   const [categoryList, setCategoryList] = useState([]);
+  const [ingredientTypeEdit, setIngredientTypeEdit] = useState();
   const { id } = useParams();
 
   const [file, setFile] = useState(null);
@@ -55,13 +63,13 @@ const EditMeal = () => {
 
   useEffect(() => {
     // setLoading(true);
-    dispatch(getMealById(id));
-    dispatch(getCategories());
+    dispatch(getIngredientTypeById(id));
+    setIngredientTypeEdit(ingredientType);
     // setMealStatus(meal?.trang_thai);
     // setLoading(false);
-    setMealEdit(meal);
-    setCategoryList(categories);
-  }, [dispatch, meal]);
+    // setMealEdit(meal);
+    // setCategoryList(categories);
+  }, [dispatch, ingredientType]);
 
   // console.log(mealEdit);
 
@@ -71,17 +79,10 @@ const EditMeal = () => {
 
       console.log(data);
       dispatch(
-        updateMeal({
+        updateIngredientType({
           id: id,
-          ten_mon_an: data.title != "" ? data.title : meal.ten_mon_an,
-          gia: data.rate != "" ? data.rate : meal.gia,
-          trang_thai:
-            data.status != meal.trang_thai ? data.status : meal.trang_thai,
-          hinh_anh_mon_an: meal.hinh_anh_mon_an,
-          ma_danh_muc:
-            data.category != meal.ma_danh_muc
-              ? data.category
-              : meal.ma_danh_muc,
+          ten_loai_nguyen_lieu:
+            data.title != "" ? data.title : ingredientType.ten_loai_nguyen_lieu,
         })
       );
       // console.log("file", file);
@@ -94,7 +95,7 @@ const EditMeal = () => {
       // dispatch(addMeal(form));
 
       history(
-        `${process.env.PUBLIC_URL}/app/ecommerce/meal/meal-list/${layoutURL}`
+        `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-type-list/${layoutURL}`
       );
     } else {
       errors.showMessages();
@@ -104,8 +105,8 @@ const EditMeal = () => {
     <Fragment>
       <Breadcrumbs
         parent="Món Ăn"
-        title="Cập Nhập Món Ăn"
-        mainTitle="Cập Nhập Món Ăn"
+        title="Thêm Món Ăn"
+        mainTitle="Thêm Món Ăn"
       />
       <Container fluid={true}>
         <Row>
@@ -119,7 +120,7 @@ const EditMeal = () => {
                   <ProjectTitleClass
                     register={register}
                     errors={errors}
-                    name={mealEdit?.ten_mon_an}
+                    name={ingredientTypeEdit?.ten_loai_nguyen_lieu}
                   />
 
                   {/* <ClientNameClass register={register} errors={errors} /> */}
@@ -131,7 +132,7 @@ const EditMeal = () => {
                   /> */}
                   <Row>
                     <Col sm="4">
-                      <FormGroup>
+                      {/* <FormGroup>
                         <Label>Giá</Label>
                         <input
                           className="form-control"
@@ -143,10 +144,10 @@ const EditMeal = () => {
                             required: mealEdit?.gia != "" ? false : true,
                           })}
                         />
-                      </FormGroup>
+                      </FormGroup> */}
                     </Col>
                     <Col sm="4">
-                      <FormGroup>
+                      {/* <FormGroup>
                         <Label>Danh Mục</Label>
                         {mealEdit && (
                           <Input
@@ -156,7 +157,7 @@ const EditMeal = () => {
                             className="form-control digits"
                             required
                             innerRef={refCategory}
-                            // defaultValue={mealEdit?.trang_thai}
+                            defaultValue={mealEdit?.trang_thai}
                             {...category}
                           >
                             {mealEdit?.ma_danh_muc && (
@@ -174,13 +175,12 @@ const EditMeal = () => {
                               }
                             })}
 
-                            {/* <option value="Hết">Hết</option> */}
                           </Input>
                         )}
-                      </FormGroup>
+                      </FormGroup> */}
                     </Col>
                     <Col sm="4">
-                      <FormGroup>
+                      {/* <FormGroup>
                         <Label>Trạng Thái</Label>
                         {mealEdit && mealEdit.trang_thai && (
                           <Input
@@ -203,10 +203,9 @@ const EditMeal = () => {
                             >{`${
                               mealEdit?.trang_thai == "Hết" ? "Còn" : "Hết"
                             }`}</option>
-                            {/* <option value="Hết">Hết</option> */}
                           </Input>
                         )}
-                      </FormGroup>
+                      </FormGroup> */}
                     </Col>
                   </Row>
                   {/* <IssueClass register={register} /> */}
@@ -240,4 +239,4 @@ const EditMeal = () => {
   );
 };
 
-export default EditMeal;
+export default EditIngredientType;

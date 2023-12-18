@@ -104,6 +104,12 @@ export const MENUITEMS = [
             value: "ingredient-list",
           },
           {
+            path: `${process.env.PUBLIC_URL}/app/project/ingredient/new-ingredient`,
+            type: "link",
+            title: "Thêm Nguyên Liệu",
+            value: "new-ingredient",
+          },
+          {
             path: `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-type-list`,
             type: "link",
             title: "Danh Sách Loại Nguyên Liệu",
@@ -155,8 +161,23 @@ export const MENUITEMS = [
         title: "Nhân Viên",
         icon: "user",
         value: "none",
-        type: "link",
+        type: "sub",
+        value: "user",
         active: false,
+        children: [
+          {
+            path: `${process.env.PUBLIC_URL}/app/ecommerce/user/user-list`,
+            type: "link",
+            title: "Danh Sách Nhân Viên",
+            value: "user-list",
+          },
+          {
+            path: `${process.env.PUBLIC_URL}/app/user/new-user`,
+            type: "link",
+            title: "Thêm Nhân Viên",
+            value: "new-user",
+          },
+        ],
       },
     ],
   },
