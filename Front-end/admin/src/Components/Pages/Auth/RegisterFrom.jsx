@@ -52,6 +52,13 @@ const RegisterFrom = ({ logoClassMain }) => {
     console.log(lastName);
     console.log(password);
 
+    const existedUser = await axios.get('http://localhost:8000/v1/user/getUserByEmail/' + email);
+
+    if (existedUser.data[0] != null) {
+      toast.error('The email you\'ve just entered has already been registered!');
+      return;
+    }
+
     await axios.post('http://localhost:8000/v1/user/addUser', {
       data: {
         userId: userUID,

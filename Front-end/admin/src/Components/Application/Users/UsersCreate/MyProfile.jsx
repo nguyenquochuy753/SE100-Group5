@@ -21,14 +21,54 @@ import {
   EmailAddress,
 } from "../../../../Constant";
 import CustomizerContext from "../../../../_helper/Customizer";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 
-function onUserCreate() {
-  
-  console.log("onUserCreate");
-}
+
 
 const MyProfileEdit = () => {
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
+  const [userType, setUserType] = useState('waiter');
+  const [description, setDescription] = useState(null);
+
   const { layoutURL } = useContext(CustomizerContext);
+
+  // function onUserCreate = async (e) => {
+  const onUserCreate = async (e) => {
+    if (email == null || password == null || confirmPassword == null || userType == null) {
+      toast.error("Vui lòng điền đầy đủ thông tin!");
+    } else {
+      if (password != confirmPassword) {
+        toast.error("Mật khẩu không khớp!");
+      } else {
+        const existedUser = await axios.get('http://localhost:8000/v1/user/getUserByEmail/' + email);
+
+        if (existedUser.data[0] != null) {
+          toast.error('Tài khoản đã tồn tại!');
+          return;
+        }
+
+        await axios.post('http://localhost:8000/v1/user/addUser', {
+          data: {
+            userId: uuidv4(),
+            email: email,
+            password: password,
+            userType: userType,
+            description: description,
+          }
+        }).then((res) => {
+          toast.success("Thêm tài khoản thành công!");
+        }).catch((err) => {
+          toast.error("Có lỗi: " + err);
+        });
+      }
+    }
+  }
+
   return (
     <Fragment>
       <Card>
@@ -72,7 +112,8 @@ const MyProfileEdit = () => {
                 type="textarea"
                 className="form-control"
                 rows="5"
-                defaultValue="On the other hand, we denounce with righteous indignation"
+                placeholder="Nhập tiểu sử của bạn ở đây."
+                onChange={(e) => setDescription(e.target.value)}
               />
             </FormGroup>
             <FormGroup className="mb-3">
@@ -80,6 +121,7 @@ const MyProfileEdit = () => {
               <Input
                 className="form-control"
                 placeholder="your-email@domain.com"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </FormGroup>
             <FormGroup className="mb-3">
@@ -87,7 +129,8 @@ const MyProfileEdit = () => {
               <Input
                 className="form-control"
                 type="password"
-                defaultValue="password"
+                placeholder="********"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </FormGroup>
             <FormGroup className="mb-3">
@@ -95,7 +138,8 @@ const MyProfileEdit = () => {
               <Input
                 className="form-control"
                 type="password"
-                defaultValue="password"
+                placeholder="********"
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </FormGroup>
             {/* <FormGroup className="mb-3">
@@ -108,9 +152,10 @@ const MyProfileEdit = () => {
                 type="select"
                 name="select"
                 className="form-control btn-square"
+                onChange={(e) => setUserType(e.target.value)}
               >
-                <option value="nhân viên">Nhân Viên</option>
-                <option value="đầu bếp">Đầu Bếp</option>
+                <option value="waiter">Nhân Viên</option>
+                <option value="chef">Đầu Bếp</option>
               </Input>
             </FormGroup>
             
