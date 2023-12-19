@@ -3,6 +3,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  CardFooter,
   Form,
   FormGroup,
   Input,
@@ -20,6 +21,11 @@ import {
   EmailAddress,
 } from "../../../../Constant";
 import CustomizerContext from "../../../../_helper/Customizer";
+
+function onUserCreate() {
+  
+  console.log("onUserCreate");
+}
 
 const MyProfileEdit = () => {
   const { layoutURL } = useContext(CustomizerContext);
@@ -107,13 +113,14 @@ const MyProfileEdit = () => {
                 <option value="đầu bếp">Đầu Bếp</option>
               </Input>
             </FormGroup>
-            <div className="form-footer">
-              <Btn attrBtn={{ className: "btn-block", color: "primary" }}>
-                Lưu
-              </Btn>
-            </div>
+            
           </Form>
         </CardBody>
+        <CardFooter className="text-end">
+          <Btn attrBtn={{ color: "primary", type: "submit"}} onClick={(e) => onUserCreate(e) }>
+            Lưu
+          </Btn>
+        </CardFooter>
       </Card>
     </Fragment>
   );

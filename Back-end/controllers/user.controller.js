@@ -40,7 +40,8 @@ const userController = {
   },
   addUser: async (req, res, next) => {
     try {
-      const user = await User.create(req.body);
+      console.log(req.body);
+      const user = await User.create(req.body.data);
       res.status(200).json(user);
     } catch (err) {
       console.log(err);

@@ -33,12 +33,12 @@ const Routers = () => {
           <Route path={"/"} element={<PrivateRoute />}>
             { 
               authenticated ? (
+                console.log("authenticated"),
                 <>
                   <Route exact path={`${process.env.PUBLIC_URL}`} element={<Navigate to={`${process.env.PUBLIC_URL}/dashboard/default/${layout}`} />} />
                   <Route exact path={`/`} element={<Navigate to={`${process.env.PUBLIC_URL}/dashboard/e-commerce/${layout}`} />} />
                 </>
               ) : (
-                console.log('aaadvasdvasdv'),
                 // <Route path={"/*"} element={<Signin />} />
                 <Route path={"/*"} element={<Navigate to={`${process.env.PUBLIC_URL}/login`} />} />
               )
