@@ -2,6 +2,7 @@ import {
   productData,
   tableColumns,
   ingredintColumns,
+  employeeColumns,
 } from "../../../../Data/Ecommerce/ProductList";
 import React, { Fragment } from "react";
 import { useEffect } from "react";
@@ -20,12 +21,16 @@ import { getIngredientTypes } from "../../../../actions/ingredientType.actions";
 import {
   deleteIngredientById,
   getIngredients,
+  getUsers,
 } from "../../../../actions/ingredient.actions";
 import ModalCustom from "../../../UiKits/Modals/common/modalCustom";
+import axios from "axios";
+
 const style = {
   width: 40,
   height: 40,
 };
+
 const style2 = { width: 60, fontSize: 14, padding: 4 };
 function formatDate(value) {
   let date = new Date(value);
@@ -51,26 +56,29 @@ const ProductTableData = () => {
     setIdRemove(id);
   };
 
-  const deleteHandler = (id) => {
+  const deleteHandler = async (id) => {
     console.log(id);
-    dispatch(deleteIngredientById(id));
+    await axios.delete("http://localhost:8000/v1/user/deleteUserById/" + id);
   };
 
   useEffect(() => {
-    dispatch(getIngredients());
+    dispatch(getUsers());
   }, [dispatch, ingredients]);
+
+  // const userData = await axios.get("http://localhost:8000/v1/user/getAllUsers").data;
+  // console.log(userData);
 
   const ingredientTranfer = ingredients?.map((m) => ({
     Details: (
       <div>
-        <H6>{m.ten_nguyen_lieu}</H6>
+        <H6>{m.firstName}</H6>
         <span></span>
       </div>
     ),
-    amount: m.khoi_luong_ton,
+    amount: m.email,
     stock: <div className="font-success">{}</div>,
-    type: m.ma_loai_nguyen_lieu.ten_loai_nguyen_lieu,
-    start_date: formatDate(m.createdAt),
+    type: m.address ? m.address : "Chưa có địa chỉ",
+    start_date: m.userType,
     action: (
       <div>
         <span>
@@ -81,7 +89,7 @@ const ProductTableData = () => {
               className: "btn btn-xs",
               type: "button",
             }}
-            onClick={() => openModel(m._id)}
+            onClick={() => openModel(m.userId)}
           >
             Xoá
           </Btn>
@@ -107,8 +115,6 @@ const ProductTableData = () => {
       </div>
     ),
   }));
-
-  console.log(ingredients);
 
   // useEffect(() => {
   //   dispatch(getTable());
@@ -180,7 +186,7 @@ const ProductTableData = () => {
           noHeader
           pagination
           // paginationServer
-          columns={ingredintColumns}
+          columns={employeeColumns}
           data={ingredientTranfer}
           highlightOnHover={true}
           striped={true}

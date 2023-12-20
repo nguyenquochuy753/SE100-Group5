@@ -57,6 +57,15 @@ const userController = {
       res.status(500).json({ message: err.message });
     }
   },
+  deleteUserById: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      await User.deleteMany({ userId: id });
+      res.status(200).json("Deleted successfully");
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
   editUserById: async (req, res, next) => {
     try {
       const id = req.params.id;
