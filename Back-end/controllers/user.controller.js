@@ -68,6 +68,17 @@ const userController = {
       res.status(500).json({ message: err.message });
     }
   },
+  editUserByEmail: async (req, res, next) => {
+    try {
+      const email = req.params.email;
+      const user = await User.findOneAndUpdate({ email: email }, req.body, {
+        new: true,
+      });
+      res.status(200).json("Updated successfully");
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
 };
 
 module.exports = userController;

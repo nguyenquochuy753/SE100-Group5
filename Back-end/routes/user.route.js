@@ -20,4 +20,7 @@ router.delete("/deleteUserByEmail/:email", userController.deleteUserByEmail);
 // edit user by id
 router.put("/editUserById/:id", userController.editUserById);
 
+// edit user by Email
+router.put("/editUserByEmail/:email", userController.editUserByEmail);
+
 module.exports = router;

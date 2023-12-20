@@ -73,6 +73,7 @@ const RegisterFrom = ({ logoClassMain }) => {
       localStorage.setItem("login", JSON.stringify(true));
       localStorage.setItem("authenticated", JSON.stringify(true));
       localStorage.setItem("userId", JSON.stringify(userUID));
+      localStorage.setItem("userType", JSON.stringify('admin'));
       history(`${process.env.PUBLIC_URL}`);
     }).catch((err) => {
       console.log(err);

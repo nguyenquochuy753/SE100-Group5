@@ -162,7 +162,7 @@ const MyProfileEdit = () => {
           </Form>
         </CardBody>
         <CardFooter className="text-end">
-          <Btn attrBtn={{ color: "primary", type: "submit"}} onClick={(e) => onUserCreate(e) }>
+          <Btn attrBtn={{ color: "primary", type: "submit"}} onClick={(e) => onUserCreate(e)} >
             Lưu
           </Btn>
         </CardFooter>
