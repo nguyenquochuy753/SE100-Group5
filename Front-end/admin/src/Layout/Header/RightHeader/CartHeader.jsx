@@ -63,7 +63,7 @@ const CartHeader = () => {
     dispatch(
       addMealToTable({
         id: table.id,
-        trang_thai: "Đang Ăn",
+        trang_thai: "Đang ăn",
         mon_an: cart.map((c) => ({
           ma_mon_an: c.p._id,
           sl: c.qty,

@@ -60,8 +60,8 @@ const ProjectRateClass = ({ register, numChair, statusTable }) => {
                   ? "Trống"
                   : statusTable == "Đã Đặt"
                   ? "Đã Đặt"
-                  : statusTable == "Đang Ăn"
-                  ? "Đang Ăn"
+                  : statusTable == "Đang ăn"
+                  ? "Đang ăn"
                   : statusTable
               }
               {...status}
@@ -69,7 +69,7 @@ const ProjectRateClass = ({ register, numChair, statusTable }) => {
             >
               <option value="Trống">Trống</option>
               <option value="Đã Đặt">Đã Đặt</option>
-              <option value="Đang Ăn">Đang Ăn</option>
+              <option value="Đang ăn">Đang ăn</option>
             </Input>
           </FormGroup>
         </Col> */}

@@ -59,7 +59,7 @@ const ProjectRateClass = ({ register }) => {
             >
               <option value="Trống">Trống</option>
               <option value="Đã Đặt">Đã Đặt</option>
-              <option value="Đang Ăn">Đang Ăn</option>
+              <option value="Đang ăn">Đang ăn</option>
             </Input>
           </FormGroup>
         </Col>
