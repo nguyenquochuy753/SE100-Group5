@@ -10,6 +10,10 @@ import { auth, db } from '../../../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+import { setUserId } from 'firebase/analytics';
+
 
 
 const RegisterFrom = ({ logoClassMain }) => {
@@ -20,34 +24,61 @@ const RegisterFrom = ({ logoClassMain }) => {
   const [password, setPassword] = useState("");
   const history = useNavigate();
 
-
   const signInAuth = async (e) => {
     e.preventDefault();
 
-    // const userCollectionRef = collection(db, "users");
+    // await createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     addDoc(collection(db, "users"), {
+    //       email: email,
+    //       firstName: firstName,
+    //       lastName: lastName,
+    //       userType: 'admin',
+    //     })
+    //     localStorage.setItem("login", JSON.stringify(true));
+    //     localStorage.setItem("authenticated", JSON.stringify(true));
+    //     history(`${process.env.PUBLIC_URL}`);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     toast.error('The email you\'ve just entered has already been registered!');
+    //   })
 
-    // await docRef.set({
-    //   username: email,
-    //   firstName: 'Ada',
-    //   lastName: 'Lovelace',
-    //   userType: 'admin',
-    // });
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        addDoc(collection(db, "users"), {
-          email: email,
-          firstName: firstName,
-          lastName: lastName,
-          userType: 'admin',
-        })
-        localStorage.setItem("login", JSON.stringify(true));
-        localStorage.setItem("authenticated", JSON.stringify(true));
-        history(`${process.env.PUBLIC_URL}`);
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error('The email you\'ve just entered has already been registered!');
-      })
+    const userUID = uuidv4();
+
+    console.log(userUID);
+    console.log(email);
+    console.log(firstName);
+    console.log(lastName);
+    console.log(password);
+
+    const existedUser = await axios.get('http://localhost:8000/v1/user/getUserByEmail/' + email);
+
+    if (existedUser.data[0] != null) {
+      toast.error('The email you\'ve just entered has already been registered!');
+      return;
+    }
+
+    await axios.post('http://localhost:8000/v1/user/addUser', {
+      data: {
+        userId: userUID,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        password: password,
+        userType: 'admin',
+      },
+    }).then((res) => {
+      console.log(res);
+      localStorage.setItem("login", JSON.stringify(true));
+      localStorage.setItem("authenticated", JSON.stringify(true));
+      localStorage.setItem("userId", JSON.stringify(userUID));
+      localStorage.setItem("userType", JSON.stringify('admin'));
+      history(`${process.env.PUBLIC_URL}`);
+    }).catch((err) => {
+      console.log(err);
+      toast.error('Error: ' + err);
+    });
   }
 
   return (

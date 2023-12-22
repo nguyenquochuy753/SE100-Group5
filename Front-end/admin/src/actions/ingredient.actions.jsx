@@ -14,6 +14,19 @@ export const getIngredients = () => {
   };
 };
 
+export const getUsers = () => {
+  return async (dispatch) => {
+    const res = await axios.get("http://localhost:8000/v1/user/getAllUsers");
+    if (res.status === 200) {
+      dispatch({
+        type: ingredientContants.GET_INGREDIENTS,
+        payload: res.data,
+      });
+    } else {
+    }
+  };
+};
+
 export const addIngredient = (form) => {
   return async (dispatch) => {
     dispatch({ type: ingredientContants.ADD_INGREDIENT_REQUEST });

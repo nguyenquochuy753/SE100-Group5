@@ -580,6 +580,50 @@ export const ingredintColumns = [
   },
 ];
 
+export const employeeColumns = [
+  {
+    name: "Tên Nhân Viên",
+    selector: (row) => row.Details,
+    sortable: true,
+    // center: true,
+    wrap: true,
+    minWidth: "100px",
+  },
+  {
+    name: "Email",
+    selector: (row) => row.amount,
+    sortable: true,
+    center: true,
+    minWidth: "200px",
+    maxWidth: "900px",
+  },
+
+  {
+    name: "Địa chỉ",
+    selector: (row) => row.type,
+    sortable: true,
+    center: true,
+    minWidth: "120px",
+    maxWidth: "400px",
+  },
+  {
+    name: "Loại Nhân Viên",
+    selector: (row) => row.start_date,
+    sortable: true,
+    center: true,
+    minWidth: "120px",
+    maxWidth: "400px",
+  },
+  {
+    name: "Hành Vi",
+    selector: (row) => row.action,
+    sortable: true,
+    center: true,
+    minWidth: "160px",
+    maxWidth: "200px",
+  },
+];
+
 export const ingredientTypeColumns = [
   {
     name: "Mã Loại Nguyên Liệu",

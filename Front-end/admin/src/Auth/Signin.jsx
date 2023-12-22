@@ -18,6 +18,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
+import axios from "axios";
+
 const Signin = ({ selected }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -34,31 +36,20 @@ const Signin = ({ selected }) => {
   }, [value, name]);
 
   const loginAuth = async (e) => {
-    e.preventDefault();
-    setValue(man);
-    setName("Emay Walter");
-    await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // localStorage.setItem("login", JSON.stringify(true));
+    if (email != null && password != null) {
+      e.preventDefault();
+
+      const userData = await axios.get("http://localhost:8000/v1/user/getUserByEmail/" + email);
+      if (userData.data[0]['password'] == password) {
         localStorage.setItem("authenticated", JSON.stringify(true));
+        localStorage.setItem("userType", JSON.stringify(userData.data[0]['userType']));
         history(`${process.env.PUBLIC_URL}`);
         toast.success("Successfully logged in!");
-        console.log(userCredential);
-      })
-      .catch((err) => {
-        console.log(err);
+      } else {
         toast.error("You entered wrong username or password!");
-      });
-    // if (email === "test@gmail.com" && password === "test123") {
-    // localStorage.setItem("login", JSON.stringify(true));
-    // localStorage.setItem("authenticated", JSON.stringify(true));
-    // // history(`${process.env.PUBLIC_URL}/dashboard/default/${layoutURL}`);
-    // history(`${process.env.PUBLIC_URL}`);
-    // toast.success("Successfully logged in!..");
-    // } else {
-    //   toast.error("You enter wrong password or username!..");
-    // }
-  };
+      }
+    };
+  }
 
   return (
     <Fragment>
