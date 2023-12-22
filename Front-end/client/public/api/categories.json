@@ -2,7 +2,7 @@
   "data": [
     {
       "id": 1,
-      "name": "Fresh Vegetables",
+      "name": "Rau",
       "slug": "fresh-vegetables",
       "image": {
         "id": 1,
@@ -35,7 +35,7 @@
     },
     {
       "id": 2,
-      "name": "Diet Foods",
+      "name": "Trái Cây",
       "slug": "diet-foods",
       "image": {
         "id": 1,
@@ -58,7 +58,7 @@
     },
     {
       "id": 3,
-      "name": "Diet Nutrition",
+      "name": "Đồ Ăn Dinh Dưỡng",
       "slug": "diet-nutrition",
       "image": {
         "id": 1,
@@ -69,7 +69,7 @@
     },
     {
       "id": 4,
-      "name": "Fast Food Items",
+      "name": "Đồ Ăn Nhanh",
       "slug": "fast-food-items",
       "image": {
         "id": 1,

@@ -35,7 +35,7 @@ const Project = () => {
     dispatch(getTable());
   }, [dispatch]);
   const bookTableHandler = (id, name, trang_thai) => {
-    if (trang_thai == "Đang Ăn") {
+    if (trang_thai == "Đang ăn") {
       history(
         `${process.env.PUBLIC_URL}/app/ecommerce/detailtable/${id}/${layoutURL}`
       );
@@ -84,7 +84,7 @@ const Project = () => {
                         onClick={() => setActiveTab("3")}
                       >
                         <CheckCircle />
-                        Đang Ăn
+                        Đang ăn
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -143,7 +143,7 @@ const Project = () => {
                   <TabPane tabId="3">
                     <Row>
                       {table?.map((item, i) =>
-                        item.trang_thai == "Đang Ăn" ? (
+                        item.trang_thai == "Đang ăn" ? (
                           <CusClass item={item} key={i} />
                         ) : (
                           ""

@@ -39,6 +39,7 @@ const ProductTableData = ({ table, idTable }) => {
     ...t.ma_mon_an,
     qty: t.sl,
     isDone: t.da_hoan_thanh,
+    status: t.trang_thai,
   }));
   console.log(meal);
   const [modal, setModal] = useState(false);
@@ -96,7 +97,11 @@ const ProductTableData = ({ table, idTable }) => {
     stock: m.isDone ? (
       <div className="font-success">Hoàn Thành</div>
     ) : (
-      <div className="font-danger">Chưa Hoàn Thành</div>
+      <div
+        className={m.status === "Chờ chế biến" ? "font-danger" : "font-warning"}
+      >
+        {m.status}
+      </div>
     ),
     start_date: m.qty,
     action: (
@@ -108,7 +113,7 @@ const ProductTableData = ({ table, idTable }) => {
               color: "success",
               className: "btn btn-xs",
               type: "button",
-              disabled: m.isDone,
+              disabled: m.isDone || m.status === "Chờ chế biến",
             }}
             onClick={() => doneMealHandler(m._id)}
           >
