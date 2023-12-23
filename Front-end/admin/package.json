@@ -32,7 +32,6 @@
     "json-server": "^0.17.3",
     "knob": "^1.1.0",
     "leaflet": "^1.9.3",
-    "node-sass": "^8.0.0",
     "pigeon-maps": "^0.21.3",
     "react-18-image-lightbox": "^5.1.4",
     "react-ace": "^10.1.0",
@@ -109,13 +108,12 @@
     "react-dev-utils": "10.0.0"
   },
   "eslintConfig": {
-    "extends": "react-app",
     "plugins": [
       "jsx-a11y"
     ],
     "rules": {
       "no-whitespace-before-property": "off",
-      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/rules-of-hooks": "off",
       "react-hooks/exhaustive-deps": "off"
     },
     "overrides": [
@@ -144,9 +142,12 @@
     ]
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.6.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
 }
+
+

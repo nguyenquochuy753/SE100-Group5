@@ -8,5 +8,6 @@ router.delete("/deleteTable/:id", tableController.deleteTable);
 router.put("/updateTable/:id", tableController.updateTable);
 router.put("/orderTable/:id", tableController.orderMeal);
 router.get("/getTableNotAvailable", tableController.getTableNotAvailable);
+router.put("/finishTheDish/:tableId/:itemId",tableController.finishTheDish);
 
 module.exports = router;

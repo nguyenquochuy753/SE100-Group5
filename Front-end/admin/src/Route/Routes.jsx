@@ -196,6 +196,9 @@ import EditIngredient from "../Components/Application/Project/EditIngredient";
 import UserList from "../Components/Application/Ecommerce/UserList";
 import UserCreate from "../Components/Application/Users/UsersCreate";
 
+//OrderManagement in cheff
+import OrderManagementPage from "../Components/Cheff/OrderManagement/OrderManagementPage";
+
 export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/dashboard/default/:layout`,
@@ -818,4 +821,12 @@ export const routes = [
     path: `${process.env.PUBLIC_URL}/app/faq/:layout`,
     Component: <FAQContent />,
   },
+
+  {
+    path: `${process.env.PUBLIC_URL}/dashboard/cheff/order`,
+    Component: <OrderManagementPage />,
+  },
+
 ];
+
+
