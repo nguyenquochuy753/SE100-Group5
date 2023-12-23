@@ -1,0 +1,33 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border: none;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+}
+
+.header-buttons button{
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.header-buttons button>a {
+    text-decoration: none;
+}
+
+.header-buttons button:hover {
+    background-color: #ddd;
+}

@@ -1,0 +1,11 @@
+/* CSS cho ingredient-item */
+.ingredient-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.ingredient-item h3 {
+    margin-bottom: 5px;
+}

@@ -1,0 +1,70 @@
+
+
+.table-buttons button {
+    width: 200px;
+    height: 200px;
+    font-size: 24px;
+    /* Điều chỉnh kích thước chữ */
+    padding: 20px;
+    /* Điều chỉnh padding để tạo khoảng trống xung quanh văn bản */
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.waiting-label {
+    background-color: #ffe066;
+    /* Màu vàng nhạt */
+    color: #ffffff;
+    /* Màu chữ trắng */
+    padding: 4px 8px;
+    /* Padding cho label */
+    border-radius: 4px;
+    /* Bo tròn góc */
+    display: inline-block;
+}
+
+.done-label {
+    background-color: #ffe066;
+    /* Màu vàng nhạt */
+    color: #ffffff;
+    /* Màu chữ trắng */
+    padding: 4px 8px;
+    /* Padding cho label */
+    border-radius: 4px;
+    /* Bo tròn góc */
+    display: inline-block;
+}
+
+.table-buttons button.selected {
+    background-color: #ffcc00;
+}
+
+.menu-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 600px;
+}
+
+.menu-item img {
+    width: 350px;
+    height: 350px;
+    margin-right: 30px;
+}
+
+.item-info {
+    flex: 1;
+}

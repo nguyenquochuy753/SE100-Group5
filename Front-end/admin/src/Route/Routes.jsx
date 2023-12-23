@@ -191,6 +191,9 @@ import NewIngredientType from "../Components/Application/Project/NewIngredientTy
 import IngredientTypeListContain from "../Components/Application/Ecommerce/IngredientTypeList";
 import IngredientListContain from "../Components/Application/Ecommerce/IngredientList";
 
+//OrderManagement in cheff
+import OrderManagementPage from "../Components/Cheff/OrderManagement/OrderManagementPage";
+
 export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/dashboard/default/:layout`,
@@ -793,4 +796,12 @@ export const routes = [
     path: `${process.env.PUBLIC_URL}/app/faq/:layout`,
     Component: <FAQContent />,
   },
+
+  {
+    path: `${process.env.PUBLIC_URL}/dashboard/cheff/order`,
+    Component: <OrderManagementPage />,
+  },
+
 ];
+
+
