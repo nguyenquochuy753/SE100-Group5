@@ -7,7 +7,7 @@ interface ProductFeedProps {
   className?: string;
 }
 
-const PopularProductFeed: FC<ProductFeedProps> = ({ className }) => {
+const PopularProductFeed: FC<ProductFeedProps> = ({ className, meals }) => {
   const limit = LIMITS.POPULAR_PRODUCTS_LIMITS;
   const { data, isLoading, error } = usePopularProductsQuery({
     limit: limit,
@@ -17,7 +17,7 @@ const PopularProductFeed: FC<ProductFeedProps> = ({ className }) => {
       sectionHeading="text-popular-product"
       sectionSubHeading="text-fresh-grocery-items"
       className={className}
-      products={data}
+      products={meals}
       loading={isLoading}
       error={error?.message}
       limit={limit}

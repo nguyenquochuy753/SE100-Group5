@@ -22,7 +22,7 @@ const Ecommerce = () => {
       />
       <Container fluid={true}>
         <Row className="size-column">
-          {order && <LeftGrid order={order} />}
+          {/* {order && <LeftGrid order={order} />} */}
           <RightGrid />
         </Row>
       </Container>

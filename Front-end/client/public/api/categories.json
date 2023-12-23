@@ -2,7 +2,7 @@
   "data": [
     {
       "id": 1,
-      "name": "Rau",
+      "name": "Rau Sạch",
       "slug": "fresh-vegetables",
       "image": {
         "id": 1,
@@ -35,7 +35,7 @@
     },
     {
       "id": 2,
-      "name": "Trái Cây",
+      "name": "Thực Phẩm Ăn Kiêng",
       "slug": "diet-foods",
       "image": {
         "id": 1,
@@ -97,7 +97,7 @@
     },
     {
       "id": 5,
-      "name": "Fruits Items",
+      "name": "Trái Cây",
       "slug": "fruits-items",
       "image": {
         "id": 1,
@@ -130,7 +130,7 @@
     },
     {
       "id": 6,
-      "name": "Healthy Foods",
+      "name": "Thực Phẩm Lành Mạnh",
       "slug": "healthy-foods",
       "image": {
         "id": 1,
@@ -141,7 +141,7 @@
     },
     {
       "id": 7,
-      "name": "Grocery Items",
+      "name": "Thực Phẩm Tạp Hoá",
       "slug": "grocery-items",
       "image": {
         "id": 1,
@@ -152,7 +152,7 @@
     },
     {
       "id": 8,
-      "name": "Quality Milk",
+      "name": "Sữa",
       "slug": "quality-milk",
       "image": {
         "id": 1,
@@ -175,7 +175,7 @@
     },
     {
       "id": 9,
-      "name": "Cold Drinks",
+      "name": "Nước Giải Khát",
       "slug": "cold-drinks",
       "image": {
         "id": 1,
@@ -203,7 +203,7 @@
     },
     {
       "id": 10,
-      "name": "Beaf Steak",
+      "name": "Thịt Bò",
       "slug": "beaf-steak",
       "image": {
         "id": 1,
@@ -214,7 +214,7 @@
     },
     {
       "id": 11,
-      "name": "Vitamin Items",
+      "name": "Vitamin",
       "slug": "vitamin-items",
       "image": {
         "id": 1,
@@ -225,7 +225,7 @@
     },
     {
       "id": 12,
-      "name": "Raw Chicken",
+      "name": "Thịt Gà",
       "slug": "raw-chicken",
       "image": {
         "id": 1,
@@ -253,7 +253,7 @@
     },
     {
       "id": 13,
-      "name": "Breakfast Item",
+      "name": "Bánh Mì",
       "slug": "breakfast-item",
       "image": {
         "id": 1,
@@ -281,7 +281,7 @@
     },
     {
       "id": 14,
-      "name": "Fish Items",
+      "name": "Cá",
       "slug": "fish-items",
       "image": {
         "id": 1,
@@ -292,7 +292,7 @@
     },
     {
       "id": 15,
-      "name": "Green Vegetables",
+      "name": "Rau Xanh",
       "slug": "green-vegetables",
       "image": {
         "id": 1,
@@ -303,7 +303,7 @@
     },
     {
       "id": 16,
-      "name": "Cookies & Biscuits",
+      "name": "Bánh Quy",
       "slug": "cookies-biscuits",
       "image": {
         "id": 1,
@@ -314,7 +314,7 @@
     },
     {
       "id": 17,
-      "name": "Frozen Desserts",
+      "name": "Tráng Miệng",
       "slug": "frozen-desserts",
       "image": {
         "id": 1,
@@ -325,7 +325,7 @@
     },
     {
       "id": 18,
-      "name": "Deli Meat",
+      "name": "Thịt Nguội",
       "slug": "deli-meat",
       "image": {
         "id": 1,

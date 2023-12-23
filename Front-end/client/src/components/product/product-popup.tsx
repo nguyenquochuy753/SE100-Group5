@@ -70,7 +70,7 @@ export default function ProductPopup() {
   const { price, basePrice, discount } = usePrice({
     amount: data.sale_price ? data.sale_price : data.price,
     baseAmount: data.price,
-    currencyCode: 'USD',
+    currencyCode: 'VND',
   });
   const variations = getVariations(data.variations);
   const { slug, image, name, unit, description, gallery, tag, quantity } = data;
@@ -184,9 +184,10 @@ export default function ProductPopup() {
                 {isEmpty(variations) && (
                   <div className="flex items-center mt-5">
                     <div className="text-skin-base font-bold text-base md:text-xl xl:text-[22px]">
-                      {price}
+                      {/* {price} */}
+                      {basePrice}
                     </div>
-                    {discount && (
+                    {/* {discount && (
                       <>
                         <del className="text-sm md:text-15px ps-3 text-skin-base text-opacity-50">
                           {basePrice}
@@ -195,7 +196,7 @@ export default function ProductPopup() {
                           {discount} {t('text-off')}
                         </span>
                       </>
-                    )}
+                    )} */}
                   </div>
                 )}
               </div>

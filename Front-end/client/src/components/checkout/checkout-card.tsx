@@ -14,7 +14,7 @@ const CheckoutCard: React.FC = () => {
   const { items, total, isEmpty } = useCart();
   const { price: subtotal } = usePrice({
     amount: total,
-    currencyCode: 'USD',
+    currencyCode: 'VND',
   });
   function orderHeader() {
     !isEmpty && Router.push(ROUTES.ORDER);
@@ -28,7 +28,7 @@ const CheckoutCard: React.FC = () => {
     {
       id: 2,
       name: t('text-shipping'),
-      price: '$0',
+      price: '0 VND',
     },
     {
       id: 3,

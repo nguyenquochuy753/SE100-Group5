@@ -7,16 +7,20 @@ interface ProductFeedProps {
   className?: string;
 }
 
-const BestSellerGroceryProductFeed: FC<ProductFeedProps> = ({ className }) => {
+const BestSellerGroceryProductFeed: FC<ProductFeedProps> = ({
+  className,
+  meals,
+}) => {
   const { data, isLoading, error } = useBestSellerGroceryProductsQuery({
     limit: LIMITS.BEST_SELLER_GROCERY_PRODUCTS_LIMITS,
   });
+  console.log(data);
   return (
     <ProductsGridBlock
       sectionHeading="text-best-grocery-near-you"
       sectionSubHeading="text-fresh-grocery-items"
       className={className}
-      products={data}
+      products={meals}
       loading={isLoading}
       error={error?.message}
       limit={LIMITS.BEST_SELLER_GROCERY_PRODUCTS_LIMITS}
