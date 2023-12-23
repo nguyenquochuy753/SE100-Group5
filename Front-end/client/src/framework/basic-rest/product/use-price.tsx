@@ -9,12 +9,14 @@ export function formatPrice({
   currencyCode: string;
   locale: string;
 }) {
-  const formatCurrency = new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: currencyCode,
-  });
+  // const formatCurrency = new Intl.NumberFormat(locale, {
+  //   style: 'currency',
+  //   currency: currencyCode,
+  // });
 
-  return formatCurrency.format(amount);
+  const formatNumber = new Intl.NumberFormat(locale).format(amount);
+
+  return `${formatNumber} ${currencyCode}`;
 }
 
 export function formatVariantPrice({

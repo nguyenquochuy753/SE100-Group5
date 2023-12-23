@@ -52,20 +52,21 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
   const { price, basePrice, discount } = usePrice({
     amount: product?.sale_price ? product?.sale_price : product?.price,
     baseAmount: product?.price,
-    currencyCode: 'USD',
+    currencyCode: 'VND',
   });
   const { price: minPrice } = usePrice({
     amount: product?.min_price ?? 0,
-    currencyCode: 'USD',
+    currencyCode: 'VND',
   });
   const { price: maxPrice } = usePrice({
     amount: product?.max_price ?? 0,
-    currencyCode: 'USD',
+    currencyCode: 'VND',
   });
 
   function handlePopupView() {
     openModal('PRODUCT_VIEW', product);
   }
+  console.log('Product', product);
   return (
     <article
       className={cn(
@@ -87,11 +88,14 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
           />
         </div>
         <div className="w-full h-full absolute top-0 pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
-          {discount && (
+          {/* {discount && (
             <span className="text-[11px] md:text-xs font-bold text-skin-inverted uppercase inline-block bg-skin-primary rounded-full px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
               {t('text-on-sale')}
             </span>
-          )}
+          )} */}
+          <span className="text-[11px] md:text-xs font-bold text-skin-inverted uppercase inline-block bg-skin-primary rounded-full px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
+            best seller
+          </span>
           <div className="inline-block product-count-button-position">
             <RenderPopupOrAddToCart data={product} />
           </div>
@@ -102,12 +106,14 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
         <div className="space-s-2 mb-1 lg:mb-1.5">
           <span className="inline-block font-semibold text-sm sm:text-15px lg:text-base text-skin-base">
             {product_type === 'variable' ? `${minPrice} - ${maxPrice}` : price}
+            {/* {price} */}
+            {/* {product.price} */}
           </span>
-          {basePrice && (
+          {/* {basePrice && (
             <del className="text-sm text-skin-base text-opacity-70">
               {basePrice}
             </del>
-          )}
+          )} */}
         </div>
         <h2 className="text-skin-base text-13px sm:text-sm lg:text-15px leading-5 sm:leading-6 mb-1.5">
           {name}

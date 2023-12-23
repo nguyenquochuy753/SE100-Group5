@@ -39,17 +39,22 @@ const Signin = ({ selected }) => {
     if (email != null && password != null) {
       e.preventDefault();
 
-      const userData = await axios.get("http://localhost:8000/v1/user/getUserByEmail/" + email);
-      if (userData.data[0]['password'] == password) {
+      const userData = await axios.get(
+        "http://localhost:8000/v1/user/getUserByEmail/" + email
+      );
+      if (userData.data[0]["password"] == password) {
         localStorage.setItem("authenticated", JSON.stringify(true));
-        localStorage.setItem("userType", JSON.stringify(userData.data[0]['userType']));
-        history(`${process.env.PUBLIC_URL}`);
+        localStorage.setItem(
+          "userType",
+          JSON.stringify(userData.data[0]["userType"])
+        );
+        history(`${process.env.PUBLIC_URL}/dashboard/e-commerce/Dubai`);
         toast.success("Successfully logged in!");
       } else {
         toast.error("You entered wrong username or password!");
       }
-    };
-  }
+    }
+  };
 
   return (
     <Fragment>
