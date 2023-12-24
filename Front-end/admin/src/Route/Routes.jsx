@@ -198,6 +198,7 @@ import UserCreate from "../Components/Application/Users/UsersCreate";
 
 //OrderManagement in cheff
 import OrderManagementPage from "../Components/Cheff/OrderManagement/OrderManagementPage";
+import IngredientPage from "../Components/Cheff/IngredientManagement/IngredientPage";
 
 export const routes = [
   {
@@ -825,6 +826,11 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/dashboard/cheff/order`,
     Component: <OrderManagementPage />,
+  },
+
+  {
+    path: `${process.env.PUBLIC_URL}/dashboard/cheff/ingredient`,
+    Component: <IngredientPage />,
   },
 
 ];

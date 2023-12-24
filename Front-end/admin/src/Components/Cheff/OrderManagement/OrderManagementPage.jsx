@@ -4,7 +4,6 @@ import './OrderManagementPage.css';
 import Header from "../Common/Header/Header";
 import CustomModal from '../Common/Modal/Modal';
 
-
 const OrderManagementPage = () => {
     const [selectedTable, setSelectedTable] = useState(null);
     const [menuItems, setMenuItems] = useState([]);
@@ -35,8 +34,7 @@ const OrderManagementPage = () => {
         setSelectedTableID(tableID);
     };
 
-    //strategy pattern
-    const statusHandlers = {
+    const getStatusHandler = status => ({
         'Chờ chế biến': {
             className: 'waiting-label',
             text: 'Chờ chế biến',
@@ -47,13 +45,11 @@ const OrderManagementPage = () => {
             text: 'Chế biến xong',
             bgColor: '#82e0aa',
         },
-    };
-
-    const getStatusHandler = status => statusHandlers[status] || null;
+    }[status]);
 
     const handleItemClick = (itemId) => {
         setShowModal(true);
-        setSelectedItem(itemId)
+        setSelectedItem(itemId);
     };
 
     const updateItemStatus = (itemId, newStatus) => {
@@ -63,52 +59,65 @@ const OrderManagementPage = () => {
             }
             return item;
         });
+
         setMenuItems(updatedMenuItems);
+
+        const allItemsDone = updatedMenuItems.every(item => item.trang_thai === 'Chế biến xong');
+
+        if (allItemsDone) {
+            const updatedTables = tables.filter(table => table._id !== selectedTableID);
+            setTables(updatedTables);
+            setSelectedTable(null);
+            setSelectedTableID(null);
+        }
     };
 
     return (
         <div>
             <Header />
-            <div>
-                <div style={{ marginRight: '20px' }}>
-                    <h3>Danh sách bàn</h3>
-                    <div className="table-buttons">
-                        {tables.map((table) => (
-                            <button
-                                key={table._id}
-                                className={selectedTable === table.ten_ban ? 'selected' : ''}
-                                onClick={() => handleSelectTable(table._id, table.ten_ban)}
-                            >
-                                {table.ten_ban}
-                            </button>
-                        ))}
+            <div className="container">
+                <h3>Danh sách bàn</h3>
+                <div className="table-buttons">
+                    <div className="scrollable">
+                        {tables.filter(table => table.mon_an.some(item => item.trang_thai === 'Chờ chế biến'))
+                            .map((table) => (
+                                <button
+                                    key={table._id}
+                                    className={selectedTable === table.ten_ban ? 'selected' : ''}
+                                    onClick={() => handleSelectTable(table._id, table.ten_ban)}
+                                >
+                                    {table.ten_ban}
+                                </button>
+                            ))}
                     </div>
                 </div>
                 {selectedTable && (
                     <div>
                         <h3>Menu của {selectedTable}</h3>
-                        <div className="menu-items">
-                            {menuItems.length > 0 ? (
-                                menuItems.map((item, index) => {
-                                    const statusHandler = getStatusHandler(item.trang_thai);
-                                    return (
-                                        <div className="menu-item" key={index} onClick={() => handleItemClick(item.ma_mon_an._id)}>
-                                            <img src={`http://localhost:8000/${item.ma_mon_an.hinh_anh_mon_an}`} alt={item.ma_mon_an.ten_mon_an} />
-                                            <div className="item-info">
-                                                <h2>{item.ma_mon_an.ten_mon_an}</h2>
-                                                <p>Số lượng: {item.sl}</p>
-                                                {statusHandler && (
-                                                    <span className={statusHandler.className} style={{ backgroundColor: statusHandler.bgColor }}>
-                                                        {statusHandler.text}
-                                                    </span>
-                                                )}
+                        <div className="menu-items-scroll">
+                            <div className="menu-items">
+                                {menuItems.length > 0 ? (
+                                    menuItems.map((item, index) => {
+                                        const statusHandler = getStatusHandler(item.trang_thai);
+                                        return (
+                                            <div className="menu-item" key={index} onClick={() => handleItemClick(item.ma_mon_an._id)}>
+                                                <img src={`http://localhost:8000/${item.ma_mon_an?.hinh_anh_mon_an}`} alt={item.ma_mon_an?.ten_mon_an} />
+                                                <div className="item-info">
+                                                    <h2>{item.ma_mon_an?.ten_mon_an}</h2>
+                                                    <p>Số lượng: {item.sl}</p>
+                                                    {statusHandler && (
+                                                        <span className={statusHandler.className} style={{ backgroundColor: statusHandler.bgColor }}>
+                                                            {statusHandler.text}
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </div>
-                                        </div>
-                                    );
-                                })
-                            ) : (
-                                <p>Không có món ăn nào.</p>
-                            )}
+                                        );
+                                    })
+                                ) : (
+                                    <p>Loading...</p>
+                                )}
+                            </div>
                         </div>
                     </div>
                 )}
