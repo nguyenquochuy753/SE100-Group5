@@ -6,12 +6,12 @@ import CustomModal from '../Common/Modal/Modal';
 
 
 const OrderManagementPage = () => {
-    const [selectedTable, setSelectedTable] = useState(null); 
-    const [menuItems, setMenuItems] = useState([]); 
-    const [tables, setTables] = useState([]); 
+    const [selectedTable, setSelectedTable] = useState(null);
+    const [menuItems, setMenuItems] = useState([]);
+    const [tables, setTables] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [selectedItem,setSelectedItem] = useState("");
-    const[selectedTableID, setSelectedTableID] = useState(null);
+    const [selectedItem, setSelectedItem] = useState("");
+    const [selectedTableID, setSelectedTableID] = useState(null);
 
     useEffect(() => {
         axios.get('http://localhost:8000/v1/table/getTableNotAvailable')
@@ -52,7 +52,7 @@ const OrderManagementPage = () => {
     const getStatusHandler = status => statusHandlers[status] || null;
 
     const handleItemClick = (itemId) => {
-        setShowModal(true); 
+        setShowModal(true);
         setSelectedItem(itemId)
     };
 
@@ -68,7 +68,7 @@ const OrderManagementPage = () => {
 
     return (
         <div>
-            <Header/>
+            <Header />
             <div>
                 <div style={{ marginRight: '20px' }}>
                     <h3>Danh sách bàn</h3>
@@ -92,7 +92,7 @@ const OrderManagementPage = () => {
                                 menuItems.map((item, index) => {
                                     const statusHandler = getStatusHandler(item.trang_thai);
                                     return (
-                                        <div className="menu-item" key={index} onClick={()=>handleItemClick(item.ma_mon_an._id)}>
+                                        <div className="menu-item" key={index} onClick={() => handleItemClick(item.ma_mon_an._id)}>
                                             <img src={`http://localhost:8000/${item.ma_mon_an.hinh_anh_mon_an}`} alt={item.ma_mon_an.ten_mon_an} />
                                             <div className="item-info">
                                                 <h2>{item.ma_mon_an.ten_mon_an}</h2>
