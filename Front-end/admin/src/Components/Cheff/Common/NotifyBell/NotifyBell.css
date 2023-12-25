@@ -1,13 +1,13 @@
 .notification-bell {
     position: relative;
     display: inline-block;
-    margin-left: 20px;
 }
 
 .bell-icon {
     font-size: 24px;
     color: #333;
-    /* Màu sắc của icon chuông */
+    cursor: pointer;
+    position: relative;
 }
 
 .notification-count {
@@ -23,4 +23,20 @@
     justify-content: center;
     align-items: center;
     font-size: 12px;
+}
+
+.notification-content {
+    /* Thêm phần tử này để điều chỉnh vị trí xuất hiện của nội dung thông báo */
+    position: absolute;
+    width: 200px;
+    top: 30px;
+    /* Điều chỉnh khoảng cách từ chuông đến nội dung thông báo */
+    right: -10px;
+    /* Điều chỉnh vị trí phần nội dung thông báo theo chiều ngang */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 10;
 }
