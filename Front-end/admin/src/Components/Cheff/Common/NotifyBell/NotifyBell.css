@@ -26,17 +26,69 @@
 }
 
 .notification-content {
-    /* Thêm phần tử này để điều chỉnh vị trí xuất hiện của nội dung thông báo */
     position: absolute;
-    width: 200px;
+    width: 250px;
     top: 30px;
-    /* Điều chỉnh khoảng cách từ chuông đến nội dung thông báo */
     right: -10px;
-    /* Điều chỉnh vị trí phần nội dung thông báo theo chiều ngang */
-    background-color: white;
-    border: 1px solid #ccc;
+    background-color: #f0f0f0;
     padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     z-index: 10;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.ingredient-item1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.notification-content.open {
+    max-height: 500px;
+    /* Điều chỉnh độ cao tối đa phù hợp với nội dung của bạn */
+    opacity: 1;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-actions {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-actions button {
+    margin-left: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Thêm một số CSS để điều chỉnh giao diện nút xóa */
+.ingredient-item button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    font-size: 14px;
+}
+
+.ingredient-item button:hover {
+    color: #f00;
+}
+
+.quantity-actions button:hover,
+.ingredient-item button:hover {
+    background-color: white;
+}
+
+ul .confirm-btn {
+    background-color: green;
+    color: white;
+    margin-left: 40px;
+    margin-top: 20px;
 }
