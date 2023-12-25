@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../../components/Header/Header';
+import Header from '../Common/Header/Header';
 import "./IngredientPage.css"
-import IngredientItem from '../../components/IngredientItem/IngredientItem';
+import IngredientItem from '../Common/IngredientItem/IngredientItem';
 import axios from 'axios';
 
 function IngredientPage() {

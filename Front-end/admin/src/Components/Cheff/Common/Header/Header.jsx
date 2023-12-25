@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import logo from "../../logo_restaurant-removebg-preview.png";
+import logo from "../Header/logo_restaurant-removebg-preview.png";
 import { Link } from "react-router-dom";
 import NotificationBell from '../NotifyBell/NotifyBell';
 
