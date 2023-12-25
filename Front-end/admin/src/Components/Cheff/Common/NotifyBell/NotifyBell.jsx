@@ -74,7 +74,6 @@ function NotifyBell({ count, selectedIngredients }) {
                 )}
             </div>
             <div className={`notification-content ${isOpen ? 'open' : ''}`}>
-                <h3>Giảm nguyên liệu</h3>
                 {renderIngredients()}
             </div>
         </div>
