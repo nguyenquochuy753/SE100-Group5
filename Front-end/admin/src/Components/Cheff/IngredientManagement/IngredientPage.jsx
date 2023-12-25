@@ -1,8 +1,8 @@
 import React, { useState , useEffect } from 'react';
-import Header from '../Common/Header/Header.css';
+import Header from '../Common/Header/Header';
 import "./IngredientPage.css"
-import IngredientItem from '../Common/IngredientItem/IngredientItem.jsx'; // Import component IngredientItem
 import axios from 'axios';
+import IngredientItem from '../Common/IngredientItem/IngredientItem';
 
 
 function IngredientPage() {
@@ -17,7 +17,7 @@ function IngredientPage() {
             });
     }, []);
     return (
-        <div>
+        <>
             <Header />
             <div className="ingredient-list">
                 {ingredients?.map(ingredient => (
@@ -29,7 +29,7 @@ function IngredientPage() {
                     />
                 ))}
             </div>
-        </div>
+        </>
     );
 }
 
