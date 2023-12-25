@@ -1,12 +1,14 @@
-import React, { useState , useEffect } from 'react';
-import Header from '../Common/Header/Header';
+import React, { useState, useEffect } from 'react';
+import Header from '../../components/Header/Header';
 import "./IngredientPage.css"
+import IngredientItem from '../../components/IngredientItem/IngredientItem';
 import axios from 'axios';
-import IngredientItem from '../Common/IngredientItem/IngredientItem';
-
 
 function IngredientPage() {
-    const [ingredients,setIngredients] = useState();
+    const [ingredients, setIngredients] = useState([]);
+    const [notificationCount, setNotificationCount] = useState(0);
+    const [selectedIngredients, setSelectedIngredients] = useState([]);
+
     useEffect(() => {
         axios.get('http://localhost:8000/v1/ingredient/getAllIngredient')
             .then((res) => {
@@ -16,9 +18,18 @@ function IngredientPage() {
                 console.error('Error fetching tables:', error);
             });
     }, []);
+
+    const handleIngredientClick = (ingredient) => {
+        // Tăng số lượng thông báo lên 1 khi người dùng nhấn vào một nguyên liệu
+        setNotificationCount(notificationCount + 1);
+
+        // Lưu thông tin nguyên liệu vào mảng selectedIngredients
+        setSelectedIngredients([...selectedIngredients, ingredient]);
+    };
+
     return (
-        <>
-            <Header />
+        <div>
+            <Header notificationCount={notificationCount} selectedIngredients={selectedIngredients} />
             <div className="ingredient-list">
                 {ingredients?.map(ingredient => (
                     <IngredientItem
@@ -26,10 +37,11 @@ function IngredientPage() {
                         name={ingredient.ten_nguyen_lieu}
                         quantity={ingredient.khoi_luong_ton}
                         unit={ingredient.ma_loai_nguyen_lieu.ten_loai_nguyen_lieu}
+                        onClick={() => handleIngredientClick(ingredient.ten_nguyen_lieu)}
                     />
                 ))}
             </div>
-        </>
+        </div>
     );
 }
 
