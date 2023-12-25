@@ -99,6 +99,31 @@ const ingredientController = {
       res.status(500).json({ error: "Lỗi server" });
     }
   },
+
+  decreaseIngredient: async (req, res) => {
+    try {
+      const updatedIngredients = req.body;
+      const bulkOperations = [];
+
+      for (const updatedIngredient of updatedIngredients) {
+        const { ten_nguyen_lieu, khoi_luong_ton } = updatedIngredient;
+        const updateOperation = {
+          updateOne: {
+            filter: { ten_nguyen_lieu },
+            update: { $inc: { khoi_luong_ton: -khoi_luong_ton } },
+          },
+        };
+
+        bulkOperations.push(updateOperation);
+      }
+      await ingredientModel.bulkWrite(bulkOperations);
+
+      res.status(200).json({ message: "Cập nhật thành công" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Lỗi server" });
+    }
+  },
 };
 
 module.exports = ingredientController;

@@ -7,5 +7,6 @@ router.get("/getIngredient/:id", ingredientController.getIngredientById);
 router.put("/updateIngredient/:id", ingredientController.updateIngredient);
 router.delete("/deleteIngredient/:id", ingredientController.deleteIngredient);
 router.put("/buyIngredient", ingredientController.buyIngredient);
+router.put("/decreaseIngredient", ingredientController.decreaseIngredient);
 
 module.exports = router;
