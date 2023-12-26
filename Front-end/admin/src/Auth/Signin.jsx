@@ -48,7 +48,11 @@ const Signin = ({ selected }) => {
           "userType",
           JSON.stringify(userData.data[0]["userType"])
         );
-        history(`${process.env.PUBLIC_URL}/dashboard/e-commerce/Dubai`);
+        if (userData.data[0]["userType"] == "chef") {
+          history(`${process.env.PUBLIC_URL}/dashboard/cheff/order`);
+        } else {
+          history(`${process.env.PUBLIC_URL}/dashboard/e-commerce/Dubai`);
+        }
         toast.success("Successfully logged in!");
       } else {
         toast.error("You entered wrong username or password!");
