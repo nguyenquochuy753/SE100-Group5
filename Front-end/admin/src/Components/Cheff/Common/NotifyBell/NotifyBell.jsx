@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './NotifyBell.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 function NotifyBell({ count, selectedIngredients }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +10,7 @@ function NotifyBell({ count, selectedIngredients }) {
 
     useEffect(() => {
         if (selectedIngredients && selectedIngredients.length > 0) {
-            setIngredientList(selectedIngredients.map(ingredient => ({ name: ingredient, quantity: 1 })));
+            setIngredientList(selectedIngredients.map(ingredient => ({ ten_nguyen_lieu: ingredient, khoi_luong_ton: 1 })));
         }
     }, [selectedIngredients]);
 
@@ -19,14 +20,14 @@ function NotifyBell({ count, selectedIngredients }) {
 
     const handleIncrease = (index) => {
         const updatedList = [...ingredientList];
-        updatedList[index].quantity += 1;
+        updatedList[index].khoi_luong_ton += 1;
         setIngredientList(updatedList);
     };
 
     const handleDecrease = (index) => {
         const updatedList = [...ingredientList];
-        if (updatedList[index].quantity > 1) {
-            updatedList[index].quantity -= 1;
+        if (updatedList[index].khoi_luong_ton > 1) {
+            updatedList[index].khoi_luong_ton -= 1;
             setIngredientList(updatedList);
         }
     };
@@ -38,6 +39,13 @@ function NotifyBell({ count, selectedIngredients }) {
         count = count - 1;
     };
 
+    const confirmHandler = () => {
+        if (ingredientList.length > 0) {
+            axios.put('http://localhost:8000/v1/ingredient/decreaseIngredient', ingredientList);
+            window.location.reload();
+        }
+    }
+
     console.log(ingredientList)
 
     const renderIngredients = () => {
@@ -45,12 +53,12 @@ function NotifyBell({ count, selectedIngredients }) {
             <ul>
                 {ingredientList?.map((ingredient, index) => (
                     <div className="ingredient-item1" key={index}>
-                        <span>{ingredient.name}</span>
+                        <span>{ingredient.ten_nguyen_lieu}</span>
                         <div className="quantity-actions">
                             <button onClick={() => handleDecrease(index)}>
                                 <FontAwesomeIcon icon={faMinus} />
                             </button>
-                            <span className="quantity">{ingredient.quantity}</span>
+                            <span className="quantity">{ingredient.khoi_luong_ton}</span>
                             <button onClick={() => handleIncrease(index)}>
                                 <FontAwesomeIcon icon={faPlus} />
                             </button>
@@ -60,7 +68,7 @@ function NotifyBell({ count, selectedIngredients }) {
                         </div>
                     </div>
                 ))}
-                <button className='confirm-btn'>Xác nhận</button>
+                <button className='confirm-btn' onClick={() => confirmHandler()}>Xác nhận</button>
             </ul>
         );
     };
