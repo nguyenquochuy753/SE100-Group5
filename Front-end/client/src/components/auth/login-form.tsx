@@ -33,12 +33,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ isPopup = true, className }) => {
   } = useForm<LoginInputType>();
 
   async function onSubmit({ email, password, remember_me }: LoginInputType) {
-    const userData = await axios.get("http://localhost:8000/v1/user/getUserByEmail/" + email);
+    const userData = await axios.get("http://localhost:8000/v1/clientUser/getUserByEmail/" + email);
     if (userData.data.length == 0) {
       toast.error("You entered wrong username or password!");
       return;
     }
     if (userData.data[0]['password'] == password) {
+      localStorage.clear();
+      localStorage.setItem('userUID', userData.data[0]['userId']);
+      localStorage.setItem('email', userData.data[0]['email']); 
+      localStorage.setItem('userName', userData.data[0]['userName']);
       toast.success("Successfully logged in!");
       login({
         email,

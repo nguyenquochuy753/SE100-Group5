@@ -15,6 +15,7 @@ import cn from 'classnames';
 import { ROUTES } from '@utils/routes';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { uuid } from 'uuidv4';
 
 
 interface SignUpFormProps {
@@ -43,23 +44,26 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
     return openModal('FORGET_PASSWORD');
   }
   async function onSubmit({ name, email, password, remember_me }: SignUpInputType) {
-    const existedUser = await axios.get('http://localhost:8000/v1/user/getUserByEmail/' + email);
+    const existedUser = await axios.get('http://localhost:8000/v1/clientUser/getUserByEmail/' + email);
 
     if (existedUser.data[0] != null) {
       toast.error('The email you\'ve just entered has already been registered!');
       return;
     }
     // generate user id
-    const userUID = Math.floor(Math.random() * 100000000000);
+    const userUID = uuid();
 
-    await axios.post('http://localhost:8000/v1/user/addUser', {
+    localStorage.clear();
+    localStorage.setItem('userUID', userUID);
+    localStorage.setItem('email', email); 
+    localStorage.setItem('userName', name);
+
+    await axios.post('http://localhost:8000/v1/clientUser/addUser', {
       data: {
         userId: userUID,
         email: email,
-        firstName: name,
-        lastName: '',
+        userName: name,
         password: password,
-        userType: 'customer',
       },
     }).then((res) => {
       signUp({

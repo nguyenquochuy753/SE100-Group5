@@ -15,6 +15,7 @@ const ingredientRoute = require("./routes/ingredient.route");
 const placeOrderRoute = require("./routes/placeOrder.route");
 const categoryRoute = require("./routes/category.route");
 const userRoute = require("./routes/user.route");
+const clientUserRoute = require("./routes/client_user.route");
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -37,6 +38,7 @@ app.use("/v1/ingredient_type", ingredient_typeRoute);
 app.use("/v1/placeOrder", placeOrderRoute);
 app.use("/v1/category", categoryRoute);
 app.use("/v1/user", userRoute);
+app.use("/v1/clientUser", clientUserRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}/`);
