@@ -13,6 +13,10 @@ import Switch from '@components/ui/switch';
 import CloseButton from '@components/ui/close-button';
 import cn from 'classnames';
 import { ROUTES } from '@utils/routes';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { uuid } from 'uuidv4';
+
 
 interface SignUpFormProps {
   isPopup?: boolean;
@@ -39,13 +43,40 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
   function handleForgetPassword() {
     return openModal('FORGET_PASSWORD');
   }
-  function onSubmit({ name, email, password, remember_me }: SignUpInputType) {
-    signUp({
-      name,
-      email,
-      password,
-      remember_me,
+  async function onSubmit({ name, email, password, remember_me }: SignUpInputType) {
+    const existedUser = await axios.get('http://localhost:8000/v1/clientUser/getUserByEmail/' + email);
+
+    if (existedUser.data[0] != null) {
+      toast.error('The email you\'ve just entered has already been registered!');
+      return;
+    }
+    // generate user id
+    const userUID = uuid();
+
+    localStorage.clear();
+    localStorage.setItem('userUID', userUID);
+    localStorage.setItem('email', email); 
+    localStorage.setItem('userName', name);
+
+    await axios.post('http://localhost:8000/v1/clientUser/addUser', {
+      data: {
+        userId: userUID,
+        email: email,
+        userName: name,
+        password: password,
+      },
+    }).then((res) => {
+      signUp({
+        name,
+        email,
+        password,
+        remember_me,
+      });
+    }).catch((err) => {
+      console.log(err);
+      toast.error('Error: ' + err);
     });
+    closeModal();
     console.log(name, email, password, 'sign form values');
   }
   return (

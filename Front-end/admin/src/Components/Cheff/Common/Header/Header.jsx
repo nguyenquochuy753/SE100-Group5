@@ -14,10 +14,10 @@ function Header({ notificationCount, selectedIngredients }) {
         <div className="header-buttons">
           <NotificationBell count={notificationCount} selectedIngredients={selectedIngredients} />
           <button>
-            <Link to="/orderManagement">Chuẩn bị món ăn</Link>
+            <Link to="/cuba-context/dashboard/cheff/order">Chuẩn bị món ăn</Link>
           </button>
           <button>
-            <Link to="/ingredient">Nguyên liệu</Link>
+            <Link to="/cuba-context/dashboard/cheff/ingredient">Nguyên liệu</Link>
           </button>
         </div>
       </header>

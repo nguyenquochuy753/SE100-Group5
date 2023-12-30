@@ -46,11 +46,11 @@ const RegisterFrom = ({ logoClassMain }) => {
 
     const userUID = uuidv4();
 
-    console.log(userUID);
-    console.log(email);
-    console.log(firstName);
-    console.log(lastName);
-    console.log(password);
+    // console.log(userUID);
+    // console.log(email);
+    // console.log(firstName);
+    // console.log(lastName);
+    // console.log(password);
 
     const existedUser = await axios.get('http://localhost:8000/v1/user/getUserByEmail/' + email);
 

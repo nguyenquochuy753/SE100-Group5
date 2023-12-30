@@ -12,6 +12,8 @@ import Switch from '@components/ui/switch';
 import CloseButton from '@components/ui/close-button';
 import { FaFacebook, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 import cn from 'classnames';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 interface LoginFormProps {
   isPopup?: boolean;
@@ -30,12 +32,27 @@ const LoginForm: React.FC<LoginFormProps> = ({ isPopup = true, className }) => {
     formState: { errors },
   } = useForm<LoginInputType>();
 
-  function onSubmit({ email, password, remember_me }: LoginInputType) {
-    login({
-      email,
-      password,
-      remember_me,
-    });
+  async function onSubmit({ email, password, remember_me }: LoginInputType) {
+    const userData = await axios.get("http://localhost:8000/v1/clientUser/getUserByEmail/" + email);
+    if (userData.data.length == 0) {
+      toast.error("You entered wrong username or password!");
+      return;
+    }
+    if (userData.data[0]['password'] == password) {
+      localStorage.clear();
+      localStorage.setItem('userUID', userData.data[0]['userId']);
+      localStorage.setItem('email', userData.data[0]['email']); 
+      localStorage.setItem('userName', userData.data[0]['userName']);
+      toast.success("Successfully logged in!");
+      login({
+        email,
+        password,
+        remember_me,
+      });
+    } else {
+      toast.error("You entered wrong username or password!");
+      return;
+    }
     closeModal();
     console.log(email, password, remember_me, 'data');
   }
@@ -103,11 +120,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ isPopup = true, className }) => {
                 variant="solid"
                 {...register('email', {
                   required: `${t('forms:email-required')}`,
-                  pattern: {
-                    value:
-                      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: t('forms:email-error'),
-                  },
+                  // pattern: {
+                  //   value:
+                  //     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  //   message: t('forms:email-error'),
+                  // },
                 })}
                 error={errors.email?.message}
               />
