@@ -61,6 +61,7 @@ const ProductTableData = ({ table, idTable }) => {
       ma_mon_an: t.ma_mon_an._id,
       sl: t.sl,
       da_hoan_thanh: t.ma_mon_an._id == mealId ? true : t.da_hoan_thanh,
+      trang_thai: t.ma_mon_an._id == mealId ? "Hoàn thành" : t.trang_thai,
     }));
     dispatch(
       addMealToTable({
@@ -94,15 +95,18 @@ const ProductTableData = ({ table, idTable }) => {
       </div>
     ),
     amount: m.gia,
-    stock: m.isDone ? (
-      <div className="font-success">Hoàn Thành</div>
-    ) : (
-      <div
-        className={m.status === "Chờ chế biến" ? "font-danger" : "font-warning"}
-      >
-        {m.status}
-      </div>
-    ),
+    stock:
+      m.status === "Hoàn thành" ? (
+        <div className="font-success">Hoàn Thành</div>
+      ) : (
+        <div
+          className={
+            m.status === "Chờ chế biến" ? "font-danger" : "font-warning"
+          }
+        >
+          {m.status}
+        </div>
+      ),
     start_date: m.qty,
     action: (
       <div>
