@@ -8,16 +8,29 @@ import { CheckoutCardFooterItem } from './checkout-card-footer-item';
 import { useTranslation } from 'next-i18next';
 import Router from 'next/router';
 import { ROUTES } from '@utils/routes';
+import axios from "axios";
 
-const CheckoutCard: React.FC = () => {
+const CheckoutCard: React.FC = ({ngay, gio, tenKhachHang, sdt}) => {
   const { t } = useTranslation('common');
   const { items, total, isEmpty } = useCart();
   const { price: subtotal } = usePrice({
     amount: total,
     currencyCode: 'VND',
   });
-  function orderHeader() {
+  async function orderHeader() {
+    await axios.post("http://localhost:8000/v1/reserving/addReserving",{
+      "ten_khach_hang": tenKhachHang,
+      sdt: sdt,
+      ngay: ngay,
+      gio: gio,
+      "mon_an": items.map(item=>({
+        "ma_mon_an": item.id,
+        sl: item.quantity,
+        "trang_thai": "Chờ chế biến"
+      }))
+    })
     !isEmpty && Router.push(ROUTES.ORDER);
+
   }
   const checkoutFooter = [
     {
@@ -59,9 +72,7 @@ const CheckoutCard: React.FC = () => {
         ))}
         <Button
           variant="formButton"
-          className={`w-full mt-8 mb-5 bg-skin-primary text-skin-inverted rounded font-semibold px-4 py-3 transition-all ${
-            isEmpty && 'opacity-40 cursor-not-allowed'
-          }`}
+          className={`w-full mt-8 mb-5 bg-skin-primary text-skin-inverted rounded font-semibold px-4 py-3 transition-all`}
           onClick={orderHeader}
         >
           {t('button-order-now')}

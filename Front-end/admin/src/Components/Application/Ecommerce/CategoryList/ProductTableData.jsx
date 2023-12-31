@@ -96,7 +96,6 @@ const ProductTableData = () => {
       </div>
     ),
   }));
-  console.log(categoy);
 
   // useEffect(() => {
   //   dispatch(getTable());

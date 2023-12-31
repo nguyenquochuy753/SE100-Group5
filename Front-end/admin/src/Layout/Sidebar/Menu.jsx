@@ -35,6 +35,15 @@ export const MENUITEMS = [
         active: false,
       },
       {
+        title: "Đặt Trước",
+        value: "reserving",
+        path: `${process.env.PUBLIC_URL}/app/project/reserving`,
+
+        icon: "calendar",
+        type: "link",
+        active: false,
+      },
+      {
         title: "Hóa Đơn",
         value: "orderhistory",
         path: `${process.env.PUBLIC_URL}/app/ecommerce/orderhistory`,

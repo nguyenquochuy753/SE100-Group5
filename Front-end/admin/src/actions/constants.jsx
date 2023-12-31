@@ -113,3 +113,10 @@ export const ingredientContants = {
 
   GET_INGREDIENT_BY_ID: "GET_INGREDIENT_BY_ID",
 };
+
+export const reservContants = {
+  GET_RESERV: "GET_RESERV",
+
+  BOOK_RESERV: "BOOK_RESERV",
+  RESET_RESERV: "RESET_RESERV",
+};
