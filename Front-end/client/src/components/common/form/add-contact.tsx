@@ -26,12 +26,14 @@ const AddContactForm: React.FC = () => {
     defaultValues: {
       title: data || data?.title ? data?.title : '',
       number: data || data?.number ? data?.number : '',
-      default: data || data?.default ? data?.default : '',
+      default: data || data?.default ? true : true,
     },
   });
 
   function onSubmit(values: ContactFormValues) {
-    console.log(values, 'Add Contact');
+    console.log('Add Contact',values );
+    data(values.title, values.number);
+    closeModal();
   }
 
   return (

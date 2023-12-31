@@ -199,6 +199,8 @@ import UserCreate from "../Components/Application/Users/UsersCreate";
 //OrderManagement in cheff
 import OrderManagementPage from "../Components/Cheff/OrderManagement/OrderManagementPage";
 import IngredientPage from "../Components/Cheff/IngredientManagement/IngredientPage";
+import BookTable from "../Components/Application/Project/BookTable";
+import EditCategory from "../Components/Application/Project/EditCategory";
 
 export const routes = [
   {
@@ -530,6 +532,10 @@ export const routes = [
     Component: <Project />,
   },
   {
+    path: `${process.env.PUBLIC_URL}/app/project/reserving/:layout`,
+    Component: <BookTable />,
+  },
+  {
     path: `${process.env.PUBLIC_URL}/app/project/new-project/:layout`,
     Component: <Newproject />,
   },
@@ -568,6 +574,10 @@ export const routes = [
   {
     path: `${process.env.PUBLIC_URL}/app/project/table/edit-table/:id/:layout`,
     Component: <EditTable />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/app/project/category/edit-category/:id/:layout`,
+    Component: <EditCategory />,
   },
   {
     path: `${process.env.PUBLIC_URL}/app/chat-app/chats/:layout`,
@@ -832,7 +842,4 @@ export const routes = [
     path: `${process.env.PUBLIC_URL}/dashboard/cheff/ingredient`,
     Component: <IngredientPage />,
   },
-
 ];
-
-

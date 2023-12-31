@@ -50,10 +50,10 @@
   "placeholder-briefly-describe": "Briefly describe..",
   "placeholder-email-subscribe": "Write your email here",
   "placeholder-order-notes": "Notes about your order, e.g. special notes for delivery",
-  "label-contact-number": "Contact Number",
-  "label-contact-title": "Contact Title",
-  "contact-title-required": "Contact title is required",
+  "label-contact-number": "Số Điện Thoại",
+  "label-contact-title": "Tên Khách Hàng",
+  "contact-title-required": "Tên Khách Hàng Là Bắt Buộc",
   "default-type-required": "Default type Required",
-  "contact-number-required": "Contact number is required"
+  "contact-number-required": "Số Điện Thoại Là Bắt Buộc"
   
 }

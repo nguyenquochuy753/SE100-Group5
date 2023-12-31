@@ -13,6 +13,7 @@ const Ecommerce = () => {
   useEffect(() => {
     dispatch(getOrders());
   }, [dispatch]);
+  console.log(order);
   return (
     <Fragment>
       <Breadcrumbs
@@ -22,7 +23,7 @@ const Ecommerce = () => {
       />
       <Container fluid={true}>
         <Row className="size-column">
-          {/* {order && <LeftGrid order={order} />} */}
+          {order && <LeftGrid order={order} />}
           <RightGrid />
         </Row>
       </Container>

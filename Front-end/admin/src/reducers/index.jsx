@@ -6,6 +6,7 @@ import orderReducer from "./order.reducer";
 import categoryReducer from "./category.reducer";
 import ingredienttypeReducer from "./ingredienttype.reducer";
 import ingredientReducer from "./ingredient.reducer";
+import reservReudcer from "./reserv.reudcer";
 
 const rootReducer = combineReducers({
   meal: mealReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   category: categoryReducer,
   ingredientType: ingredienttypeReducer,
   ingredient: ingredientReducer,
+  reserv: reservReudcer,
 });
 
 export default rootReducer;
