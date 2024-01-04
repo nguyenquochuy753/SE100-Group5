@@ -43,7 +43,7 @@ const OrderThisMonth = ({ order }) => {
       return (
         preOrder +
         currOrder?.mon_an?.reduce(
-          (pre, curr) => pre + curr.ma_mon_an?.gia * curr.sl,
+          (pre, curr) => pre + curr.ma_mon_an.gia * curr.sl,
           0
         )
       );

@@ -24,7 +24,7 @@ const WidgetsGrid = ({ order }) => {
         currOrder?.mon_an?.reduce((pre, curr) => {
           console.log("Gia", currOrder._id);
           console.log("Gia", curr.ma_mon_an?.gia);
-          return pre + curr.ma_mon_an?.gia * curr.sl;
+          return pre + curr.ma_mon_an.gia * curr.sl;
         }, 0)
       );
     } else {
