@@ -26,6 +26,10 @@ const reservingSchema = new mongoose.Schema(
             type: mongoose.SchemaTypes.ObjectId,
             ref: 'Table'
         },
+        trang_thai: {
+            type: String,
+            default: "Đã đặt"
+        },
         mon_an: [
             {
                 _id: false,
