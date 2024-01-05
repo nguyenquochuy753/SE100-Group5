@@ -14,7 +14,10 @@ interface ProductGridProps {
   className?: string;
 }
 
-export const ProductGrid: FC<ProductGridProps> = ({ className = '' }) => {
+export const ProductGrid: FC<ProductGridProps> = ({
+  className = '',
+  meals,
+}) => {
   const { t } = useTranslation('common');
   const { query } = useRouter();
   const {
@@ -34,7 +37,7 @@ export const ProductGrid: FC<ProductGridProps> = ({ className = '' }) => {
           className
         )}
       >
-        {error ? (
+        {/* {error ? (
           <div className="col-span-full">
             <Alert message={error?.message} />
           </div>
@@ -54,10 +57,13 @@ export const ProductGrid: FC<ProductGridProps> = ({ className = '' }) => {
               />
             ));
           })
-        )}
+        )} */}
+        {meals.map((meal) => (
+          <ProductCard key={`product--key-${meal.id}`} product={meal} />
+        ))}
         {/* end of error state */}
       </div>
-      {hasNextPage && (
+      {/* {hasNextPage && (
         <div className="text-center pt-8 xl:pt-10">
           <Button
             loading={loadingMore}
@@ -67,7 +73,7 @@ export const ProductGrid: FC<ProductGridProps> = ({ className = '' }) => {
             {t('button-load-more')}
           </Button>
         </div>
-      )}
+      )} */}
     </>
   );
 };

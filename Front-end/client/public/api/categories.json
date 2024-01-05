@@ -3,63 +3,29 @@
     {
       "id": 1,
       "name": "Rau Sạch",
-      "slug": "fresh-vegetables",
+      "slug": "Rau Sạch",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/fresh-vegetables.png",
         "original": "/assets/images/category/fresh-vegetables.png"
       },
-      "icon": "/assets/images/category/icon/fresh-vegetables.svg",
-      "children": [
-        {
-          "id": 1,
-          "name": "Arugula",
-          "slug": "arugula"
-        },
-        {
-          "id": 2,
-          "name": "Asparagus",
-          "slug": "asparagus"
-        },
-        {
-          "id": 3,
-          "name": "Beets",
-          "slug": "beets"
-        },
-        {
-          "id": 4,
-          "name": "Cabbages",
-          "slug": "cabbages"
-        }
-      ]
+      "icon": "/assets/images/category/icon/fresh-vegetables.svg"
     },
     {
       "id": 2,
       "name": "Thực Phẩm Ăn Kiêng",
-      "slug": "diet-foods",
+      "slug": "Thực Phẩm Ăn Kiêng",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/diet-foods.png",
         "original": "/assets/images/category/diet-foods.png"
       },
-      "icon": "/assets/images/category/icon/diet-foods.svg",
-      "children": [
-        {
-          "id": 1,
-          "name": "Whole Eggs",
-          "slug": "whole-eggs"
-        },
-        {
-          "id": 2,
-          "name": "Boiled Potatoes",
-          "slug": "boiled-potatoes"
-        }
-      ]
+      "icon": "/assets/images/category/icon/diet-foods.svg"
     },
     {
       "id": 3,
       "name": "Đồ Ăn Dinh Dưỡng",
-      "slug": "diet-nutrition",
+      "slug": "Đồ Ăn Dinh Dưỡng",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/diet-nutrition.png",
@@ -70,68 +36,29 @@
     {
       "id": 4,
       "name": "Đồ Ăn Nhanh",
-      "slug": "fast-food-items",
+      "slug": "Đồ Ăn Nhanh",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/fast-food.png",
         "original": "/assets/images/category/fast-food.png"
       },
-      "icon": "/assets/images/category/icon/fast-food.svg",
-      "children": [
-        {
-          "id": 1,
-          "name": "Burger",
-          "slug": "burger"
-        },
-        {
-          "id": 2,
-          "name": "Beef Sandwich",
-          "slug": "beef-sandwich"
-        },
-        {
-          "id": 3,
-          "name": "Burrito Supreme",
-          "slug": "burrito-supreme"
-        }
-      ]
+      "icon": "/assets/images/category/icon/fast-food.svg"
     },
     {
       "id": 5,
       "name": "Trái Cây",
-      "slug": "fruits-items",
+      "slug": "Trái Cây",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/fruits-items.png",
         "original": "/assets/images/category/fruits-items.png"
       },
-      "icon": "/assets/images/category/icon/fruits-items.svg",
-      "children": [
-        {
-          "id": 1,
-          "name": "Apples",
-          "slug": "apples"
-        },
-        {
-          "id": 2,
-          "name": "Melons",
-          "slug": "melons"
-        },
-        {
-          "id": 3,
-          "name": "Berries",
-          "slug": "berries"
-        },
-        {
-          "id": 4,
-          "name": "Citrus",
-          "slug": "citrus"
-        }
-      ]
+      "icon": "/assets/images/category/icon/fruits-items.svg"
     },
     {
       "id": 6,
       "name": "Thực Phẩm Lành Mạnh",
-      "slug": "healthy-foods",
+      "slug": "Thực Phẩm Lành Mạnh",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/healthy-foods.png",
@@ -142,7 +69,7 @@
     {
       "id": 7,
       "name": "Thực Phẩm Tạp Hoá",
-      "slug": "grocery-items",
+      "slug": "Thực Phẩm Tạp Hoá",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/grocery-items.png",
@@ -153,58 +80,29 @@
     {
       "id": 8,
       "name": "Sữa",
-      "slug": "quality-milk",
+      "slug": "Sữa",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/quality-milk.png",
         "original": "/assets/images/category/quality-milk.png"
       },
-      "icon": "/assets/images/category/icon/quality-milk.svg",
-      "children": [
-        {
-          "id": 1,
-          "name": "Boiled Milk",
-          "slug": "boiled-milk"
-        },
-        {
-          "id": 2,
-          "name": "Mixed Milk",
-          "slug": "mixed-milk"
-        }
-      ]
+      "icon": "/assets/images/category/icon/quality-milk.svg"
     },
     {
       "id": 9,
       "name": "Nước Giải Khát",
-      "slug": "cold-drinks",
+      "slug": "Nước Giải Khát",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/cold-drinks.png",
         "original": "/assets/images/category/cold-drinks.png"
       },
-      "icon": "/assets/images/category/icon/cold-drinks.svg",
-      "children": [
-        {
-          "id": 1,
-          "name": "Fruit Juice",
-          "slug": "fruit-juice"
-        },
-        {
-          "id": 2,
-          "name": "Ice Coffee",
-          "slug": "ice-coffee"
-        },
-        {
-          "id": 3,
-          "name": "Punch",
-          "slug": "punch"
-        }
-      ]
+      "icon": "/assets/images/category/icon/cold-drinks.svg"
     },
     {
       "id": 10,
       "name": "Thịt Bò",
-      "slug": "beaf-steak",
+      "slug": "Thịt Bò",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/beaf-steak.png",
@@ -215,7 +113,7 @@
     {
       "id": 11,
       "name": "Vitamin",
-      "slug": "vitamin-items",
+      "slug": "Vitamin",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/vitamin-items.png",
@@ -226,63 +124,29 @@
     {
       "id": 12,
       "name": "Thịt Gà",
-      "slug": "raw-chicken",
+      "slug": "Thịt Gà",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/raw-chicken.png",
         "original": "/assets/images/category/raw-chicken.png"
       },
-      "icon": "/assets/images/category/icon/raw-chicken.svg",
-      "children": [
-        {
-          "id": 1,
-          "name": "Chicken leg",
-          "slug": "chicken-leg"
-        },
-        {
-          "id": 2,
-          "name": "Chicken wing",
-          "slug": "chicken-wing"
-        },
-        {
-          "id": 3,
-          "name": "Chicken breast",
-          "slug": "chicken-breast"
-        }
-      ]
+      "icon": "/assets/images/category/icon/raw-chicken.svg"
     },
     {
       "id": 13,
       "name": "Bánh Mì",
-      "slug": "breakfast-item",
+      "slug": "Bánh Mì",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/breakfast-item.png",
         "original": "/assets/images/category/breakfast-item.png"
       },
-      "icon": "/assets/images/category/icon/breakfast-item.svg",
-      "children": [
-        {
-          "id": 1,
-          "name": "Pancake",
-          "slug": "pancake"
-        },
-        {
-          "id": 2,
-          "name": "Coffee",
-          "slug": "coffee"
-        },
-        {
-          "id": 3,
-          "name": "Sausage",
-          "slug": "sausage"
-        }
-      ]
+      "icon": "/assets/images/category/icon/breakfast-item.svg"
     },
     {
       "id": 14,
       "name": "Cá",
-      "slug": "fish-items",
+      "slug": "Cá",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/fish-items.png",
@@ -293,7 +157,7 @@
     {
       "id": 15,
       "name": "Rau Xanh",
-      "slug": "green-vegetables",
+      "slug": "Rau Xanh",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/green-vegetables.png",
@@ -304,7 +168,7 @@
     {
       "id": 16,
       "name": "Bánh Quy",
-      "slug": "cookies-biscuits",
+      "slug": "Bánh Quy",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/cookies-biscuits.png",
@@ -315,7 +179,7 @@
     {
       "id": 17,
       "name": "Tráng Miệng",
-      "slug": "frozen-desserts",
+      "slug": "Tráng Miệng",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/breakfast-item.png",
@@ -326,13 +190,24 @@
     {
       "id": 18,
       "name": "Thịt Nguội",
-      "slug": "deli-meat",
+      "slug": "Thịt Nguội",
       "image": {
         "id": 1,
         "thumbnail": "/assets/images/category/cookies-biscuits.png",
         "original": "/assets/images/category/cookies-biscuits.png"
       },
       "icon": "/assets/images/category/icon/deli-meat.svg"
+    },
+    {
+      "id": 19,
+      "name": "Thịt Heo",
+      "slug": "Thịt Heo",
+      "image": {
+        "id": 1,
+        "thumbnail": "/assets/images/category/pork.png",
+        "original": "/assets/images/category/pork.png"
+      },
+      "icon": "/assets/images/category/pork.png"
     }
   ]
 }

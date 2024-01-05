@@ -15,8 +15,9 @@ import { API_ENDPOINTS } from '@framework/utils/api-endpoints';
 import { fetchCategories } from '@framework/category/get-all-categories';
 import { fetchProducts } from '@framework/product/get-all-products';
 import { LIMITS } from '@framework/utils/limits';
+import axios from 'axios';
 
-export default function Search() {
+export default function Search({ meals }) {
   return (
     <>
       <Seo
@@ -31,8 +32,8 @@ export default function Search() {
             <ShopFilters />
           </div>
           <div className="w-full lg:-ms-2 xl:-ms-8 lg:-mt-1">
-            <SearchTopBar />
-            <ProductGrid />
+            <SearchTopBar count={meals.length} />
+            <ProductGrid meals={meals} />
           </div>
         </Element>
       </Container>
@@ -43,8 +44,10 @@ export default function Search() {
 
 Search.Layout = Layout;
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetStaticProps = async ({ locale, query }) => {
   const queryClient = new QueryClient();
+  console.log(query);
+
   await queryClient.prefetchQuery(
     [API_ENDPOINTS.CATEGORIES, { limit: LIMITS.CATEGORIES_LIMITS }],
     fetchCategories
@@ -53,7 +56,64 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     [API_ENDPOINTS.PRODUCTS, { limit: LIMITS.PRODUCTS_LIMITS }],
     fetchProducts
   );
-
+  const res = await axios.get(`http://localhost:8000/v1/meal/getAllMeals`);
+  const meals = res.data;
+  const mealTranfer = meals
+    .filter((meal) => {
+      if (query.category !== undefined && query.category !== '') {
+        console.log(query.category);
+        return meal.ma_danh_muc.name === query.category;
+      } else {
+        return true;
+      }
+    })
+    .sort((a, b) => {
+      if (query.sort_by !== undefined && query.sort_by === 'highest-price') {
+        return b.gia - a.gia;
+      } else if (
+        query.sort_by !== undefined &&
+        query.sort_by === 'lowest-price'
+      ) {
+        return a.gia - b.gia;
+      } else if (
+        query.sort_by !== undefined &&
+        query.sort_by === 'new-arrival'
+      ) {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      } else {
+        return true;
+      }
+    })
+    .map((meal) => ({
+      id: meal._id,
+      name: meal.ten_mon_an,
+      slug: 'fresh-green-leaf-lettuce',
+      description:
+        "Vegetables are parts of plants that are consumed by humans or other animals as food. the first meaning remains commonly used and is applied to plants collectively to ask all edible plant matter, including the flowers, fruits, stems, leaves, roots, and seeds. An alternate definition of the term is applied somewhat arbitrarily, often by culinary and cultural tradition. it's going to exclude foods derived from some plants that are fruits, flowers, nuts, and cereal grains, but include savoury fruits like tomatoes and courgettes, flowers like broccoli, and seeds like pulses.",
+      image: {
+        id: 1,
+        thumbnail: `http://localhost:8000/${meal.hinh_anh_mon_an}`,
+        original: `http://localhost:8000/${meal.hinh_anh_mon_an}`,
+      },
+      gallery: [
+        {
+          id: 1,
+          thumbnail: `http://localhost:8000/${meal.hinh_anh_mon_an}`,
+          original: `http://localhost:8000/${meal.hinh_anh_mon_an}`,
+        },
+      ],
+      quantity: 70,
+      price: meal.gia,
+      sale_price: 0,
+      unit: '1 phần',
+      tag: [
+        {
+          id: 1,
+          name: meal.ma_danh_muc.name,
+          slug: meal.ma_danh_muc._id,
+        },
+      ],
+    }));
   return {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
@@ -63,7 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         'menu',
         'footer',
       ])),
+      meals: JSON.parse(JSON.stringify(mealTranfer)),
     },
-    revalidate: 60,
   };
 };
