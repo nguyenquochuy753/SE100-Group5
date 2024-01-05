@@ -343,10 +343,10 @@ export default function ProductPopup() {
             </div>
           </div>
         </div>
-        <RelatedProductFeed
+        {/* <RelatedProductFeed
           carouselBreakpoint={breakpoints}
           className="mb-0.5 md:mb-2 lg:mb-3.5 xl:mb-4 2xl:mb-6"
-        />
+        /> */}
       </div>
     </div>
   );

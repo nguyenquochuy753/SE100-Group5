@@ -41,12 +41,12 @@ const Project = () => {
     dispatch(getTable());
   }, [dispatch]);
   const bookTableHandler = (id, name, trang_thai) => {
-    const mon_an = reserv.mon_an.map((res) => ({
-      ma_mon_an: res.ma_mon_an._id,
-      sl: res.sl,
-      trang_thai: res.trang_thai,
-    }));
     if (reserv) {
+      const mon_an = reserv.mon_an.map((res) => ({
+        ma_mon_an: res.ma_mon_an._id,
+        sl: res.sl,
+        trang_thai: res.trang_thai,
+      }));
       dispatch(
         addMealToTable({ id: id, trang_thai: "Đang ăn", mon_an: mon_an })
       );

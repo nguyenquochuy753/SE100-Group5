@@ -6,42 +6,54 @@ import TotalBalance from "./TotalBalance";
 
 const WidgetsGrid = ({ order }) => {
   const today = new Date();
-  // console.log(order?.length);
+  const lastMonth = new Date();
+  lastMonth.setMonth(today.getMonth() - 1);
 
-  const totalOrderMounth = order?.reduce((preOrder, currOrder) => {
+  const totalOrderThisMonth = order?.reduce((preOrder, currOrder) => {
     const date = new Date(currOrder.createdAt);
-    if (date.getMonth() == today.getMonth()) {
+    if (
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    ) {
       return preOrder + 1;
     } else {
       return preOrder;
     }
   }, 0);
-  const totalSaleOrderMounth = order?.reduce((preOrder, currOrder) => {
+  const totalSaleOrderThisMonth = order?.reduce((preOrder, currOrder) => {
     const date = new Date(currOrder.createdAt);
-    if (date.getMonth() == today.getMonth()) {
+    if (
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    ) {
       return (
         preOrder +
-        currOrder?.mon_an?.reduce((pre, curr) => {
-          console.log("Gia", currOrder._id);
-          console.log("Gia", curr.ma_mon_an?.gia);
-          return pre + curr.ma_mon_an?.gia * curr.sl;
-        }, 0)
+        currOrder?.mon_an?.reduce(
+          (pre, curr) => pre + curr.ma_mon_an.gia * curr.sl,
+          0
+        )
       );
     } else {
       return preOrder;
     }
   }, 0);
-  const totalOrderPreMounth = order?.reduce((preOrder, currOrder) => {
+  const totalOrderLastMonth = order?.reduce((preOrder, currOrder) => {
     const date = new Date(currOrder.createdAt);
-    if (date.getMonth() == today.getMonth() - 1) {
+    if (
+      date.getMonth() === lastMonth.getMonth() &&
+      date.getFullYear() === lastMonth.getFullYear()
+    ) {
       return preOrder + 1;
     } else {
       return preOrder;
     }
   }, 0);
-  const totalSaleOrderPreMounth = order?.reduce((preOrder, currOrder) => {
+  const totalSaleOrderLastMonth = order?.reduce((preOrder, currOrder) => {
     const date = new Date(currOrder.createdAt);
-    if (date.getMonth() == today.getMonth() - 1) {
+    if (
+      date.getMonth() === lastMonth.getMonth() &&
+      date.getFullYear() === lastMonth.getFullYear()
+    ) {
       return (
         preOrder +
         currOrder?.mon_an?.reduce(
@@ -57,9 +69,9 @@ const WidgetsGrid = ({ order }) => {
     {
       title: "Đơn Hàng Mới",
       color: "primary",
-      total: totalOrderMounth,
+      total: totalOrderThisMonth,
       gros: Math.abs(
-        100 - (totalOrderMounth / totalOrderPreMounth) * 100
+        100 - (totalOrderThisMonth / totalOrderLastMonth) * 100
       ).toFixed(0),
       icon: "new-order",
     },
@@ -73,9 +85,9 @@ const WidgetsGrid = ({ order }) => {
     {
       title: "Doanh Thu Trung Bình",
       color: "secondary",
-      total: totalSaleOrderMounth,
+      total: totalSaleOrderThisMonth,
       gros: Math.abs(
-        100 - (totalSaleOrderMounth / totalSaleOrderPreMounth) * 100
+        100 - (totalSaleOrderThisMonth / totalSaleOrderLastMonth) * 100
       ).toFixed(0),
       // prefix: "$",
       icon: "sale",

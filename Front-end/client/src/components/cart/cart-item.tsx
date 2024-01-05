@@ -17,7 +17,6 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
     amount: item?.itemTotal,
     currencyCode: 'VND',
   });
-  console.log('Cart', item);
   const outOfStock = !isInStock(item.id);
   return (
     <div

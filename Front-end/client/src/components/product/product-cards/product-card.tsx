@@ -45,7 +45,11 @@ function RenderPopupOrAddToCart({ data }: { data: Product }) {
   }
   return <AddToCart data={data} />;
 }
-const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
+const ProductCard: React.FC<ProductProps> = ({
+  product,
+  className,
+  products,
+}) => {
   const { name, image, unit, product_type } = product ?? {};
   const { openModal } = useModalAction();
   const { t } = useTranslation('common');
@@ -66,7 +70,6 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
   function handlePopupView() {
     openModal('PRODUCT_VIEW', product);
   }
-  console.log('Product', product);
   return (
     <article
       className={cn(

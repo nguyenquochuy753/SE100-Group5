@@ -13,9 +13,14 @@ const reservingController = {
   },
   getAllRervings: async (req, res) => {
     try {
-      const allReservings = await reservingModel.find().populate({
-        path: "mon_an.ma_mon_an",
-      });
+      const allReservings = await reservingModel
+        .find({
+          trang_thai: "Đã đặt",
+        })
+        .populate({
+          path: "mon_an.ma_mon_an",
+        });
+
       res.status(200).json(allReservings);
     } catch (error) {
       res.status(500).json(error);
@@ -33,7 +38,7 @@ const reservingController = {
   updateReserving: async (req, res) => {
     const id = req.params._id;
     try {
-      await reservingModel.findByIdAndUpdate(id, req.body, { new: true });
+      await reservingModel.findByIdAndUpdate(id, req.body);
       res.status(200).json("updated successfully");
     } catch (error) {
       res.status(500).json(error);

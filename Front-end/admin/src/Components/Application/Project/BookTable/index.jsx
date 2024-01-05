@@ -26,6 +26,7 @@ import {
   getReserv,
 } from "../../../../actions/reserv.actions";
 import BookClass from "../Common/bookClass";
+import axios from "../../../../helpers/axios";
 
 const BookTable = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,10 @@ const BookTable = () => {
     dispatch(getTable());
     dispatch(getReserv());
   }, [dispatch]);
-  const bookTableHandler = (item) => {
+  const bookTableHandler = async (item) => {
+    const res = await axios.put(`/reserving/updateReservingById/${item._id}`, {
+      trang_thai: "Đã hoàn thành",
+    });
     dispatch(addReservToTable({ item }));
     history(`${process.env.PUBLIC_URL}/app/project/book/${layoutURL}`);
   };
