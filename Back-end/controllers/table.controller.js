@@ -1,4 +1,5 @@
 const tableModel = require("../models/table.model");
+const mealModel = require("../models/meal.model");
 
 const tableController = {
   addTable: async (req, res) => {
@@ -49,12 +50,22 @@ const tableController = {
   },
   orderMeal: async (req, res) => {
     const id = req.params.id;
+    const { mon_an } = req.body;
+
     try {
+      const table = await tableModel.findById(id);
+
+      for (const item of mon_an) {
+        const mealId = item.ma_mon_an;
+        await mealModel.findByIdAndUpdate(mealId, { $inc: { so_lan_dat_mon: 1 } });
+      }
+
       await tableModel.findByIdAndUpdate(id, {
         trang_thai: req.body.trang_thai,
         mon_an: req.body.mon_an,
       });
-      res.status(200).json("order successfully");
+
+      res.status(200).json("Order successfully");
     } catch (error) {
       res.status(500).json(error);
     }

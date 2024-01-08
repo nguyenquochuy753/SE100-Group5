@@ -74,6 +74,10 @@ const mealSchema = new mongoose.Schema(
       ref: "Category",
       required: true,
     },
+    so_lan_dat_mon: {
+      type: Number,
+      default: 0
+    }
   },
   { timestamps: true }
 );
