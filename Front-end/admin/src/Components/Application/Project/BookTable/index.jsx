@@ -20,59 +20,43 @@ import CusClass from "../Common/CusClass";
 import CustomizerContext from "../../../../_helper/Customizer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { bookTable, getTable } from "../../../../actions/table.actions";
 import {
-  addMealToTable,
-  bookTable,
-  getTable,
-} from "../../../../actions/table.actions";
-import { resetReserv } from "../../../../actions/reserv.actions";
+  addReservToTable,
+  getReserv,
+} from "../../../../actions/reserv.actions";
+import BookClass from "../Common/bookClass";
+import axios from "../../../../helpers/axios";
 
-const Project = () => {
+const BookTable = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
 
   const table = useSelector((state) => state.table.tables);
-  const reserv = useSelector((state) => state.reserv.reserv).item;
+  const reserv = useSelector((state) => state.reserv.reservs);
+
   const tableBook = useSelector((state) => state.table.tableBook);
   const { layoutURL } = useContext(CustomizerContext);
   const [activeTab, setActiveTab] = useState("1");
   const { allData } = useContext(ProjectContext);
   useEffect(() => {
     dispatch(getTable());
+    dispatch(getReserv());
   }, [dispatch]);
-  const bookTableHandler = (id, name, trang_thai) => {
-    if (reserv) {
-      const mon_an = reserv.mon_an.map((res) => ({
-        ma_mon_an: res.ma_mon_an._id,
-        sl: res.sl,
-        trang_thai: res.trang_thai,
-      }));
-      dispatch(
-        addMealToTable({ id: id, trang_thai: "Đang ăn", mon_an: mon_an })
-      );
-      history(
-        `${process.env.PUBLIC_URL}/app/ecommerce/detailtable/${id}/${layoutURL}`
-      );
-      dispatch(resetReserv());
-    } else {
-      if (trang_thai == "Đang ăn") {
-        history(
-          `${process.env.PUBLIC_URL}/app/ecommerce/detailtable/${id}/${layoutURL}`
-        );
-      } else {
-        dispatch(bookTable({ id, name }));
-        history(`${process.env.PUBLIC_URL}/app/ecommerce/select/${layoutURL}`);
-      }
-    }
+  const bookTableHandler = async (item) => {
+    const res = await axios.put(`/reserving/updateReservingById/${item._id}`, {
+      trang_thai: "Đã hoàn thành",
+    });
+    dispatch(addReservToTable({ item }));
+    history(`${process.env.PUBLIC_URL}/app/project/book/${layoutURL}`);
   };
-  console.log(table);
 
   return (
     <Fragment>
       <Breadcrumbs
         parent="Quản Lý Nhà Hàng"
-        title="Đặt Bàn"
-        mainTitle="Đặt Bàn"
+        title="Đơn Hàng Khách Đặt Trước"
+        mainTitle="Đơn Hàng Khách Đặt Trước"
       />
       <Container fluid={true}>
         <Row className="project-card">
@@ -141,8 +125,8 @@ const Project = () => {
                 <TabContent activeTab={activeTab}>
                   <TabPane tabId="1">
                     <Row>
-                      {table?.map((item, i) => (
-                        <CusClass
+                      {reserv?.map((item, i) => (
+                        <BookClass
                           item={item}
                           key={i}
                           bookTable={bookTableHandler}
@@ -152,7 +136,7 @@ const Project = () => {
                   </TabPane>
                   <TabPane tabId="2">
                     <Row>
-                      {table?.map((item, i) =>
+                      {reserv?.map((item, i) =>
                         item.trang_thai == "Trống" ? (
                           <CusClass item={item} key={i} />
                         ) : (
@@ -163,7 +147,7 @@ const Project = () => {
                   </TabPane>
                   <TabPane tabId="3">
                     <Row>
-                      {table?.map((item, i) =>
+                      {reserv?.map((item, i) =>
                         item.trang_thai == "Đang ăn" ? (
                           <CusClass item={item} key={i} />
                         ) : (
@@ -182,4 +166,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default BookTable;

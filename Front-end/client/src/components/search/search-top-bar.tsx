@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { getDirection } from '@utils/get-direction';
 
-const SearchTopBar = () => {
+const SearchTopBar = ({ count }) => {
   const { openFilter, displayFilter, closeFilter } = useUI();
   const { t } = useTranslation('common');
   const { locale } = useRouter();
@@ -25,14 +25,15 @@ const SearchTopBar = () => {
       </button>
       <div className="flex w-full items-center justify-end lg:justify-between">
         <div className="flex-shrink-0 text-skin-base font-medium text-15px leading-4 md:me-6 hidden lg:block mt-0.5">
-          2,683 {t('text-items-found')}
+          {count} {t('text-items-found')}
         </div>
         <ListBox
           options={[
-            { name: 'text-lowest-price', value: 'lowest' },
-            { name: 'text-highest-price', value: 'highest' },
-            { name: 'text-new-arrival', value: 'new-arrival' },
+            { name: 'Ngẫu Nhiên', value: '' },
             { name: 'text-most-order', value: 'most-order' },
+            { name: 'text-new-arrival', value: 'new-arrival' },
+            { name: 'text-highest-price', value: 'highest-price' },
+            { name: 'text-lowest-price', value: 'lowest-price' },
           ]}
         />
       </div>

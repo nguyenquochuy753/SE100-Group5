@@ -9,40 +9,40 @@ import DeliveryTips from './delivery-tips';
 import StripeCheckoutInlineForm from './stripe-checkout-inline-form';
 import { useTranslation } from 'next-i18next';
 
-const data = [
-  {
-    id: 1,
-    title: 'text-delivery-address',
-    component: <Address />,
-  },
-  {
-    id: 2,
-    title: 'text-delivery-schedule',
-    component: <DeliverySchedule />,
-  },
-  {
-    id: 3,
-    title: 'text-contact-number',
-    component: <Contact />,
-  },
-  {
-    id: 4,
-    title: 'text-payment-option',
-    component: <StripeCheckoutInlineForm />,
-  },
-  {
-    id: 5,
-    title: 'text-delivery-instructions',
-    component: <DeliveryNotes />,
-  },
-  {
-    id: 6,
-    title: 'text-delivery-tip',
-    component: <DeliveryTips />,
-  },
-];
+// const data = [
+//   // {
+//   //   id: 1,
+//   //   title: 'text-delivery-address',
+//   //   component: <Address />,
+//   // },
+//   {
+//     id: 2,
+//     title: 'text-delivery-schedule',
+//     component: <DeliverySchedule />,
+//   },
+//   {
+//     id: 3,
+//     title: 'text-contact-number',
+//     component: <Contact />,
+//   },
+//   // {
+//   //   id: 4,
+//   //   title: 'text-payment-option',
+//   //   component: <StripeCheckoutInlineForm />,
+//   // },
+//   // {
+//   //   id: 5,
+//   //   title: 'text-delivery-instructions',
+//   //   component: <DeliveryNotes />,
+//   // },
+//   // {
+//   //   id: 6,
+//   //   title: 'text-delivery-tip',
+//   //   component: <DeliveryTips />,
+//   // },
+// ];
 
-const CheckoutDetails: React.FC = () => {
+const CheckoutDetails: React.FC = ({setNgay, setGio, setTenKhachHang, setSdt}) => {
   const { t } = useTranslation('common');
   const [bindIndex, setBindIndex] = useState(0);
   const changeItem = (itemIndex: any) => {
@@ -50,6 +50,19 @@ const CheckoutDetails: React.FC = () => {
       setBindIndex(itemIndex);
     }
   };
+  const data = [
+    {
+      id: 2,
+      title: 'text-delivery-schedule',
+      component: <DeliverySchedule setNgay={setNgay} setGio={setGio}/>,
+    },
+    {
+      id: 3,
+      title: 'text-contact-number',
+      component: <Contact setTenKhachHang={setTenKhachHang} setSdt={setSdt}/>,
+    },
+  ];
+
   return (
     <div className="border border-skin-base bg-skin-fill rounded-md">
       {data?.map((item, index) => {

@@ -25,6 +25,8 @@ import axios from 'axios';
 
 export default function Home({ meals }) {
   console.log('MEAL', meals);
+  meals = meals.slice(0, 14);
+
   return (
     <>
       <Seo

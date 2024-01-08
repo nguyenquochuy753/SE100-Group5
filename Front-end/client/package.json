@@ -23,6 +23,8 @@
     "axios": "^0.24.0",
     "caniuse-lite": "^1.0.30001571",
     "classnames": "^2.3.1",
+    "date-fns": "^3.0.6",
+    "date-fns-tz": "^2.0.0",
     "dayjs": "^1.10.7",
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
