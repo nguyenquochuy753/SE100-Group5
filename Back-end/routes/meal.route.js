@@ -8,6 +8,7 @@ router.post(
   mealController.addMeal
 );
 router.get("/getAllMeals", mealController.getAllMeals);
+router.get("/getTop10Meals", mealController.getTop10Meals);
 router.get("/getMeal/:id", mealController.getMeal);
 router.put("/updateMeal/:id", mealController.updateMeal);
 router.delete("/deleteMeal/:id", mealController.deleteMeal);

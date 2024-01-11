@@ -21,6 +21,9 @@ const LeftGrid = ({ order }) => {
         <Col xxl="3" md="5" sm="6" className="box-col-5">
           <ValuableCustomer />
         </Col>
+        <Col xxl="4" xl="4" sm="6" className="box-col-6">
+          <VisitorsCard />
+        </Col>
         <Col xxl="9" sm="6" className="box-col-6">
           <OrderThisMonth order={order} />
         </Col>
@@ -33,9 +36,7 @@ const LeftGrid = ({ order }) => {
         <Col xxl="3" xl="4" sm="6" className="box-col-6 wow zoomIn">
           <DiscoverCard />
         </Col>
-        <Col xxl="4" xl="4" sm="6" className="box-col-6">
-          <VisitorsCard />
-        </Col>
+
         <Col xxl="5" xl="4" className="box-col-12">
           <RecentOrders />
         </Col>

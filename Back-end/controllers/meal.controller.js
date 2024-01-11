@@ -23,6 +23,19 @@ const mealController = {
       res.status(500).json(error);
     }
   },
+  getTop10Meals: async (req, res) => {
+    try {
+      const top10Meals = await mealModel
+        .find({})
+        .sort({ so_lan_dat_mon: -1 }) // Sorting in descending order of so_lan_dat_mon
+        .limit(10) // Limiting to top 10 results
+        .populate({ path: "ma_danh_muc" }); // Populating the category information
+
+      res.status(200).json(top10Meals); // Return the top 10 meals
+    } catch (error) {
+      res.status(500).json(error); // Handle any errors
+    }
+  },
   getMeal: async (req, res) => {
     const id = req.params.id;
     try {
