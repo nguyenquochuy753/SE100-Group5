@@ -8,9 +8,9 @@ import { CheckoutCardFooterItem } from './checkout-card-footer-item';
 import { useTranslation } from 'next-i18next';
 import Router from 'next/router';
 import { ROUTES } from '@utils/routes';
-import axios from "axios";
+import axios from 'axios';
 
-const CheckoutCard: React.FC = ({ngay, gio, tenKhachHang, sdt}) => {
+const CheckoutCard: React.FC = ({ ngay, gio, tenKhachHang, sdt }) => {
   const { t } = useTranslation('common');
   const { items, total, isEmpty } = useCart();
   const { price: subtotal } = usePrice({
@@ -18,19 +18,21 @@ const CheckoutCard: React.FC = ({ngay, gio, tenKhachHang, sdt}) => {
     currencyCode: 'VND',
   });
   async function orderHeader() {
-    await axios.post("http://localhost:8000/v1/reserving/addReserving",{
-      "ten_khach_hang": tenKhachHang,
-      sdt: sdt,
-      ngay: ngay,
-      gio: gio,
-      "mon_an": items.map(item=>({
-        "ma_mon_an": item.id,
-        sl: item.quantity,
-        "trang_thai": "Chờ chế biến"
-      }))
-    })
-    !isEmpty && Router.push(ROUTES.ORDER);
-
+    const data = await axios.post(
+      'http://localhost:8000/v1/reserving/addReserving',
+      {
+        ten_khach_hang: tenKhachHang,
+        sdt: sdt,
+        ngay: ngay,
+        gio: gio,
+        mon_an: items.map((item) => ({
+          ma_mon_an: item.id,
+          sl: item.quantity,
+          trang_thai: 'Chờ chế biến',
+        })),
+      }
+    );
+    !isEmpty && Router.push(`/order/${data.data._id}`);
   }
   const checkoutFooter = [
     {

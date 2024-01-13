@@ -6,16 +6,16 @@ import { useTranslation } from 'next-i18next';
 import Heading from '@components/ui/heading';
 const OrderItemCard = ({ product }: { product: OrderItem }) => {
   const { price: itemTotal } = usePrice({
-    amount: product.price * product.quantity,
-    currencyCode: 'USD',
+    amount: product.ma_mon_an.gia * product.sl,
+    currencyCode: 'VND',
   });
   return (
     <tr
       className="border-b font-normal border-skin-base last:border-b-0"
-      key={product.id}
+      key={product.ma_mon_an._id}
     >
       <td className="p-4">
-        {product.name} * {product.quantity}
+        {product.ma_mon_an.ten_mon_an} * {product.sl}
       </td>
       <td className="p-4">{itemTotal}</td>
     </tr>
@@ -23,6 +23,8 @@ const OrderItemCard = ({ product }: { product: OrderItem }) => {
 };
 const OrderDetails: React.FC<{ className?: string }> = ({
   className = 'pt-10 lg:pt-12',
+  mon_an,
+  orderTotal,
 }) => {
   const { t } = useTranslation('common');
   const {
@@ -45,8 +47,8 @@ const OrderDetails: React.FC<{ className?: string }> = ({
   );
   const { price: shipping } = usePrice(
     order && {
-      amount: order.shipping_fee,
-      currencyCode: 'USD',
+      amount: 0,
+      currencyCode: 'VND',
     }
   );
   if (isLoading) return <p>Loading...</p>;
@@ -68,31 +70,42 @@ const OrderDetails: React.FC<{ className?: string }> = ({
           </tr>
         </thead>
         <tbody>
-          {order?.products.map((product, index) => (
+          {/* {order?.products.map((product, index) => (
+            <OrderItemCard key={index} product={product} />
+          ))} */}
+          {mon_an.map((product, index) => (
             <OrderItemCard key={index} product={product} />
           ))}
         </tbody>
         <tfoot>
           <tr className="odd:bg-skin-secondary">
             <td className="p-4 italic">{t('text-sub-total')}:</td>
-            <td className="p-4">{subtotal}</td>
+            <td className="p-4">
+              {orderTotal.toLocaleString('it-IT', {
+                style: 'currency',
+                currency: 'VND',
+              })}
+            </td>
           </tr>
           <tr className="odd:bg-skin-secondary">
             <td className="p-4 italic">{t('text-shipping')}:</td>
             <td className="p-4">
               {shipping}
-              <span className="text-[13px] font-normal ps-1.5 inline-block">
-                via Flat rate
-              </span>
+              <span className="text-[13px] font-normal ps-1.5 inline-block"></span>
             </td>
           </tr>
           <tr className="odd:bg-skin-secondary">
             <td className="p-4 italic">{t('text-payment-method')}:</td>
-            <td className="p-4">{order?.payment_gateway}</td>
+            <td className="p-4">Tiền mặt</td>
           </tr>
           <tr className="odd:bg-skin-secondary">
             <td className="p-4 italic">{t('text-total')}:</td>
-            <td className="p-4">{total}</td>
+            <td className="p-4">
+              {orderTotal.toLocaleString('it-IT', {
+                style: 'currency',
+                currency: 'VND',
+              })}
+            </td>
           </tr>
           <tr className="odd:bg-skin-secondary">
             <td className="p-4 italic">{t('text-note')}:</td>

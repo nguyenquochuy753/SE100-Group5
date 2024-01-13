@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import usePrice from '@framework/product/use-price';
 import { useTranslation } from 'next-i18next';
 
-export default function OrderInformation() {
+export default function OrderInformation({ order }) {
   const {
     query: { id },
   } = useRouter();
@@ -16,6 +16,10 @@ export default function OrderInformation() {
       amount: data.shipping_fee ? data.total + data.shipping_fee : data.total,
       currencyCode: 'USD',
     }
+  );
+  const orderTotal = order.mon_an.reduce(
+    (acc, curr) => acc + curr.ma_mon_an.gia * curr.sl,
+    0
   );
   if (isLoading) return <p>Loading...</p>;
   return (
@@ -32,31 +36,34 @@ export default function OrderInformation() {
           <span className="uppercase text-xs block text-skin-muted font-normal leading-5">
             {t('text-order-number')}:
           </span>
-          {data?.tracking_number}
+          {order._id}
         </li>
         <li className="text-skin-base font-semibold text-base lg:text-lg border-b md:border-b-0 md:border-r border-dashed border-gray-300 px-4 lg:px-6 xl:px-8 py-4 md:py-5 lg:py-6 last:border-0">
           <span className="uppercase text-[11px] block text-skin-muted font-normal leading-5">
             {t('text-date')}:
           </span>
-          April 22, 2021
+          {order.ngay} - {order.gio}
         </li>
         <li className="text-skin-base font-semibold text-base lg:text-lg border-b md:border-b-0 md:border-r border-dashed border-gray-300 px-4 lg:px-6 xl:px-8 py-4 md:py-5 lg:py-6 last:border-0">
           <span className="uppercase text-[11px] block text-skin-muted font-normal leading-5">
             {t('text-email')}:
           </span>
-          {data?.customer.email}
+          {order.ten_khach_hang}
         </li>
         <li className="text-skin-base font-semibold text-base lg:text-lg border-b md:border-b-0 md:border-r border-dashed border-gray-300 px-4 lg:px-6 xl:px-8 py-4 md:py-5 lg:py-6 last:border-0">
           <span className="uppercase text-[11px] block text-skin-muted font-normal leading-5">
             {t('text-total')}:
           </span>
-          {total}
+          {orderTotal.toLocaleString('it-IT', {
+            style: 'currency',
+            currency: 'VND',
+          })}
         </li>
         <li className="text-skin-base font-semibold text-base lg:text-lg border-b md:border-b-0 md:border-r border-dashed border-gray-300 px-4 lg:px-6 xl:px-8 py-4 md:py-5 lg:py-6 last:border-0">
           <span className="uppercase text-[11px] block text-skin-muted font-normal leading-5">
             {t('text-payment-method')}:
           </span>
-          {data?.payment_gateway}
+          Tiền mặt
         </li>
       </ul>
 
@@ -64,7 +71,7 @@ export default function OrderInformation() {
         {t('text-pay-cash')}
       </p>
 
-      <OrderDetails />
+      <OrderDetails mon_an={order.mon_an} orderTotal={orderTotal} />
     </div>
   );
 }
