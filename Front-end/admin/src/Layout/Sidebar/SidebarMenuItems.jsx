@@ -13,10 +13,12 @@ const SidebarMenuItems = ({
 }) => {
   const { layout } = useContext(CustomizerContext);
   const layout1 = localStorage.getItem("sidebar_layout") || layout;
+  const userType = localStorage.getItem("userType");
 
   const id = window.location.pathname.split("/").pop();
   const layoutId = id;
   const CurrentPath = window.location.pathname;
+  console.log(userType);
 
   const { t } = useTranslation();
   const toggletNavActive = (item) => {
@@ -54,12 +56,20 @@ const SidebarMenuItems = ({
       });
     }
     item.active = !item.active;
-    setMainMenu({ mainmenu: MENUITEMS });
+    setMainMenu({
+      mainmenu: MENUITEMS,
+    });
   };
 
   return (
     <>
-      {MENUITEMS.map((Item, i) => (
+      {MENUITEMS.filter((item) => {
+        if (item.isAdmin === true && userType !== `"admin"`) {
+          return false;
+        } else {
+          return true;
+        }
+      }).map((Item, i) => (
         <Fragment key={i}>
           <li className="sidebar-main-title">
             <div>

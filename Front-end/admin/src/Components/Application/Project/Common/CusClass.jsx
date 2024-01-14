@@ -9,7 +9,7 @@ const CusClass = ({ item, bookTable }) => {
   const calcProgressHandler = () => {
     let count = 0;
     for (const meal of item.mon_an) {
-      if (meal.da_hoan_thanh) {
+      if (meal.trang_thai === "Hoàn thành") {
         count++;
       }
     }

@@ -1,6 +1,7 @@
 export const MENUITEMS = [
   {
     menutitle: "Tổng Quan",
+    isAdmin: false,
     menucontent: "Dashboards",
     Items: [
       {
@@ -15,6 +16,7 @@ export const MENUITEMS = [
   },
   {
     menutitle: "Quản Lý Nhà Hàng",
+    isAdmin: false,
     menucontent: "Dashboards",
     Items: [
       {
@@ -55,6 +57,8 @@ export const MENUITEMS = [
   },
   {
     menutitle: "Quản Lý Món Ăn",
+    isAdmin: true,
+
     menucontent: "Dashboards",
     Items: [
       {
@@ -66,12 +70,14 @@ export const MENUITEMS = [
         children: [
           {
             path: `${process.env.PUBLIC_URL}/app/ecommerce/meal/meal-list`,
+
             type: "link",
             title: "Danh Sách Món Ăn",
             value: "meal-list",
           },
           {
             path: `${process.env.PUBLIC_URL}/app/project/meal/new-meal`,
+
             type: "link",
             title: "Thêm Món Ăn",
             value: "new-meal",
@@ -83,16 +89,19 @@ export const MENUITEMS = [
         icon: "learning",
         type: "sub",
         value: "category",
+
         active: false,
         children: [
           {
             path: `${process.env.PUBLIC_URL}/app/ecommerce/category/category-list`,
+
             type: "link",
             title: "Danh Sách Danh Mục",
             value: "category-list",
           },
           {
             path: `${process.env.PUBLIC_URL}/app/project/category/new-category`,
+
             type: "link",
             title: "Thêm Danh Mục",
             value: "new-category",
@@ -105,27 +114,32 @@ export const MENUITEMS = [
         value: "ingredient",
         type: "sub",
         active: false,
+
         children: [
           {
             path: `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-list`,
+
             type: "link",
             title: "Danh Sách Nguyên Liệu",
             value: "ingredient-list",
           },
           {
             path: `${process.env.PUBLIC_URL}/app/project/ingredient/new-ingredient`,
+
             type: "link",
             title: "Thêm Nguyên Liệu",
             value: "new-ingredient",
           },
           {
             path: `${process.env.PUBLIC_URL}/app/ecommerce/ingredient/ingredient-type-list`,
+
             type: "link",
             title: "Danh Sách Loại Nguyên Liệu",
             value: "ingredient-type-list",
           },
           {
             path: `${process.env.PUBLIC_URL}/app/project/ingredient/new-ingredient-type`,
+
             type: "link",
             title: "Thêm Loại Nguyên Liệu",
             value: "new-ingredient-type",
@@ -136,6 +150,8 @@ export const MENUITEMS = [
   },
   {
     menutitle: "Quản Lý Bàn",
+    isAdmin: true,
+
     menucontent: "Dashboards",
     Items: [
       {
@@ -144,16 +160,19 @@ export const MENUITEMS = [
         value: "table",
         type: "sub",
         active: false,
+
         // path: `${process.env.PUBLIC_URL}/app/ecommerce/table-list`,
         children: [
           {
             path: `${process.env.PUBLIC_URL}/app/ecommerce/table/table-list`,
+
             type: "link",
             title: "Danh Sách Bàn Ăn",
             value: "table-list",
           },
           {
             path: `${process.env.PUBLIC_URL}/app/project/table/new-table`,
+
             type: "link",
             title: "Thêm Bàn Ăn",
             value: "new-table",
@@ -164,30 +183,57 @@ export const MENUITEMS = [
   },
   {
     menutitle: "Quản Lý Nhân Sự",
+    isAdmin: true,
+
     menucontent: "Dashboards",
     Items: [
       {
-        title: "Nhân Viên",
-        icon: "user",
-        value: "none",
-        type: "sub",
-        value: "user",
+        title: "Thêm Nhân Viên",
+        icon: "ecommerce",
+        value: "new-user",
+        type: "link",
         active: false,
-        children: [
-          {
-            path: `${process.env.PUBLIC_URL}/app/ecommerce/user/user-list`,
-            type: "link",
-            title: "Danh Sách Nhân Viên",
-            value: "user-list",
-          },
-          {
-            path: `${process.env.PUBLIC_URL}/app/user/new-user`,
-            type: "link",
-            title: "Thêm Nhân Viên",
-            value: "new-user",
-          },
-        ],
+        path: `${process.env.PUBLIC_URL}/app/user/new-user`,
       },
+      {
+        title: "Danh Sách Nhân Viên",
+        icon: "ecommerce",
+        value: "user-list",
+        type: "link",
+        active: false,
+        path: `${process.env.PUBLIC_URL}/app/ecommerce/user/user-list`,
+      },
+      {
+        title: "Đăng xuất",
+        icon: "ecommerce",
+        value: "logout",
+        type: "link",
+        active: false,
+        path: `${process.env.PUBLIC_URL}/app/ecommerce/user/user-list`,
+      },
+      // {
+      //   title: "Nhân Viên",
+      //   icon: "user",
+      //   value: "none",
+      //   type: "sub",
+      //   value: "user",
+      //   active: false,
+
+      //   children: [
+      //     {
+      //       path: `${process.env.PUBLIC_URL}/app/ecommerce/user/user-list`,
+      //       type: "link",
+      //       title: "Danh Sách Nhân Viên",
+      //       value: "user-list",
+      //     },
+      //     {
+      //       path: `${process.env.PUBLIC_URL}/app/user/new-user`,
+      //       type: "link",
+      //       title: "Thêm Nhân Viên",
+      //       value: "new-user",
+      //     },
+      //   ],
+      // },
     ],
   },
 ];

@@ -69,7 +69,7 @@ const ProductTableData = () => {
     ),
     amount: m.khoi_luong_ton,
     stock: <div className="font-success">{}</div>,
-    type: m.ma_loai_nguyen_lieu.ten_loai_nguyen_lieu,
+    type: m.ma_loai_nguyen_lieu?.ten_loai_nguyen_lieu,
     start_date: formatDate(m.createdAt),
     action: (
       <div>

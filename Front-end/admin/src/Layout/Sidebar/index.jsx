@@ -10,7 +10,7 @@ const Sidebar = (props) => {
   const { toggleIcon } = useContext(CustomContext);
   const id = window.location.pathname.split("/").pop();
   const defaultLayout = Object.keys(customizer.layout);
-
+  const userType = localStorage.getItem("userType");
   const layout = id ? id : defaultLayout;
   // eslint-disable-next-line
   const [mainmenu, setMainMenu] = useState(MENUITEMS);
@@ -25,9 +25,11 @@ const Sidebar = (props) => {
       //   customizer.settings.sidebar.type.split(' ').pop() ===
       //   'advance-layout'
       // )
-      document.querySelector(".sidebar-main").className = "sidebar-main hovered";
+      document.querySelector(".sidebar-main").className =
+        "sidebar-main hovered";
     } else {
-      if (document.getElementById("sidebar-main")) document.querySelector(".sidebar-main").className = "sidebar-main";
+      if (document.getElementById("sidebar-main"))
+        document.querySelector(".sidebar-main").className = "sidebar-main";
     }
   };
 
@@ -101,7 +103,9 @@ const Sidebar = (props) => {
       return menuItems;
     });
     item.active = !item.active;
-    setMainMenu({ mainmenu: MENUITEMS });
+    setMainMenu({
+      mainmenu: MENUITEMS,
+    });
   };
 
   const closeOverlay = () => {
@@ -115,12 +119,22 @@ const Sidebar = (props) => {
         className="bg-overlay1"
         onClick={() => {
           closeOverlay();
-        }}></div>
-      <div className={`sidebar-wrapper ${toggleIcon ? "close_icon" : ""}`} sidebar-layout="stroke-svg">
+        }}
+      ></div>
+      <div
+        className={`sidebar-wrapper ${toggleIcon ? "close_icon" : ""}`}
+        sidebar-layout="stroke-svg"
+      >
         <SidebarIcon />
         <SidebarLogo />
         {/* sidebartoogle={sidebartoogle} */}
-        <SidebarMenu setMainMenu={setMainMenu} props={props} setNavActive={setNavActive} activeClass={activeClass} width={width} />
+        <SidebarMenu
+          setMainMenu={setMainMenu}
+          props={props}
+          setNavActive={setNavActive}
+          activeClass={activeClass}
+          width={width}
+        />
       </div>
     </Fragment>
   );
